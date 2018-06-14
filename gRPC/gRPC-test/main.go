@@ -42,7 +42,9 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 }
 
 func main() {
+	log.Println("start main proc")
 	lis, err := net.Listen("tcp", port)
+	log.Println("sub linsener")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -50,7 +52,11 @@ func main() {
 	pb.RegisterGreeterServer(s, &server{})
 	// Register reflection service on gRPC server.
 	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+	log.Println("serve start")
+	server_err := s.Serve(lis)
+	log.Println("serve end")
+	if server_err != nil {
+		log.Fatalf("failed to serve: %v", server_err)
 	}
+	log.Println("stop main proc")
 }
