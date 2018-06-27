@@ -50,8 +50,8 @@ func handlerConn(conn net.Conn) {
 		read_len, err := conn.Read(inputCache);
 		if err != nil {
 			fmt.Println(conn.RemoteAddr().String() + " error: " + err.Error() + " -> " + reflect.TypeOf(err).String())
-			_, ok := err.(*net.OpError)
-			if ok {
+			op_error, ok := err.(*net.OpError)
+			if ok && op_error.Timeout() {
 				fmt.Println(conn.RemoteAddr().String() + " timeout !")
 				break
 			}
