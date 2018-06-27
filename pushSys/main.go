@@ -3,5 +3,6 @@ package main
 import "./test"
 
 func main() {
-	test.TestOfTcpServer()
+	//test.TestOfTcpServer()
+	test.TestOfTcpServerGoroutine()
 }
