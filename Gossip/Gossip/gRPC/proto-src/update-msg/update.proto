@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package update;
+
+message upateData {
+  string key = 1;
+  string value = 2;
+  double version = 3;
+}
+
+message upateDatas{
+  repeated upateData datas = 1;
+}
+
+service Update {
+  rpc DoUpdateAll (stream upateDatas) returns (stream upateDatas) {}
+  rpc DoUpdate (upateData) returns (upateData) {}
+}
+
+
+//protoc -I ./ --go_out=plugins=grpc:. ./update.proto

@@ -1,0 +1,3 @@
+self_add: peer1.yong.thinking.com
+anchor_node: peer0.yong.thinking.com
+interval: 5
