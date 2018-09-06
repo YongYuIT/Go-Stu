@@ -29,6 +29,6 @@ func (*Server) DoUpdateAll(ser pb.Update_DoUpdateAllServer) error {
 
 func (this *Server) DoUpdate(ctx context.Context, in_data *pb.UpateData) (*pb.UpateData, error) {
 	fmt.Printf("rec data --> from %s value %s\n", in_data.Key, in_data.Value)
-	data := pb.UpateData{this.safe_add, "ping", -1, nil, nil, nil}
+	data := pb.UpateData{this.safe_add, "ping", -1, struct{}{}, nil, 0}
 	return &data, nil
 }

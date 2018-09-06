@@ -43,19 +43,19 @@ func Listen(interval int) {
 
 func receive(interval int) {
 
+	fmt.Printf("commp self %s, anch %s \n", Self_add, Anchor_add)
+
 	if Self_add == Anchor_add {
 		return
 	}
 
-	conn, err := grpc.Dial(Anchor_add, grpc.WithInsecure())
+	conn, err := grpc.Dial(Anchor_add+port, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
 
 	grpc := pb.NewUpdateClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
 
 	for {
 		if (IsOut) {
@@ -63,12 +63,15 @@ func receive(interval int) {
 			break
 		}
 
-		data := pb.UpateData{Self_add, "ping", -1, nil, nil, nil}
+		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+		defer cancel()
+
+		data := pb.UpateData{Self_add, "ping", -1, struct{}{}, nil, 0}
 		back_data, err := grpc.DoUpdate(ctx, &data)
-		fmt.Printf("back_data --> from %s value %s\n", back_data.Key, back_data.Value)
-		
 		if err != nil {
-			log.Fatalf("could not greet: %v", err)
+			fmt.Printf("could not comm: %v \n", err)
+		} else {
+			fmt.Printf("back_data --> from %s value %s\n", back_data.Key, back_data.Value)
 		}
 
 		time.Sleep(time.Duration(interval) * time.Second)

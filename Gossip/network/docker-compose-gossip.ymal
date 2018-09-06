@@ -1,0 +1,60 @@
+version: '2'
+
+networks:
+  thinking:
+
+services:
+  peer0.yong.thinking.com:
+    image: ubuntu
+    container_name: peer0.yong.thinking.com
+    command: /bin/bash
+    tty: true
+    networks:
+      - thinking
+    volumes:
+      - $PWD/../src/:/thinking/src/
+      - /home/yong/Desktop/go:/go
+      - /home/yong/Desktop/go-path:/go-path
+    environment:
+      - GOROOT=/go
+      - GOPATH=/go-path
+      - PATH=${PATH}:/go/bin:/go-path/bin
+      - self_add=peer0.yong.thinking.com
+
+  peer1.yong.thinking.com:
+    image: ubuntu
+    container_name: peer1.yong.thinking.com
+    command: /bin/bash
+    tty: true
+    networks:
+      - thinking
+    volumes:
+      - $PWD/../src/:/thinking/src/
+      - /home/yong/Desktop/go:/go
+      - /home/yong/Desktop/go-path:/go-path
+    environment:
+      - GOROOT=/go
+      - GOPATH=/go-path
+      - PATH=${PATH}:/go/bin:/go-path/bin
+      - self_add=peer1.yong.thinking.com
+
+  peer2.yong.thinking.com:
+    image: ubuntu
+    container_name: peer2.yong.thinking.com
+    command: /bin/bash
+    tty: true
+    networks:
+      - thinking
+    volumes:
+      - $PWD/../src/:/thinking/src/
+      - /home/yong/Desktop/go:/go
+      - /home/yong/Desktop/go-path:/go-path
+    environment:
+      - GOROOT=/go
+      - GOPATH=/go-path
+      - PATH=${PATH}:/go/bin:/go-path/bin
+      - self_add=peer2.yong.thinking.com
+
+# docker stop peer0.yong.thinking.com peer1.yong.thinking.com
+# docker-compose -f docker-compose-gossip.ymal up -d
+# docker exec -it peer0.yong.thinking.com /bin/bash

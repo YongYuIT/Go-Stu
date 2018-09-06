@@ -5,18 +5,20 @@ import (
 	"fmt"
 	"io/ioutil"
 	"gopkg.in/yaml.v2"
-	"strconv"
 	"./gRPC"
 	"bufio"
 	"os"
 	"strings"
+	"strconv"
 )
 
 type conf struct {
 	Anchor_node string `yaml:"anchor_node"`
 	Interval    int    `yaml:"interval"`
-	Self_add    string `yaml:"self_add"`
 }
+
+//export self_add=peer1.yong.thinking.com
+//go run main_run.go -conf ./conf.ymal
 
 func main() {
 	//read config
@@ -34,11 +36,20 @@ func main() {
 		fmt.Println(err.Error())
 	}
 
+	self_add := os.Getenv("self_add")
+
+	if self_add == "" {
+		fmt.Println("env error")
+		return
+	}
+
 	fmt.Println(c.Anchor_node)
 	fmt.Println(strconv.Itoa(c.Interval))
+	fmt.Println(self_add)
 
 	//start listen
-	gRPC.Self_add = c.Self_add
+	gRPC.Self_add = self_add
+	gRPC.Anchor_add = c.Anchor_node
 	go gRPC.Listen(c.Interval)
 
 	//stop

@@ -11,55 +11,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main_fuck.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main_fuck.go">
+      <file leaf-file-name="main_run.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main_run.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="36" column="24" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="24" />
+            <state relative-caret-position="150">
+              <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="update.proto" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/update.proto">
+      <file leaf-file-name="docker-compose-gossip.ymal" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/network/docker-compose-gossip.ymal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+            <state relative-caret-position="465">
+              <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="update.pb.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/update.pb.go">
+      <file leaf-file-name="conf.ymal" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/conf.ymal">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="165" column="32" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="32" />
+            <state>
+              <caret column="36" selection-start-column="13" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listen.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gRPC/listen.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
               <folding>
-                <element signature="e#90#252#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listen.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gRPC/listen.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="62" column="17" lean-forward="true" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
-              <folding>
-                <element signature="e#14#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grpc-server.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gRPC/proto-src/grpc-server.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="30" column="77" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="77" />
-              <folding>
-                <element signature="e#19#55#0" expanded="true" />
+                <element signature="e#14#188#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,9 +69,12 @@
       <find>Register</find>
       <find>DoUpdateAll</find>
       <find>client</find>
+      <find>greet</find>
+      <find>could not comm:</find>
+      <find>Listen</find>
     </findStrings>
   </component>
-  <component name="GOROOT" path="$PROJECT_DIR$/../go" />
+  <component name="GOROOT" path="$USER_HOME$/Desktop/go" />
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -94,12 +82,16 @@
         <option value="$PROJECT_DIR$/listen.go" />
         <option value="$PROJECT_DIR$/web/listen.go" />
         <option value="$PROJECT_DIR$/gRPC/proto-src/update-msg/helloworld.proto" />
-        <option value="$PROJECT_DIR$/conf.ymal" />
-        <option value="$PROJECT_DIR$/main_fuck.go" />
         <option value="$PROJECT_DIR$/gRPC/proto-src/update-msg/update.proto" />
         <option value="$PROJECT_DIR$/gRPC/proto-src/grpc-client.go" />
+        <option value="$PROJECT_DIR$/conf.ymal" />
+        <option value="$PROJECT_DIR$/main_fuck.go" />
         <option value="$PROJECT_DIR$/gRPC/proto-src/grpc-server.go" />
         <option value="$PROJECT_DIR$/gRPC/listen.go" />
+        <option value="$PROJECT_DIR$/network/docker-compose-gossip.yml" />
+        <option value="$PROJECT_DIR$/src/main_run.go" />
+        <option value="$PROJECT_DIR$/src/gRPC/listen.go" />
+        <option value="$PROJECT_DIR$/network/docker-compose-gossip.ymal" />
       </list>
     </option>
   </component>
@@ -133,13 +125,7 @@
             <path>
               <item name="Gossip" type="b2602c69:ProjectViewProjectNode" />
               <item name="Gossip" type="462c0819:PsiDirectoryNode" />
-              <item name="gRPC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Gossip" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Gossip" type="462c0819:PsiDirectoryNode" />
-              <item name="gRPC" type="462c0819:PsiDirectoryNode" />
-              <item name="proto-src" type="462c0819:PsiDirectoryNode" />
+              <item name="network.." type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -155,10 +141,11 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/web" />
     </key>
   </component>
@@ -175,17 +162,32 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="go build main_fuck.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build main_run.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="Gossip" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
+      <envs>
+        <env name="self_add" value="peer1.yong.thinking.com" />
+      </envs>
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/main_fuck.go" />
+      <filePath value="$PROJECT_DIR$/main_run.go" />
       <directory value="$PROJECT_DIR$/" />
+    </configuration>
+    <configuration name="go build main_run.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Gossip" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <envs>
+        <env name="self_add" value="peer1.yong.thinking.com" />
+      </envs>
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/src/main_run.go" />
+      <directory value="$PROJECT_DIR$" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build main_fuck.go" />
+        <item itemvalue="Go Build.go build main_run.go" />
+        <item itemvalue="Go Build.go build main_run.go" />
       </list>
     </recent_temporary>
   </component>
@@ -202,24 +204,24 @@
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26147044" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26478717" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32984293" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" x="75" y="238" width="1855" height="552" id="Run" order="2" weight="0.45759162" />
+      <window_info anchor="bottom" x="75" y="238" width="1855" height="552" id="Run" order="2" weight="0.28795812" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32984293" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32984293" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,169 +232,89 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="15" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main_fuck.go">
+    <entry file="file://$PROJECT_DIR$/src/main_run.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="24" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main_run.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf.ymal">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/listen.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#14#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../go-path/src/gopkg.in/yaml.v2/yaml.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1935">
-          <caret line="136" column="29" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/update.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main_fuck.go">
+    <entry file="file://$PROJECT_DIR$/src/conf.ymal" />
+    <entry file="file://$PROJECT_DIR$/src/gRPC/listen.go" />
+    <entry file="file://$PROJECT_DIR$/../go-path/src/gopkg.in/yaml.v2/yaml.go" />
+    <entry file="file://$PROJECT_DIR$/src/gRPC/proto-src/update-msg/update.proto" />
+    <entry file="file://$PROJECT_DIR$/src/main_run.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf.ymal">
+    <entry file="file://$PROJECT_DIR$/src/conf.ymal" />
+    <entry file="file://$PROJECT_DIR$/src/gRPC/listen.go" />
+    <entry file="file://$PROJECT_DIR$/../go-path/src/gopkg.in/yaml.v2/yaml.go" />
+    <entry file="file://$PROJECT_DIR$/src/gRPC/proto-src/update-msg/update.proto" />
+    <entry file="file://$PROJECT_DIR$/../go/src/flag/flag.go" />
+    <entry file="file://$PROJECT_DIR$/../go/src/runtime/panic.go" />
+    <entry file="file://$PROJECT_DIR$/../go-path/src/gopkg.in/yaml.v2/yaml.go" />
+    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/helloworld.proto" />
+    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/grpc-client.go" />
+    <entry file="file://$PROJECT_DIR$/src/gRPC/proto-src/grpc-server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+        <state relative-caret-position="435">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/listen.go">
+    <entry file="file://$PROJECT_DIR$/src/gRPC/proto-src/update-msg/update.pb.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="214">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gRPC/proto-src/update-msg/update.proto">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gRPC/listen.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
           <folding>
-            <element signature="e#14#39#0" expanded="true" />
+            <element signature="e#14#188#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../go-path/src/gopkg.in/yaml.v2/yaml.go">
+    <entry file="file://$PROJECT_DIR$/src/main_run.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1935">
-          <caret line="136" column="29" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="29" />
+        <state relative-caret-position="150">
+          <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/update.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../go/src/flag/flag.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="718" column="85" selection-start-line="718" selection-start-column="85" selection-end-line="718" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../go/src/runtime/panic.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="576" selection-start-line="576" selection-end-line="576" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../go-path/src/gopkg.in/yaml.v2/yaml.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1935">
-          <caret line="136" column="29" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/helloworld.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf.ymal">
+    <entry file="file://$PROJECT_DIR$/src/conf.ymal">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="8" selection-end-column="8" />
+          <caret column="36" selection-start-column="13" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/update.proto">
+    <entry file="file://$PROJECT_DIR$/network/docker-compose-gossip.ymal">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/update-msg/update.pb.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="165" column="32" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="32" />
-          <folding>
-            <element signature="e#90#252#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/grpc-client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main_fuck.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="36" column="24" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/proto-src/grpc-server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="30" column="77" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="77" />
-          <folding>
-            <element signature="e#19#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gRPC/listen.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="62" column="17" lean-forward="true" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
-          <folding>
-            <element signature="e#14#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="465">
+          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
         </state>
       </provider>
     </entry>
