@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="beee7338-54ef-4088-b899-625029d9c3be" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="type_test.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/type_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="750">
+              <caret line="57" column="27" lean-forward="true" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main_test.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Student</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>student</replace>
+    </replaceStrings>
+  </component>
+  <component name="GOROOT" path="$USER_HOME$/Desktop/go" />
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/main_test.go" />
+        <option value="$PROJECT_DIR$/copy_test.go" />
+        <option value="$PROJECT_DIR$/type_test.go" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="292" />
+    <option name="y" value="24" />
+    <option name="width" value="1400" />
+    <option name="height" value="1028" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="reflect" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reflect" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Go Test.TestType in type_test.go">
+    <configuration name="TestCopy in type_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="reflect" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/type_test.go" />
+      <pattern value="^TestCopy$" />
+    </configuration>
+    <configuration name="TestReflect in main_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="reflect" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/main_test.go" />
+      <pattern value="^TestReflect$" />
+    </configuration>
+    <configuration name="TestType in type_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="reflect" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/type_test.go" />
+      <pattern value="^TestType$" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Test.TestReflect in main_test.go" />
+      <item itemvalue="Go Test.TestType in type_test.go" />
+      <item itemvalue="Go Test.TestCopy in type_test.go" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestType in type_test.go" />
+        <item itemvalue="Go Test.TestCopy in type_test.go" />
+        <item itemvalue="Go Test.TestReflect in main_test.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TestHistory">
+    <history-entry file="TestReflect_in_main_test_go - 2018.09.19 at 18h 49m 30s.xml">
+      <configuration name="TestReflect in main_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestReflect_in_main_test_go - 2018.09.19 at 18h 50m 10s.xml">
+      <configuration name="TestReflect in main_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestReflect_in_main_test_go - 2018.09.19 at 18h 50m 28s.xml">
+      <configuration name="TestReflect in main_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestReflect_in_main_test_go - 2018.09.19 at 18h 50m 32s.xml">
+      <configuration name="TestReflect in main_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestReflect_in_main_test_go - 2018.09.19 at 18h 50m 37s.xml">
+      <configuration name="TestReflect in main_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestReflect_in_main_test_go - 2018.09.19 at 18h 51m 14s.xml">
+      <configuration name="TestReflect in main_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestCopy_in_type_test_go - 2018.09.19 at 19h 03m 06s.xml">
+      <configuration name="TestCopy in type_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestType_in_type_test_go - 2018.09.19 at 19h 04m 02s.xml">
+      <configuration name="TestType in type_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestType_in_type_test_go - 2018.09.19 at 19h 04m 36s.xml">
+      <configuration name="TestType in type_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestType_in_type_test_go - 2018.09.24 at 19h 33m 43s.xml">
+      <configuration name="TestType in type_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25262576" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" x="75" y="238" width="1855" height="552" id="Run" order="2" weight="0.32146597" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Desktop/go/src/testing/testing.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="788" selection-start-line="788" selection-end-line="788" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/copy_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/type_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="57" column="27" lean-forward="true" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
