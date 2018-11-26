@@ -1,0 +1,16 @@
+client:
+  BCCSP:
+    security:
+      enabled: true
+      default:
+        provider: "SW"
+      hashAlgorithm: "SHA2"
+      softVerify: true
+      level: 256
+
+organizations:
+  org1.example.com:
+    mspid: Org1MSP
+    cryptoPath: /home/yong/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    peers:
+    - peer0.org1.example.com
