@@ -115,5 +115,5 @@ $ docker exec -it cli /bin/bash
 # peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n histroy_try -v v0 -c '{"Args":[]}' -P "AND('Org1MSP.member')"
 # peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n histroy_try --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","test_key","test-001"]}'
 # peer chaincode query -C mychannel -n histroy_try -c '{"Args":["get_value","test_key"]}'
-# peer chaincode query -C mychannel -n histroy_try -c '{"Args":["get_value_hiexitstory","test_key"]}'
+# peer chaincode query -C mychannel -n histroy_try -c '{"Args":["get_value_history","test_key"]}'
 */
