@@ -111,9 +111,13 @@ func main() {
 
 /*
 $ docker exec -it cli /bin/bash
-# peer chaincode install -n histroy_try -v v0 -p github.com/chaincode/histroy_try/go/
-# peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n histroy_try -v v0 -c '{"Args":[]}' -P "AND('Org1MSP.member')"
-# peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n histroy_try --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","test_key","test-001"]}'
-# peer chaincode query -C mychannel -n histroy_try -c '{"Args":["get_value","test_key"]}'
-# peer chaincode query -C mychannel -n histroy_try -c '{"Args":["get_value_history","test_key"]}'
+# peer chaincode install -n rich_query -v v0 -p github.com/chaincode/rich_query/go/
+# peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n rich_query -v v0 -c '{"Args":[]}' -P "AND('Org1MSP.member')"
+# peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n rich_query --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","test_key","test-001"]}'
+# peer chaincode query -C mychannel -n rich_query -c '{"Args":["get_value","test_key"]}'
+
+# peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n rich_query --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","10000001","{\"address\":\"ShenZhen city,GD,China\",\"age\":20,\"country\":\"CN\",\"gender\":\"M\",\"name\":\"yong\",\"phone_num\":\"110\",\"stu_no\":\"10000001\"}"]}'
+# peer chaincode query -C mychannel -n rich_query -c '{"Args":["get_value","10000001"]}'
+# peer chaincode query -C mychannel -n rich_query -c '{"Args":["rich_query","{\"selector\":{\"age\":{\"$lt\":19}}}"]}'
+# peer chaincode query -C mychannel -n rich_query -c '{"Args":["rich_query","{\"selector\":{\"age\":{\"$gt\":19}}}"]}'
 */

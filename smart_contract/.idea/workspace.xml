@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1458d938-eaf0-48d6-a7fe-56b7aa608f9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../LevelDB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LevelDB/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rich_query.go" beforeDir="false" afterPath="$PROJECT_DIR$/rich_query.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,9 +18,10 @@
           <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/histroy_try.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="95" column="25" lean-forward="true" selection-end-line="119" />
+            <state relative-caret-position="1320">
+              <caret line="95" column="25" selection-end-line="119" />
               <folding>
                 <element signature="e#14#167#0" expanded="true" />
               </folding>
@@ -61,8 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rich_query.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+            <state relative-caret-position="667">
+              <caret line="121" column="118" selection-start-line="121" selection-start-column="118" selection-end-line="121" selection-end-column="118" />
               <folding>
                 <element signature="e#14#167#0" expanded="true" />
               </folding>
@@ -158,7 +160,7 @@
     <frame x="67" y="25" width="1373" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2644628" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26821938" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -194,8 +196,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/histroy_try.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="95" column="25" lean-forward="true" selection-end-line="119" />
+        <state relative-caret-position="1320">
+          <caret line="95" column="25" selection-end-line="119" />
           <folding>
             <element signature="e#14#167#0" expanded="true" />
           </folding>
@@ -204,8 +206,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rich_query.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+        <state relative-caret-position="667">
+          <caret line="121" column="118" selection-start-line="121" selection-start-column="118" selection-end-line="121" selection-end-column="118" />
           <folding>
             <element signature="e#14#167#0" expanded="true" />
           </folding>
