@@ -113,8 +113,15 @@ func main() {
 $ docker exec -it cli /bin/bash
 # peer chaincode install -n rich_query -v v0 -p github.com/chaincode/rich_query/go/
 # peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n rich_query -v v0 -c '{"Args":[]}' -P "AND('Org1MSP.member')"
+
+####if tls is enable
+# peer chaincode install -n rich_query -v 1.0 -l golang -p github.com/chaincode/rich_query/go/
+# peer chaincode instantiate -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n rich_query -l golang -v 1.0 -c '{"Args":[]}' -P "AND('Org1MSP.member')"
+
 # peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n rich_query --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","test_key","test-001"]}'
 # peer chaincode query -C mychannel -n rich_query -c '{"Args":["get_value","test_key"]}'
+
+################################################
 
 # peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n rich_query --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","10000001","{\"address\":\"ShenZhen city,GD,China\",\"age\":20,\"country\":\"CN\",\"gender\":\"M\",\"name\":\"yong\",\"phone_num\":\"110\",\"stu_no\":\"10000001\"}"]}'
 # peer chaincode query -C mychannel -n rich_query -c '{"Args":["get_value","10000001"]}'
