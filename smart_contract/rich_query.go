@@ -117,6 +117,11 @@ $ docker exec -it cli /bin/bash
 ####if tls is enable
 # peer chaincode install -n rich_query -v 1.0 -l golang -p github.com/chaincode/rich_query/go/
 # peer chaincode instantiate -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n rich_query -l golang -v 1.0 -c '{"Args":[]}' -P "AND('Org1MSP.member')"
+####if need to disable tls:
+####modify docker-compose-cli.yaml - CORE_PEER_TLS_ENABLED=false
+####modify base/docker-compose-base.yaml - ORDERER_GENERAL_TLS_ENABLED=false
+####modify base/peer-base.yaml - CORE_PEER_TLS_ENABLED=false
+
 
 # peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n rich_query --peerAddresses peer0.org1.example.com:7051 -c '{"Args":["put_kv","test_key","test-001"]}'
 # peer chaincode query -C mychannel -n rich_query -c '{"Args":["get_value","test_key"]}'
