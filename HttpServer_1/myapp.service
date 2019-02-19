@@ -12,12 +12,17 @@ Description=myapp service
 Type=simple
 # 设置应用的工作目录
 WorkingDirectory=/home/yong/Documents/Go-Stu20190219001/HttpServer_1
-ExecStart=go run /home/yong/Documents/Go-Stu20190219001/HttpServer_1/main.go
+ExecStart=/home/yong/Documents/Go-Stu20190219001/HttpServer_1/start.sh
 ExecStop=/bin/kill -s TERM $MAINPID
 
 [Install]
 WantedBy=multi-user.target
 
-# 开机启动与取消
+# 启动服务，查看状态
+# systemctl start myapp
+# systemctl status myapp.service -l
+
+# 开机启动与取消，查看状态
 # systemctl enable myapp.service
 # systemctl disable myapp.service
+# systemctl list-unit-files|grep myapp
