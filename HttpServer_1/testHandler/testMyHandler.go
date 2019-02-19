@@ -15,7 +15,7 @@ func (this *MyHandler) ServeHTTP(writer http.ResponseWriter, req *http.Request) 
 func DoTestFunc001() {
 	hander := MyHandler{}
 	ser := http.Server{
-		Addr:    "localhost:8888",
+		Addr: "localhost:8080",
 		//指定处理器，这样所有发到localhost:8888的请求都归&hander处理
 		Handler: &hander,
 	}

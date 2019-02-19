@@ -13,7 +13,6 @@ func (this *HelloHandler) ServeHTTP(writer http.ResponseWriter, req *http.Reques
 }
 
 type WordHandler struct {
-
 }
 
 func (this *WordHandler) ServeHTTP(writer http.ResponseWriter, req *http.Request) {
@@ -22,11 +21,11 @@ func (this *WordHandler) ServeHTTP(writer http.ResponseWriter, req *http.Request
 
 func DoTestFunc002() {
 	ser := http.Server{
-		Addr:    "localhost:8888",
+		Addr: "localhost:8080",
 		//不指定处理器，这样就会使用默认处理器DefaultServeMux
 		Handler: nil,
 	}
-	http.Handle("/hello",&HelloHandler{})
-	http.Handle("/word",&WordHandler{})
+	http.Handle("/hello", &HelloHandler{})
+	http.Handle("/word", &WordHandler{})
 	ser.ListenAndServe()
 }
