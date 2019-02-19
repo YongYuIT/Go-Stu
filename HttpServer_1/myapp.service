@@ -1,0 +1,23 @@
+# vi /etc/systemd/system/myapp.service
+# ----------------------------------------------------
+# 如果需要修改/etc/systemd/system/myapp.service，修改后要进行更新，执行如下命令
+# systemctl daemon-reload
+# 查看服务是否被正确识别
+# systemctl list-unit-files|grep myapp
+[Unit]
+# 服务描述，便于识别
+Description=myapp service
+
+[Service]
+Type=simple
+# 设置应用的工作目录
+WorkingDirectory=/home/yong/Documents/Go-Stu20190219001/HttpServer_1
+ExecStart=go run /home/yong/Documents/Go-Stu20190219001/HttpServer_1/main.go
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
+# 开机启动与取消
+# systemctl enable myapp.service
+# systemctl disable myapp.service
