@@ -22,7 +22,7 @@ func Test3(writer http.ResponseWriter, req *http.Request) {
 
 func DoTestFunc003() {
 	ser := http.Server{
-		Addr: "localhost:8080",
+		Addr: "0.0.0.0:8080",
 		//不指定处理器，这样就会使用默认处理器DefaultServeMux
 		Handler: nil,
 	}
