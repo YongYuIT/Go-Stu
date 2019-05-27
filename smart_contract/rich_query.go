@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"strconv"
 	"strings"
 )
 
@@ -28,19 +29,19 @@ func (this *RichQueryContract) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 	response.Payload = []byte("unknown error")
 
 	func_name, params := stub.GetFunctionAndParameters()
-	if (strings.Compare("put_kv", func_name) == 0) {
+	if strings.Compare("put_kv", func_name) == 0 {
 		isSuccess, err_msg := put_kv(stub, params[0], params[1])
-		if (isSuccess) {
+		if isSuccess {
 			response.Status = shim.OK
 			response.Payload = []byte("put success")
 		} else {
 			response.Payload = []byte("put falied-->" + err_msg)
 		}
 	}
-	if (strings.Compare("get_value", func_name) == 0) {
+	if strings.Compare("get_value", func_name) == 0 {
 
 		isSuccess, msg := get_value(stub, params[0])
-		if (isSuccess) {
+		if isSuccess {
 			response.Status = shim.OK
 			response.Payload = []byte("get success-->" + msg)
 		} else {
@@ -48,14 +49,24 @@ func (this *RichQueryContract) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 		}
 	}
 
-	if (strings.Compare("rich_query", func_name) == 0) {
+	if strings.Compare("rich_query", func_name) == 0 {
 
 		isSuccess, msg := rich_query(stub, params[0])
-		if (isSuccess) {
+		if isSuccess {
 			response.Status = shim.OK
 			response.Payload = []byte("get rich query success-->" + msg)
 		} else {
 			response.Payload = []byte("get rich query falied-->" + msg)
+		}
+	}
+
+	if strings.Compare("add_age", func_name) == 0 {
+		isSuccess, msg := add_age(stub, params[0], params[1])
+		if isSuccess {
+			response.Status = shim.OK
+			response.Payload = []byte("add success-->" + msg)
+		} else {
+			response.Payload = []byte("add falied-->" + msg)
 		}
 	}
 
@@ -65,7 +76,7 @@ func (this *RichQueryContract) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 func put_kv(stub shim.ChaincodeStubInterface, key string, value string) (isSuccess bool, err_msg string) {
 
 	err := stub.PutState(key, []byte(value))
-	if (err != nil) {
+	if err != nil {
 		return false, err.Error()
 	}
 	return true, ""
@@ -74,7 +85,7 @@ func put_kv(stub shim.ChaincodeStubInterface, key string, value string) (isSucce
 func get_value(stub shim.ChaincodeStubInterface, key string) (isSuccess bool, value_err string) {
 
 	value, err := stub.GetState(key)
-	if (err != nil) {
+	if err != nil {
 		return false, err.Error()
 	}
 	return true, string(value)
@@ -83,22 +94,52 @@ func get_value(stub shim.ChaincodeStubInterface, key string) (isSuccess bool, va
 
 func rich_query(stub shim.ChaincodeStubInterface, query_str string) (isSuccess bool, value_err string) {
 	resultIter, err := stub.GetQueryResult(query_str)
-	if (err != nil) {
+	if err != nil {
 		return false, err.Error()
 	}
 	var result string = ""
 	for resultIter.HasNext() {
 		response, err := resultIter.Next()
-		if (err != nil) {
+		if err != nil {
 			return false, err.Error()
 		}
 		item, err := json.Marshal(response)
-		if (err != nil) {
+		if err != nil {
 			return false, err.Error()
 		}
 		result += "item-->" + string(item) + "\n"
 	}
 	return true, result
+}
+
+type student struct {
+	StuNo    string `json:"stu_no"`
+	Name     string `json:"name"`
+	Gender   string `json:"gender"`
+	Country  string `json:"country"`
+	Age      int    `json:"age"`
+	Address  string `json:"address"`
+	PhoneNum string `json:"phone_num"`
+}
+
+func add_age(stub shim.ChaincodeStubInterface, key string, add_age string) (isSuccess bool, value_err string) {
+	value, err := stub.GetState(key)
+	if err != nil {
+		return false, err.Error()
+	}
+	var p_stu *student = new(student)
+	json.Unmarshal(value, p_stu)
+	i_add_age, err := strconv.Atoi(add_age)
+	p_stu.Age += i_add_age
+	put_value, err := json.Marshal(*p_stu)
+	if err != nil {
+		return false, err.Error()
+	}
+	err = stub.PutState(key, []byte(put_value))
+	if err != nil {
+		return false, err.Error()
+	}
+	return true, ""
 }
 
 func main() {
