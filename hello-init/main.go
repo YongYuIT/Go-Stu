@@ -9,6 +9,7 @@ func main() {
 	init_pkg.DoAAA()
 	init_pkg.DoBBB()
 	//main包引入init_pkg1，init_pkg1引入init_pkg2
-	//实验证明，init_pkg1先执行，init_pkg2后执行
+	//实验证明，init_pkg2先执行，init_pkg1后执行
+	//执行过程参考图片init.png
 	init_pkg1.Do111()
 }
