@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	from_env_refix()
+	from_yaml_file()
 }
 
 //从yaml文件中读取配置信息
@@ -21,6 +21,7 @@ func from_yaml_file() {
 		fmt.Println(err)
 		return
 	}
+	fmt.Println(config.ConfigFileUsed())
 	var orgs = config.Get("organizations").([]interface{})
 	var org0 = orgs[0].(map[interface{}]interface{})
 	fmt.Println((org0["Name"]))
