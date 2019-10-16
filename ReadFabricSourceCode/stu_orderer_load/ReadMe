@@ -3,7 +3,7 @@ orderer-->server/main.go里main函数-->localconfig.Load()-->config viper对象�
 
 ############################################################
 
-启动示例项目，看看orderer服务器/etc/hyperledger/fabric上到底有啥
+启动示例项目，看看orderer服务器FABRIC_CFG_PATH 或者 /etc/hyperledger/fabric上到底有啥
 
 $ cd fabric-samples/first-network/
 $ ./byfn.sh up
@@ -19,381 +19,56 @@ a1e5b199b7df        hyperledger/fabric-peer:latest                              
 80a5919afb2d        hyperledger/fabric-peer:latest                                                                         "peer node start"        10 minutes ago      Up 10 minutes       0.0.0.0:10051->7051/tcp, 0.0.0.0:10053->7053/tcp   peer1.org2.example.com
 95cbd3fbd63f        hyperledger/fabric-peer:latest                                                                         "peer node start"        10 minutes ago      Up 10 minutes       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp     peer0.org1.example.com
 $ docker exec -it 48db0a229902 /bin/bash
+# echo $FABRIC_CFG_PATH
+/etc/hyperledger/fabric
+
+看来在orderer上FABRIC_CFG_PATH和/etc/hyperledger/fabric是一个东西
+
 # cd /etc/hyperledger/fabric
 # ls
 configtx.yaml  core.yaml  msp  orderer.yaml
 # ls msp
 admincerts  cacerts  config.yaml  keystore  signcerts  tlscacerts  tlsintermediatecerts
-$ docker inspect 48db0a229902
-[
-    {
-        "Id": "48db0a229902a19765b7238174a818fcf2e1953bfc4b62954dc9d06c4a3250a6",
-        "Created": "2019-10-16T06:22:27.908574619Z",
-        "Path": "orderer",
-        "Args": [],
-        "State": {
-            "Status": "running",
-            "Running": true,
-            "Paused": false,
-            "Restarting": false,
-            "OOMKilled": false,
-            "Dead": false,
-            "Pid": 32350,
-            "ExitCode": 0,
-            "Error": "",
-            "StartedAt": "2019-10-16T06:22:30.745380696Z",
-            "FinishedAt": "0001-01-01T00:00:00Z"
-        },
-        "Image": "sha256:54f372205580fca697f9f072f00da38fa5d2d55560003d0e276bcefc99eb64bf",
-        "ResolvConfPath": "/var/lib/docker/containers/48db0a229902a19765b7238174a818fcf2e1953bfc4b62954dc9d06c4a3250a6/resolv.conf",
-        "HostnamePath": "/var/lib/docker/containers/48db0a229902a19765b7238174a818fcf2e1953bfc4b62954dc9d06c4a3250a6/hostname",
-        "HostsPath": "/var/lib/docker/containers/48db0a229902a19765b7238174a818fcf2e1953bfc4b62954dc9d06c4a3250a6/hosts",
-        "LogPath": "/var/lib/docker/containers/48db0a229902a19765b7238174a818fcf2e1953bfc4b62954dc9d06c4a3250a6/48db0a229902a19765b7238174a818fcf2e1953bfc4b62954dc9d06c4a3250a6-json.log",
-        "Name": "/orderer.example.com",
-        "RestartCount": 0,
-        "Driver": "overlay2",
-        "Platform": "linux",
-        "MountLabel": "",
-        "ProcessLabel": "",
-        "AppArmorProfile": "docker-default",
-        "ExecIDs": null,
-        "HostConfig": {
-            "Binds": [
-                "net_orderer.example.com:/var/hyperledger/production/orderer:rw",
-                "/mnt/hgfs/fabric-env/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp:rw",
-                "/mnt/hgfs/fabric-env/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls:/var/hyperledger/orderer/tls:rw",
-                "/mnt/hgfs/fabric-env/fabric-samples/first-network/channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block:rw"
-            ],
-            "ContainerIDFile": "",
-            "LogConfig": {
-                "Type": "json-file",
-                "Config": {}
-            },
-            "NetworkMode": "net_byfn",
-            "PortBindings": {
-                "7050/tcp": [
-                    {
-                        "HostIp": "",
-                        "HostPort": "7050"
-                    }
-                ]
-            },
-            "RestartPolicy": {
-                "Name": "",
-                "MaximumRetryCount": 0
-            },
-            "AutoRemove": false,
-            "VolumeDriver": "",
-            "VolumesFrom": [],
-            "CapAdd": null,
-            "CapDrop": null,
-            "Dns": null,
-            "DnsOptions": null,
-            "DnsSearch": null,
-            "ExtraHosts": null,
-            "GroupAdd": null,
-            "IpcMode": "shareable",
-            "Cgroup": "",
-            "Links": null,
-            "OomScoreAdj": 0,
-            "PidMode": "",
-            "Privileged": false,
-            "PublishAllPorts": false,
-            "ReadonlyRootfs": false,
-            "SecurityOpt": null,
-            "UTSMode": "",
-            "UsernsMode": "",
-            "ShmSize": 67108864,
-            "Runtime": "runc",
-            "ConsoleSize": [
-                0,
-                0
-            ],
-            "Isolation": "",
-            "CpuShares": 0,
-            "Memory": 0,
-            "NanoCpus": 0,
-            "CgroupParent": "",
-            "BlkioWeight": 0,
-            "BlkioWeightDevice": null,
-            "BlkioDeviceReadBps": null,
-            "BlkioDeviceWriteBps": null,
-            "BlkioDeviceReadIOps": null,
-            "BlkioDeviceWriteIOps": null,
-            "CpuPeriod": 0,
-            "CpuQuota": 0,
-            "CpuRealtimePeriod": 0,
-            "CpuRealtimeRuntime": 0,
-            "CpusetCpus": "",
-            "CpusetMems": "",
-            "Devices": null,
-            "DeviceCgroupRules": null,
-            "DiskQuota": 0,
-            "KernelMemory": 0,
-            "MemoryReservation": 0,
-            "MemorySwap": 0,
-            "MemorySwappiness": null,
-            "OomKillDisable": false,
-            "PidsLimit": 0,
-            "Ulimits": null,
-            "CpuCount": 0,
-            "CpuPercent": 0,
-            "IOMaximumIOps": 0,
-            "IOMaximumBandwidth": 0,
-            "MaskedPaths": [
-                "/proc/asound",
-                "/proc/acpi",
-                "/proc/kcore",
-                "/proc/keys",
-                "/proc/latency_stats",
-                "/proc/timer_list",
-                "/proc/timer_stats",
-                "/proc/sched_debug",
-                "/proc/scsi",
-                "/sys/firmware"
-            ],
-            "ReadonlyPaths": [
-                "/proc/bus",
-                "/proc/fs",
-                "/proc/irq",
-                "/proc/sys",
-                "/proc/sysrq-trigger"
-            ]
-        },
-        "GraphDriver": {
-            "Data": {
-                "LowerDir": "/var/lib/docker/overlay2/8b6faec8ae55615581e7c382ac95bf4b2a043fb1d2c8a9e9956cf2cdf758eb2d-init/diff:/var/lib/docker/overlay2/ad7db9aa56e8cb6930067cb3b2ee92ac3615f9fabcb3299ace5202da1d84f4e6/diff:/var/lib/docker/overlay2/655b9d7b600c0bbd126d1b97a1513f01811f24a024aa448232a48cc6c28b7275/diff:/var/lib/docker/overlay2/429c2e15af5351a7e6ab9fcb15fa22c5db8a934f829fc4f6d806d8eb2d8dc304/diff:/var/lib/docker/overlay2/ef80215ddc70d2040347fd0b0d56b65ce38d4b037c9e1a6b4065ca44fee3eaac/diff:/var/lib/docker/overlay2/6fe4fe035d8a7d96b395b3c193e682e4c651bb060d2c8f949e13cad0ee834b3b/diff:/var/lib/docker/overlay2/01d16dc0a224edf0502af545ebfa2ea53b524ab9c70e20b3152ca51da2f65ab9/diff:/var/lib/docker/overlay2/1e17efb33ed17cd134d30e0c3492bf1712fe3d4b999485e5f3a81fc05b2f6eac/diff:/var/lib/docker/overlay2/28dc3e7fc9c34d0dbd42f5c2d556e5d79dfb51e53e6d08d0a0a9b9aef8fb7141/diff:/var/lib/docker/overlay2/949400bcf0ae1ce967ff31b3577bf7fcf6cafb7133ab8e60376c0c5956ff49e8/diff:/var/lib/docker/overlay2/c665dd7d410c1338fbe02f5e900d2d1c193dc4c5f1e68ae65562c1fb708dd501/diff",
-                "MergedDir": "/var/lib/docker/overlay2/8b6faec8ae55615581e7c382ac95bf4b2a043fb1d2c8a9e9956cf2cdf758eb2d/merged",
-                "UpperDir": "/var/lib/docker/overlay2/8b6faec8ae55615581e7c382ac95bf4b2a043fb1d2c8a9e9956cf2cdf758eb2d/diff",
-                "WorkDir": "/var/lib/docker/overlay2/8b6faec8ae55615581e7c382ac95bf4b2a043fb1d2c8a9e9956cf2cdf758eb2d/work"
-            },
-            "Name": "overlay2"
-        },
-        "Mounts": [
-            {
-                "Type": "volume",
-                "Name": "net_orderer.example.com",
-                "Source": "/var/lib/docker/volumes/net_orderer.example.com/_data",
-                "Destination": "/var/hyperledger/production/orderer",
-                "Driver": "local",
-                "Mode": "rw",
-                "RW": true,
-                "Propagation": ""
-            },
-            {
-                "Type": "bind",
-                "Source": "/mnt/hgfs/fabric-env/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp",
-                "Destination": "/var/hyperledger/orderer/msp",
-                "Mode": "rw",
-                "RW": true,
-                "Propagation": "rprivate"
-            },
-            {
-                "Type": "bind",
-                "Source": "/mnt/hgfs/fabric-env/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls",
-                "Destination": "/var/hyperledger/orderer/tls",
-                "Mode": "rw",
-                "RW": true,
-                "Propagation": "rprivate"
-            },
-            {
-                "Type": "bind",
-                "Source": "/mnt/hgfs/fabric-env/fabric-samples/first-network/channel-artifacts/genesis.block",
-                "Destination": "/var/hyperledger/orderer/orderer.genesis.block",
-                "Mode": "rw",
-                "RW": true,
-                "Propagation": "rprivate"
-            }
-        ],
-        "Config": {
-            "Hostname": "48db0a229902",
-            "Domainname": "",
-            "User": "",
-            "AttachStdin": false,
-            "AttachStdout": false,
-            "AttachStderr": false,
-            "ExposedPorts": {
-                "7050/tcp": {}
-            },
-            "Tty": false,
-            "OpenStdin": false,
-            "StdinOnce": false,
-            "Env": [
-                "FABRIC_LOGGING_SPEC=INFO",
-                "ORDERER_GENERAL_LISTENADDRESS=0.0.0.0",
-                "ORDERER_GENERAL_GENESISMETHOD=file",
-                "ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block",
-                "ORDERER_GENERAL_LOCALMSPID=OrdererMSP",
-                "ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp",
-                "ORDERER_GENERAL_TLS_ENABLED=true",
-                "ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key",
-                "ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt",
-                "ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]",
-                "ORDERER_KAFKA_TOPIC_REPLICATIONFACTOR=1",
-                "ORDERER_KAFKA_VERBOSE=true",
-                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-                "FABRIC_CFG_PATH=/etc/hyperledger/fabric"
-            ],
-            "Cmd": [
-                "orderer"
-            ],
-            "Image": "hyperledger/fabric-orderer:latest",
-            "Volumes": {
-                "/var/hyperledger/orderer/msp": {},
-                "/var/hyperledger/orderer/orderer.genesis.block": {},
-                "/var/hyperledger/orderer/tls": {},
-                "/var/hyperledger/production/orderer": {}
-            },
-            "WorkingDir": "/opt/gopath/src/github.com/hyperledger/fabric",
-            "Entrypoint": null,
-            "OnBuild": null,
-            "Labels": {
-                "com.docker.compose.config-hash": "f2d2eb7ef2f253953c4eadb9f80ec853f3bc133bc19dbaef1088df777a318ed0",
-                "com.docker.compose.container-number": "1",
-                "com.docker.compose.oneoff": "False",
-                "com.docker.compose.project": "net",
-                "com.docker.compose.service": "orderer.example.com",
-                "com.docker.compose.version": "1.25.0dev",
-                "org.hyperledger.fabric.base.version": "0.4.14",
-                "org.hyperledger.fabric.version": "1.4.0"
-            }
-        },
-        "NetworkSettings": {
-            "Bridge": "",
-            "SandboxID": "35a92a127ec694861274452ae7f44abf89a41a8725e769c026379759ba2697af",
-            "HairpinMode": false,
-            "LinkLocalIPv6Address": "",
-            "LinkLocalIPv6PrefixLen": 0,
-            "Ports": {
-                "7050/tcp": [
-                    {
-                        "HostIp": "0.0.0.0",
-                        "HostPort": "7050"
-                    }
-                ]
-            },
-            "SandboxKey": "/var/run/docker/netns/35a92a127ec6",
-            "SecondaryIPAddresses": null,
-            "SecondaryIPv6Addresses": null,
-            "EndpointID": "",
-            "Gateway": "",
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "IPAddress": "",
-            "IPPrefixLen": 0,
-            "IPv6Gateway": "",
-            "MacAddress": "",
-            "Networks": {
-                "net_byfn": {
-                    "IPAMConfig": null,
-                    "Links": null,
-                    "Aliases": [
-                        "orderer.example.com",
-                        "48db0a229902"
-                    ],
-                    "NetworkID": "f931b1935e2d5867a155ba9d475eff74f03d82c10f69619a98f5ce5b5f61b327",
-                    "EndpointID": "6fbb020c275abd34246c664f6b930898cbf34fd44b693f6eecc680f418a7e59c",
-                    "Gateway": "172.24.0.1",
-                    "IPAddress": "172.24.0.4",
-                    "IPPrefixLen": 16,
-                    "IPv6Gateway": "",
-                    "GlobalIPv6Address": "",
-                    "GlobalIPv6PrefixLen": 0,
-                    "MacAddress": "02:42:ac:18:00:04",
-                    "DriverOpts": null
-                }
-            }
-        }
-    }
-]
-$ docker logs 48db0a229902
-2019-10-16 06:22:30.792 UTC [localconfig] completeInitialization -> INFO 001 Kafka.Version unset, setting to 0.10.2.0
-2019-10-16 06:22:30.827 UTC [orderer.common.server] prettyPrintStruct -> INFO 002 Orderer config values:
-	General.LedgerType = "file"
-	General.ListenAddress = "0.0.0.0"
-	General.ListenPort = 7050
-	General.TLS.Enabled = true
-	General.TLS.PrivateKey = "/var/hyperledger/orderer/tls/server.key"
-	General.TLS.Certificate = "/var/hyperledger/orderer/tls/server.crt"
-	General.TLS.RootCAs = [/var/hyperledger/orderer/tls/ca.crt]
-	General.TLS.ClientAuthRequired = false
-	General.TLS.ClientRootCAs = []
-	General.Cluster.RootCAs = [/etc/hyperledger/fabric/tls/ca.crt]
-	General.Cluster.ClientCertificate = ""
-	General.Cluster.ClientPrivateKey = ""
-	General.Cluster.DialTimeout = 5s
-	General.Cluster.RPCTimeout = 7s
-	General.Cluster.ReplicationBufferSize = 20971520
-	General.Cluster.ReplicationPullTimeout = 5s
-	General.Cluster.ReplicationRetryTimeout = 5s
-	General.Keepalive.ServerMinInterval = 1m0s
-	General.Keepalive.ServerInterval = 2h0m0s
-	General.Keepalive.ServerTimeout = 20s
-	General.GenesisMethod = "file"
-	General.GenesisProfile = "SampleInsecureSolo"
-	General.SystemChannel = "test-system-channel-name"
-	General.GenesisFile = "/var/hyperledger/orderer/orderer.genesis.block"
-	General.Profile.Enabled = false
-	General.Profile.Address = "0.0.0.0:6060"
-	General.LocalMSPDir = "/var/hyperledger/orderer/msp"
-	General.LocalMSPID = "OrdererMSP"
-	General.BCCSP.ProviderName = "SW"
-	General.BCCSP.SwOpts.SecLevel = 256
-	General.BCCSP.SwOpts.HashFamily = "SHA2"
-	General.BCCSP.SwOpts.Ephemeral = false
-	General.BCCSP.SwOpts.FileKeystore.KeyStorePath = "/var/hyperledger/orderer/msp/keystore"
-	General.BCCSP.SwOpts.DummyKeystore =
-	General.BCCSP.SwOpts.InmemKeystore =
-	General.BCCSP.PluginOpts =
-	General.Authentication.TimeWindow = 15m0s
-	FileLedger.Location = "/var/hyperledger/production/orderer"
-	FileLedger.Prefix = "hyperledger-fabric-ordererledger"
-	RAMLedger.HistorySize = 1000
-	Kafka.Retry.ShortInterval = 5s
-	Kafka.Retry.ShortTotal = 10m0s
-	Kafka.Retry.LongInterval = 5m0s
-	Kafka.Retry.LongTotal = 12h0m0s
-	Kafka.Retry.NetworkTimeouts.DialTimeout = 10s
-	Kafka.Retry.NetworkTimeouts.ReadTimeout = 10s
-	Kafka.Retry.NetworkTimeouts.WriteTimeout = 10s
-	Kafka.Retry.Metadata.RetryMax = 3
-	Kafka.Retry.Metadata.RetryBackoff = 250ms
-	Kafka.Retry.Producer.RetryMax = 3
-	Kafka.Retry.Producer.RetryBackoff = 100ms
-	Kafka.Retry.Consumer.RetryBackoff = 2s
-	Kafka.Verbose = true
-	Kafka.Version = 0.10.2.0
-	Kafka.TLS.Enabled = false
-	Kafka.TLS.PrivateKey = ""
-	Kafka.TLS.Certificate = ""
-	Kafka.TLS.RootCAs = []
-	Kafka.TLS.ClientAuthRequired = false
-	Kafka.TLS.ClientRootCAs = []
-	Kafka.SASLPlain.Enabled = false
-	Kafka.SASLPlain.User = ""
-	Kafka.SASLPlain.Password = ""
-	Kafka.Topic.ReplicationFactor = 1
-	Debug.BroadcastTraceDir = ""
-	Debug.DeliverTraceDir = ""
-	Consensus = map[SnapDir:/var/hyperledger/production/orderer/etcdraft/snapshot WALDir:/var/hyperledger/production/orderer/etcdraft/wal]
-	Operations.ListenAddress = "127.0.0.1:8443"
-	Operations.TLS.Enabled = false
-	Operations.TLS.PrivateKey = ""
-	Operations.TLS.Certificate = ""
-	Operations.TLS.RootCAs = []
-	Operations.TLS.ClientAuthRequired = false
-	Operations.TLS.ClientRootCAs = []
-	Metrics.Provider = "disabled"
-	Metrics.Statsd.Network = "udp"
-	Metrics.Statsd.Address = "127.0.0.1:8125"
-	Metrics.Statsd.WriteInterval = 30s
-	Metrics.Statsd.Prefix = ""
-2019-10-16 06:22:30.856 UTC [orderer.common.server] initializeServerConfig -> INFO 003 Starting orderer with TLS enabled
-2019-10-16 06:22:30.875 UTC [fsblkstorage] newBlockfileMgr -> INFO 004 Getting block information from block storage
-2019-10-16 06:22:30.886 UTC [orderer.commmon.multichannel] Initialize -> INFO 005 Starting system channel 'byfn-sys-channel' with genesis block hash d57a2685c708b0d7c9768b84f612e80e1295b49b6a160493a843d97d1286ce40 and orderer type solo
-2019-10-16 06:22:30.886 UTC [orderer.common.server] Start -> INFO 006 Starting orderer:
- Version: 1.4.0
- Commit SHA: d700b43
- Go version: go1.11.1
- OS/Arch: linux/amd64
-2019-10-16 06:22:30.886 UTC [orderer.common.server] Start -> INFO 007 Beginning to serve requests
+$ docker images
+......
+hyperledger/fabric-orderer                                                                             1.4.0               54f372205580        9 months ago        150MB
+......
+$ docker history 54f372205580 --no-trunc=true
+IMAGE                                                                     CREATED             CREATED BY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 SIZE                COMMENT
+sha256:54f372205580fca697f9f072f00da38fa5d2d55560003d0e276bcefc99eb64bf   9 months ago        /bin/sh -c #(nop)  LABEL org.hyperledger.fabric.version=1.4.0 org.hyperledger.fabric.base.version=0.4.14                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   0B
+<missing>                                                                 9 months ago        /bin/sh -c #(nop)  CMD ["orderer"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         0B
+<missing>                                                                 9 months ago        /bin/sh -c #(nop)  EXPOSE 7050                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0B
+<missing>                                                                 9 months ago        /bin/sh -c #(nop) ADD file:cae778cfab240841852d06ef497ce106401b5bf82a39ce7e1521cf722d21683c in /etc/hyperledger/fabric/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    69kB
+<missing>                                                                 9 months ago        /bin/sh -c #(nop) COPY file:c80fef7b6fc3eb22464668deb9f54ddb37aa40b0e41eaa477015dedcdd94a913 in /usr/local/bin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             26.2MB
+<missing>                                                                 9 months ago        /bin/sh -c mkdir -p /var/hyperledger/production $FABRIC_CFG_PATH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           0B
+<missing>                                                                 9 months ago        /bin/sh -c #(nop)  ENV FABRIC_CFG_PATH=/etc/hyperledger/fabric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0B
+<missing>                                                                 12 months ago       /bin/sh -c cd /tmp/scripts &&     common/init.sh &&     docker/init.sh &&     common/cleanup.sh &&     rm -rf /tmp/scripts                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 8.67MB
+<missing>                                                                 12 months ago       /bin/sh -c #(nop) COPY dir:7a02c249ea4b9fc7dd03352f00e78fade0f76133c3fb2cd79eb2fb80ae116b5c in /tmp/scripts                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                10.7kB
+<missing>                                                                 13 months ago       /bin/sh -c #(nop)  CMD ["/bin/bash"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       0B
+<missing>                                                                 13 months ago       /bin/sh -c mkdir -p /run/systemd && echo 'docker' > /run/systemd/container                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 7B
+<missing>                                                                 13 months ago       /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   2.76kB
+<missing>                                                                 13 months ago       /bin/sh -c rm -rf /var/lib/apt/lists/*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     0B
+<missing>                                                                 13 months ago       /bin/sh -c set -xe   && echo '#!/bin/sh' > /usr/sbin/policy-rc.d  && echo 'exit 101' >> /usr/sbin/policy-rc.d  && chmod +x /usr/sbin/policy-rc.d   && dpkg-divert --local --rename --add /sbin/initctl  && cp -a /usr/sbin/policy-rc.d /sbin/initctl  && sed -i 's/^exit.*/exit 0/' /sbin/initctl   && echo 'force-unsafe-io' > /etc/dpkg/dpkg.cfg.d/docker-apt-speedup   && echo 'DPkg::Post-Invoke { "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"; };' > /etc/apt/apt.conf.d/docker-clean  && echo 'APT::Update::Post-Invoke { "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"; };' >> /etc/apt/apt.conf.d/docker-clean  && echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";' >> /etc/apt/apt.conf.d/docker-clean   && echo 'Acquire::Languages "none";' > /etc/apt/apt.conf.d/docker-no-languages   && echo 'Acquire::GzipIndexes "true"; Acquire::CompressionTypes::Order:: "gz";' > /etc/apt/apt.conf.d/docker-gzip-indexes   && echo 'Apt::AutoRemove::SuggestsImportant "false";' > /etc/apt/apt.conf.d/docker-autoremove-suggests   745B
+<missing>                                                                 13 months ago       /bin/sh -c #(nop) ADD file:a83ab1826f43e88bc0d3ab6230f14cb9b2dacab70c762c3bfc555eda733b292c in /                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           115MB
+
+可以看到在创建容器之初，这个环境变量就设置好了
+
+目前为止/etc/hyperledger/fabric里面的文件从哪里来的，暂时没找到
+直接从容器里面拷一份出来研究
+$ sudo docker cp 48db0a229902:/etc/hyperledger/fabric ./tmp_fabric
+
+fmt.Println(config.ConfigFileUsed())
+输出的是
+/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load/tmp_fabric/orderer.yaml
+
+$ cd fabric-samples/
+$ find . -name orderer.yaml
+$ grep . -r --include=*.* -e orderer.yaml
+都没找到
+
+$ cd fabric/
+$ find . -name orderer.yaml
+./examples/cluster/config/orderer.yaml
+./sampleconfig/orderer.yaml
+$ grep . -r --include=*.* -e orderer.yaml
+

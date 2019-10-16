@@ -21,15 +21,16 @@ func main() {
 		_ = fmt.Errorf("Error reading configuration: %s", err)
 	}
 
+	fmt.Println(config.ConfigFileUsed())
 	fmt.Println("success")
 }
 
-const OfficialPath = "/etc/hyperledger/fabric"
+const OfficialPath = "/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load/tmp_fabric"
 
 func InitViper(v *viper.Viper, configName string) error {
 	var altPath = os.Getenv("FABRIC_CFG_PATH")
 	//参照/mnt/hgfs/fabric-env/fabric-samples/first-network/byfn.sh
-	altPath = "/mnt/hgfs/fabric-env/fabric-samples/first-network"
+	altPath = "/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load/tmp_fabric"
 	if altPath != "" {
 		// If the user has overridden the path with an envvar, its the only path
 		// we will consider
