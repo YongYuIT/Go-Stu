@@ -25,12 +25,12 @@ func main() {
 	fmt.Println("success")
 }
 
-const OfficialPath = "/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load/tmp_fabric"
+const OfficialPath = "/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load_InitViper/tmp_fabric"
 
 func InitViper(v *viper.Viper, configName string) error {
 	var altPath = os.Getenv("FABRIC_CFG_PATH")
 	//参照/mnt/hgfs/fabric-env/fabric-samples/first-network/byfn.sh
-	altPath = "/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load/tmp_fabric"
+	altPath = "/home/yong/Go-Stu20191008001/ReadFabricSourceCode/stu_orderer_load_InitViper/tmp_fabric"
 	if altPath != "" {
 		// If the user has overridden the path with an envvar, its the only path
 		// we will consider
