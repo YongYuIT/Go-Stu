@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c4669b2-4d32-410a-bfc1-abf8fa98ef33" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../stu_orderer_load/ReadMe" beforeDir="false" afterPath="$PROJECT_DIR$/../stu_orderer_load/ReadMe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stu_orderer_load/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../stu_orderer_load/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../stu_orderer_load_EnhancedExactUnmarshal/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../stu_orderer_load_EnhancedExactUnmarshal/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../stu_orderer_load_EnhancedExactUnmarshal/.idea/stu_orderer_load_EnhancedExactUnmarshal.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../stu_orderer_load_EnhancedExactUnmarshal/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../stu_orderer_load_EnhancedExactUnmarshal/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stu_orderer_load_InitViper/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stu_orderer_load_InitViper/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="40" />
+            <state relative-caret-position="195">
+              <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -44,7 +48,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="161" />
     <option name="y" value="98" />
     <option name="width" value="548" />
@@ -56,7 +60,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -73,6 +76,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -124,11 +128,11 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="70" y="27" width="1401" height="776" extended-state="6" />
+    <frame x="70" y="27" width="1290" height="741" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2302583" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23392282" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.25289255" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
@@ -186,8 +190,8 @@
     <entry file="file://$PROJECT_DIR$/read_from_env/main.go" />
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="40" />
+        <state relative-caret-position="195">
+          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="32" />
         </state>
       </provider>
     </entry>
