@@ -1,0 +1,8 @@
+为什么orderer需要写文件账本？
+
+orderer通过Deliver模块向客户端提供同步已排序区块信息的功能。
+但是各个客户端同步进度不一，同步过程可能失败（客户端不可达等不可预期故障）。
+所以Deliver模块提供简单检索区块的功能：查找最旧区块SeekOldest，查找最新区块SeekNewest，查找指定位置区块SeekSpecified
+以实现在指定范围内，读取Orderer节点指定通道账本上的区块数据
+
+这样已排序的区块信息需要先在orderer简单缓存下，由此形成了Orderer的文件账本
