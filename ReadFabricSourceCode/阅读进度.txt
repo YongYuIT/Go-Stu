@@ -1,0 +1,1 @@
+20191101--> Hyperledger fabric技术内幕--> 从头读至131页Deliver区块分发服务，跳至151页Peer节点

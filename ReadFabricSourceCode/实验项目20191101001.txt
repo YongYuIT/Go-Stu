@@ -1,0 +1,2 @@
+实验链码多个所有者打包命令
+peer signpackage
