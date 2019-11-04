@@ -72,4 +72,10 @@ $ go run main.go testcmd fuck you -n aaa -a 111
   arg2-->you
   Stu Name is aaa, Stu age is 111
 
-
+############################################################
+cobra.Command执行顺序
+PersistentPreRunE/PersistentPreRun
+PreRunE/PreRun
+RunE/Run
+PostRunE/PostRun
+PersistentPostRunE/PersistentPostRunE

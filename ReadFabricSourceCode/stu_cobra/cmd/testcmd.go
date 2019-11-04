@@ -30,13 +30,25 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		fmt.Println("testcmd called-->PersistentPreRun")
+	},
+	PreRun: func(cmd *cobra.Command, args []string) {
+		fmt.Println("testcmd called-->PreRun")
+	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("testcmd called")
+		fmt.Println("testcmd called-->Run")
 		if len(args) > 1 {
 			fmt.Println("arg1-->" + args[0])
 			fmt.Println("arg2-->" + args[1])
 		}
 		fmt.Printf("Stu Name is %s, Stu age is %d\n", stu_name, stu_age)
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		fmt.Println("testcmd called-->PostRun")
+	},
+	PersistentPostRun: func(cmd *cobra.Command, args []string) {
+		fmt.Println("testcmd called-->PersistentPostRunE")
 	},
 }
 
