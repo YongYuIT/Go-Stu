@@ -32,10 +32,16 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("testcmd called")
-		fmt.Println("arg1-->" + args[0])
-		fmt.Println("arg2-->" + args[1])
+		if len(args) > 1 {
+			fmt.Println("arg1-->" + args[0])
+			fmt.Println("arg2-->" + args[1])
+		}
+		fmt.Printf("Stu Name is %s, Stu age is %d\n", stu_name, stu_age)
 	},
 }
+
+var stu_name string
+var stu_age int
 
 func init() {
 	rootCmd.AddCommand(testcmdCmd)
@@ -49,4 +55,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// testcmdCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	testcmdCmd.Flags().StringVarP(&stu_name, "name", "n", "def_str", "an stu nameeeee")
+	testcmdCmd.Flags().IntVarP(&stu_age, "age", "a", 5201314, "an stu ageeee")
 }
