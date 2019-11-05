@@ -1,1 +1,5 @@
 20191101--> Hyperledger fabric技术内幕--> 从头读至131页Deliver区块分发服务，跳至151页Peer节点
+
+改变读书策略，从通读到跳读
+
+20191105--> 弄懂peer节点写数据库的细节 -->跳读《Hyperledger fabric技术内幕》5.4 账本提交器
