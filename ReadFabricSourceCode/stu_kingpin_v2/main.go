@@ -13,7 +13,7 @@ var (
 )
 
 func main() {
-	fullCmd := kingpin.MustParse(app.Parse(os.Args[1:])) //what is 1:
+	fullCmd := kingpin.MustParse(app.Parse(os.Args[1:]))
 	fmt.Println("cmd is --> " + fullCmd)
 	if fullCmd == stu_name.FullCommand() {
 		fmt.Println("this test name is aaaaaa")

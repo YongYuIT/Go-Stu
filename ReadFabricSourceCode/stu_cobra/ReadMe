@@ -1,0 +1,81 @@
+$ go get -u github.com/spf13/cobra/cobra
+$ cd $GOPATH/src/github.com/spf13/cobra/cobra
+$ go build
+$ go install
+$ cobra init stu_cobra
+Your Cobra application is ready at
+$GOPATH/src/stu_cobra
+
+Give it a try by going there and running `go run main.go`.
+Add commands to it by running `cobra add [cmdname]`.
+$ cd stu_cobra
+$ cobra add testcmd
+
+####edit stu_cobra/cmd/testcmd.go, add codes like follow
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("testcmd called")
+		fmt.Println("arg1-->" + args[0])
+		fmt.Println("arg2-->" + args[1])
+	},
+############################################################
+$ go run main.go -h
+A longer description that spans multiple lines and likely contains
+examples and usage of using your application. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.
+
+Usage:
+  stu_cobra [command]
+
+Available Commands:
+  help        Help about any command
+  testcmd     A brief description of your command
+
+Flags:
+      --config string   config file (default is $HOME/.stu_cobra.yaml)
+  -h, --help            help for stu_cobra
+  -t, --toggle          Help message for toggle
+
+Use "stu_cobra [command] --help" for more information about a command.
+
+$ go run main.go testcmd -h
+A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.
+
+Usage:
+  stu_cobra testcmd [flags]
+
+Flags:
+  -a, --age int       an stu ageeee (default 5201314)
+  -h, --help          help for testcmd
+  -n, --name string   an stu nameeeee (default "def_str")
+
+Global Flags:
+      --config string   config file (default is $HOME/.stu_cobra.yaml)
+
+$ go run main.go testcmd fuck you
+  testcmd called
+  arg1-->fuck
+  arg2-->you
+  Stu Name is def_str, Stu age is 5201314
+
+
+$ go run main.go testcmd fuck you -n aaa -a 111
+  testcmd called
+  arg1-->fuck
+  arg2-->you
+  Stu Name is aaa, Stu age is 111
+
+############################################################
+cobra.Command执行顺序
+PersistentPreRunE/PersistentPreRun
+PreRunE/PreRun
+RunE/Run
+PostRunE/PostRun
+PersistentPostRunE/PersistentPostRunE
