@@ -16,12 +16,11 @@ type Profile struct {
 	Name string
 }
 
-
-func TryPkFk()  {
+func TryPkFk() {
 	db, err := gorm.Open("mysql", "root:19911214yu@(localhost:3306)/testdb?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic("连接数据库失败-->" + err.Error())
 	}
 	defer db.Close()
-	db.AutoMigrate(&User{},&Profile{})
+	db.AutoMigrate(&User{}, &Profile{})
 }
