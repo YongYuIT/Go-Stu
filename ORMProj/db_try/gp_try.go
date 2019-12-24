@@ -24,8 +24,8 @@ select * from f_test.f_stu_info
 */
 
 type StuInfo struct {
-	FStuName string `gorm:"column:f_stu_name"`
-	FStuAge  string `gorm:"column:f_stu_age"`
+	FuckStuName string `gorm:"column:f_stu_name"` //这里属性必须大写开头，否则外部不可见，导致映射失败
+	FuckStuAge  string `gorm:"column:f_stu_age"`
 }
 
 func (StuInfo) TableName() string {
