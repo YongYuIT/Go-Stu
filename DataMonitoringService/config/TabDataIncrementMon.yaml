@@ -1,0 +1,13 @@
+zero_incre_tab_mon:
+  - db1.sch1.*
+  - db2.sch2.test1
+  - db2.sch2.test2
+db_conn:
+  - name: db1
+    ip_port: 0.0.0.0:5432
+    user_name: yuyong
+    pwd: "123456"
+  - name: db2
+    ip_port: 0.0.0.0:5433
+    user_name: yuyong
+    pwd: "123456"
