@@ -9,7 +9,7 @@ import (
 type TabMonItem struct {
 	Tabname  string
 	ScheName string
-	DBName   string
+	DBConf   *DBConfig
 }
 
 func GetZeroTabMonConf() ([]TabMonItem, error) {
@@ -21,15 +21,16 @@ func GetZeroTabMonConf() ([]TabMonItem, error) {
 	tabinfos := make([]TabMonItem, 0)
 	for _, v := range tabs {
 		vinfo := strings.Split(v.(string), ".")
+		dbConfig := GetDBConfigByID(vinfo[0])
 		if vinfo[2] != "*" {
-			tabinfos = append(tabinfos, TabMonItem{vinfo[2], vinfo[1], vinfo[0]})
+			tabinfos = append(tabinfos, TabMonItem{vinfo[2], vinfo[1], dbConfig})
 			fmt.Println("GetZeroTabMonConf", v)
 		} else {
 			//需补充sch.*的情况
-			tables := ReadTabsUnderSham(vinfo[0])
+			tables := ReadAllTabsUnderSchema(dbConfig.ID, vinfo[1])
 			if tables != nil {
 				for _, v1 := range tables {
-					tabinfos = append(tabinfos, TabMonItem{v1, vinfo[1], vinfo[0]})
+					tabinfos = append(tabinfos, TabMonItem{v1.TabName, vinfo[1], dbConfig})
 				}
 			}
 		}
@@ -38,10 +39,11 @@ func GetZeroTabMonConf() ([]TabMonItem, error) {
 }
 
 type DBConfig struct {
-	Name     string
+	ID       string
 	IPPort   string
 	UserName string
 	Passwd   string
+	DBName   string
 }
 
 func GetDBConfig() ([]DBConfig, error) {
@@ -56,13 +58,39 @@ func GetDBConfig() ([]DBConfig, error) {
 		var db DBConfig
 		vv := v.(map[interface{}]interface{})
 		fmt.Println(vv)
-		db.Name = vv["name"].(string)
+		db.DBName = vv["db_name"].(string)
 		db.IPPort = vv["ip_port"].(string)
 		db.UserName = vv["user_name"].(string)
 		db.Passwd = vv["pwd"].(string)
+		db.ID = vv["id"].(string)
 		dbInfos = append(dbInfos, db)
 	}
 	return dbInfos, nil
+}
+
+func GetDBConfigByID(id string) *DBConfig {
+	conf, err := getConfig("TabDataIncrementMon", "./config/")
+	if err != nil {
+		return nil
+	}
+	dbs := conf.Get("db_conn").([]interface{})
+	fmt.Println("dbs", dbs)
+	var dbInfo *DBConfig = nil
+	for _, v := range dbs {
+		var db DBConfig
+		vv := v.(map[interface{}]interface{})
+		fmt.Println(vv)
+		db.DBName = vv["db_name"].(string)
+		db.IPPort = vv["ip_port"].(string)
+		db.UserName = vv["user_name"].(string)
+		db.Passwd = vv["pwd"].(string)
+		db.ID = vv["id"].(string)
+		if strings.EqualFold(db.ID, id) {
+			dbInfo = &db
+			break
+		}
+	}
+	return dbInfo
 }
 
 func getConfig(conf_name string, conf_path string) (*viper.Viper, error) {

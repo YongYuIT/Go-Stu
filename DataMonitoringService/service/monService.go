@@ -15,5 +15,4 @@ func (thiz *MonService) StartService() {
 	} else {
 		fmt.Println("tabIntems-->", tabIntems)
 	}
-
 }

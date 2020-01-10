@@ -1,17 +1,14 @@
 package tools
 
 import (
+	"../model"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"strings"
 )
 
-func ReadTabsUnderSham(sham_name string) []string {
-	return nil
-}
-
-var dbConnContext map[string]*gorm.DB
+var dbConnContext = make(map[string]*gorm.DB)
 
 func init() {
 	dbItems, err := GetDBConfig()
@@ -24,16 +21,38 @@ func init() {
 	for i := 0; i < len(dbItems); i++ {
 		host := strings.Split(dbItems[i].IPPort, ":")[0]
 		port := strings.Split(dbItems[i].IPPort, ":")[1]
-		psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, dbItems[i].UserName, dbItems[i].Passwd, dbItems[i].Name)
+		psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, dbItems[i].UserName, dbItems[i].Passwd, dbItems[i].DBName)
 		conn, err := gorm.Open("postgres", psqlInfo)
 		if err != nil {
-			dbConnContext[ dbItems[i].Name] = conn
+			fmt.Println("dberror-->", err)
+		} else {
+			dbConnContext[ dbItems[i].ID] = conn
 		}
 	}
 }
 
-func GetConn(name string) *gorm.DB {
-	return dbConnContext[name]
+func GetConn(id string) *gorm.DB {
+	return dbConnContext[id]
+}
+
+func ReadAllTabsUnderSchema(id string, schameName string) []model.SchemaTabInfo {
+	reslut := []model.SchemaTabInfo{}
+	conn := GetConn(id)
+	if conn == nil {
+		return reslut
+	}
+	rows, err := conn.Raw("select table_catalog,table_schema,table_name,table_type from information_schema.tables where table_schema = ?", schameName).Rows()
+	defer rows.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		for rows.Next() {
+			item := model.SchemaTabInfo{}
+			conn.ScanRows(rows, &item)
+			reslut = append(reslut, item)
+		}
+	}
+	return reslut
 }
 
 /*
@@ -91,4 +110,15 @@ create table sch2.test2(
     f_stu_age varchar(255)
 );
 grant all on sch2.test2 to yuyong;
+
+insert into sch2.test1(f_stu_name,f_stu_age)
+values('aaa','111'),
+      ('bbb','222'),
+      ('ccc','333');
+
+insert into sch2.test2(f_stu_name,f_stu_age)
+values('aaa','111'),
+      ('bbb','222'),
+      ('bbb','444'),
+      ('ccc','333');
 */
