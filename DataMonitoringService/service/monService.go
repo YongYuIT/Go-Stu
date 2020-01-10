@@ -15,4 +15,8 @@ func (thiz *MonService) StartService() {
 	} else {
 		fmt.Println("tabIntems-->", tabIntems)
 	}
+	for _, v := range tabIntems {
+		count := tools.GetTabDataCount(&v)
+		fmt.Println(count)
+	}
 }

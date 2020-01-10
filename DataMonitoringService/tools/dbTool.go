@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"strings"
+	"time"
 )
 
 var dbConnContext = make(map[string]*gorm.DB)
@@ -26,7 +27,7 @@ func init() {
 		if err != nil {
 			fmt.Println("dberror-->", err)
 		} else {
-			dbConnContext[ dbItems[i].ID] = conn
+			dbConnContext[dbItems[i].ID] = conn
 		}
 	}
 }
@@ -53,6 +54,32 @@ func ReadAllTabsUnderSchema(id string, schameName string) []model.SchemaTabInfo 
 		}
 	}
 	return reslut
+}
+
+func GetTabDataCount(tab *TabMonItem) *model.TabDataRecord {
+	conn := GetConn(tab.DBConf.ID)
+	if conn == nil {
+		return nil
+	}
+	var count int64 = -1
+	conn.Table(tab.ScheName + "." + tab.Tabname).Count(&count)
+	record := &model.TabDataRecord{}
+	record.DBName = tab.Tabname
+	record.TabName = tab.Tabname
+	record.CkechTime = time.Now()
+	record.Condition = "1=1"
+	record.Count = count
+	record.DBIPPort = tab.DBConf.IPPort
+	record.SchemaName = tab.ScheName
+	return record
+}
+
+func SaveTabCountRecode(record *model.TabDataRecord, tab *TabMonItem) error {
+	conn := GetConn(tab.DBConf.ID)
+	if conn == nil {
+		return fmt.Errorf("DB conn error")
+	}
+	conn.Create(&record)
 }
 
 /*
