@@ -12,10 +12,12 @@ func TestGetAllZeroTab(t *testing.T) {
 		fmt.Println("err-->", err)
 		return
 	}
+	saveDbTool := (&tools.SchemaTabInfoDBTool{}).InitTool("db1_id")
 	for _, v := range tabIntems {
 		fmt.Println(v.DBConf.ID + "-->" + v.ScheName + "-->" + v.Tabname)
-		count := tools.GetTabDataCount(&v)
+		sDbTool := (&tools.SchemaTabInfoDBTool{}).InitTool(v.DBConf.ID)
+		count := sDbTool.GetTabDataCount(&v)
 		fmt.Println(count)
-		tools.SaveTabCountRecode(count, &v)
+		saveDbTool.SaveTabCountRecode(count)
 	}
 }

@@ -16,8 +16,9 @@ func (thiz *MonService) StartService() {
 		fmt.Println("tabIntems-->", tabIntems)
 	}
 	for _, v := range tabIntems {
-		count := tools.GetTabDataCount(&v)
+		sDbTool := (&tools.SchemaTabInfoDBTool{}).InitTool(v.DBConf.ID)
+		count := sDbTool.GetTabDataCount(&v)
 		fmt.Println(count)
-		tools.SaveTabCountRecode(count, &v)
+		sDbTool.SaveTabCountRecode(count)
 	}
 }

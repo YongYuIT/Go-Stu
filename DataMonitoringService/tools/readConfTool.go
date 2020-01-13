@@ -27,7 +27,8 @@ func GetZeroTabMonConf() ([]TabMonItem, error) {
 			fmt.Println("GetZeroTabMonConf", v)
 		} else {
 			//需补充sch.*的情况
-			tables := ReadAllTabsUnderSchema(dbConfig.ID, vinfo[1])
+			sDbTool := (&SchemaTabInfoDBTool{}).InitTool(dbConfig.ID)
+			tables := sDbTool.ReadAllTabsUnderSchema(vinfo[1])
 			if tables != nil {
 				for _, v1 := range tables {
 					tabinfos = append(tabinfos, TabMonItem{v1.TabName, vinfo[1], dbConfig})

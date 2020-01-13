@@ -1,12 +1,10 @@
 package tools
 
 import (
-	"../model"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"strings"
-	"time"
 )
 
 var dbConnContext = make(map[string]*gorm.DB)
@@ -34,56 +32,6 @@ func init() {
 
 func GetConn(id string) *gorm.DB {
 	return dbConnContext[id]
-}
-
-func ReadAllTabsUnderSchema(id string, schameName string) []model.SchemaTabInfo {
-	reslut := []model.SchemaTabInfo{}
-	conn := GetConn(id)
-	if conn == nil {
-		return reslut
-	}
-	rows, err := conn.Raw("select table_catalog,table_schema,table_name,table_type from information_schema.tables where table_schema = ?", schameName).Rows()
-	defer rows.Close()
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		for rows.Next() {
-			item := model.SchemaTabInfo{}
-			conn.ScanRows(rows, &item)
-			reslut = append(reslut, item)
-		}
-	}
-	return reslut
-}
-
-func GetTabDataCount(tab *TabMonItem) *model.TabDataRecord {
-	conn := GetConn(tab.DBConf.ID)
-	if conn == nil {
-		return nil
-	}
-	var count int64 = -1
-	conn.Table(tab.ScheName + "." + tab.Tabname).Count(&count)
-	record := &model.TabDataRecord{}
-	record.DBName = tab.Tabname
-	record.TabName = tab.Tabname
-	record.CkechTime = time.Now()
-	record.Condition = "1=1"
-	record.Count = count
-	record.DBIPPort = tab.DBConf.IPPort
-	record.SchemaName = tab.ScheName
-	return record
-}
-
-func SaveTabCountRecode(record *model.TabDataRecord, tab *TabMonItem) error {
-	conn := GetConn("db1_id")
-	if conn == nil {
-		return fmt.Errorf("DB conn error")
-	}
-	conn.Create(record)
-	if conn.NewRecord(*record) {
-		return fmt.Errorf("create record error")
-	}
-	return nil
 }
 
 /*
