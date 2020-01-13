@@ -75,11 +75,15 @@ func GetTabDataCount(tab *TabMonItem) *model.TabDataRecord {
 }
 
 func SaveTabCountRecode(record *model.TabDataRecord, tab *TabMonItem) error {
-	conn := GetConn(tab.DBConf.ID)
+	conn := GetConn("db1_id")
 	if conn == nil {
 		return fmt.Errorf("DB conn error")
 	}
-	conn.Create(&record)
+	conn.Create(record)
+	if conn.NewRecord(*record) {
+		return fmt.Errorf("create record error")
+	}
+	return nil
 }
 
 /*

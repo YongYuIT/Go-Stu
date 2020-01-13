@@ -18,5 +18,6 @@ func (thiz *MonService) StartService() {
 	for _, v := range tabIntems {
 		count := tools.GetTabDataCount(&v)
 		fmt.Println(count)
+		tools.SaveTabCountRecode(count, &v)
 	}
 }

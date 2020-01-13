@@ -14,7 +14,8 @@ func TestGetAllZeroTab(t *testing.T) {
 	}
 	for _, v := range tabIntems {
 		fmt.Println(v.DBConf.ID + "-->" + v.ScheName + "-->" + v.Tabname)
-		count := tools.GetTabDataCount(v)
+		count := tools.GetTabDataCount(&v)
 		fmt.Println(count)
+		tools.SaveTabCountRecode(count, &v)
 	}
 }

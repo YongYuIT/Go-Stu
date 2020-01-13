@@ -1,11 +1,11 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
 	"time"
 )
 
 type TabDataRecord struct {
+	ID         int       `gorm:"primary_key;column:id"`
 	DBIPPort   string    `gorm:"column:db_ip_port"`
 	DBName     string    `gorm:"column:db_name"`
 	SchemaName string    `gorm:"column:schema_name"`
@@ -19,14 +19,11 @@ func (TabDataRecord) TableName() string {
 	return "etl_tem.tab_mon_record"
 }
 
-func (record *TabDataRecord) AfterCreate(tx *gorm.DB) (err error) {
-
-}
-
 /*
 create schema etl_tem;
 grant all on schema etl_tem to yuyong;
 create table etl_tem.tab_mon_record(
+id serial PRIMARY KEY,
 db_ip_port varchar(255),
 db_name varchar(255),
 schema_name varchar(255),
