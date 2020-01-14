@@ -12,13 +12,14 @@ func (thiz *MonService) StartService() {
 	tabIntems, err := tools.GetZeroTabMonConf()
 	if err != nil {
 		fmt.Println("err-->", err)
-	} else {
-		fmt.Println("tabIntems-->", tabIntems)
+		return
 	}
+	saveDbTool := (&tools.TabDataRecordDBTool{}).InitTool("db1_id").(*tools.TabDataRecordDBTool)
 	for _, v := range tabIntems {
-		sDbTool := (&tools.SchemaTabInfoDBTool{}).InitTool(v.DBConf.ID)
-		count := sDbTool.GetTabDataCount(&v)
+		fmt.Println(v.DBConf.ID + "-->" + v.ScheName + "-->" + v.Tabname)
+		tDbTool := (&tools.TabDataRecordDBTool{}).InitTool(v.DBConf.ID).(*tools.TabDataRecordDBTool)
+		count := tDbTool.GetTabDataCount(&v)
 		fmt.Println(count)
-		sDbTool.SaveTabCountRecode(count)
+		saveDbTool.SaveTabCountRecode(count)
 	}
 }

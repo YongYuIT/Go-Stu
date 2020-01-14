@@ -30,8 +30,21 @@ func init() {
 	}
 }
 
-func GetConn(id string) *gorm.DB {
+func getConn(id string) *gorm.DB {
 	return dbConnContext[id]
+}
+
+type dbConn struct {
+	conn *gorm.DB
+}
+
+type DBToolInterfce interface {
+	InitTool(id string) DBToolInterfce
+}
+
+func (thiz *dbConn) InitTool(id string) DBToolInterfce {
+	thiz.conn = getConn(id)
+	return thiz
 }
 
 /*
