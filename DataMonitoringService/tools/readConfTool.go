@@ -101,6 +101,20 @@ type SendEmailConf struct {
 	STMPPort string
 }
 
+func GetSendEmailConf() *SendEmailConf {
+	conf, err := getConfig("EmailServer", "./config/")
+	if err != nil {
+		return nil
+	}
+	eConf := conf.Get("send_email_conf").(map[string]string)
+	conf_item := &SendEmailConf{}
+	conf_item.Username = eConf["usr"]
+	conf_item.Passwd = eConf["pwd"]
+	conf_item.STMPHost = eConf["smtp"]
+	conf_item.STMPPort = eConf["smtp_port"]
+	return conf_item
+}
+
 func getConfig(conf_name string, conf_path string) (*viper.Viper, error) {
 	config := viper.New()
 	config.SetConfigName(conf_name)

@@ -1,0 +1,4 @@
+使用本地js/css资源，参考https://go-echarts.github.io/go-echarts/docs/assets_file
+$ git clone https://github.com/chenjiandongx/go-echarts-assets.git
+$ cd go-echarts-assets
+$ go run main.go

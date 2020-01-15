@@ -28,7 +28,7 @@ func (thiz *LinePrintTool) PrintTabDataTabRecords(records []model.TabDataRecord)
 	line.Render(f)
 }
 
-func (thiz *LinePrintTool) PrintTabDataSchaRecords(scha_records [][]*model.TabDataRecord) {
+func (thiz *LinePrintTool) PrintTabDataSchaRecords(scha_records [][]*model.TabDataRecord) string {
 	line := charts.NewLine()
 	line.SetGlobalOptions(charts.TitleOpts{Title: scha_records[0][0].SchemaName}, charts.InitOpts{Theme: "shine"})
 	for i := 0; i < len(scha_records); i++ {
@@ -51,4 +51,5 @@ func (thiz *LinePrintTool) PrintTabDataSchaRecords(scha_records [][]*model.TabDa
 		log.Println(err)
 	}
 	line.Render(f)
+	return file_name
 }

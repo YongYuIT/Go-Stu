@@ -20,7 +20,7 @@ func (thiz *PrintService) PrintTabPolyline(tabInfo string) {
 	}
 }
 
-func (thiz *PrintService) PrintSchaPolylines(scha string) {
+func (thiz *PrintService) PrintSchaPolylines(scha string) string {
 	info := strings.Split(scha, ".")
 	tDbTool := (&tools.TabDataRecordDBTool{}).InitTool("db1_id").(*tools.TabDataRecordDBTool)
 	records := tDbTool.GetTabDataRecordBySchaInfo(info[0], info[1])
@@ -42,6 +42,7 @@ func (thiz *PrintService) PrintSchaPolylines(scha string) {
 	}
 	printer := &charts.LinePrintTool{}
 	if records != nil {
-		printer.PrintTabDataSchaRecords(recordsTabs)
+		return printer.PrintTabDataSchaRecords(recordsTabs)
 	}
+	return ""
 }
