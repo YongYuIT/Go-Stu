@@ -1,0 +1,5 @@
+send_email_conf:
+  usr: 13145882354@163.com
+  pwd: 1qaz2wsx
+  smtp: smtp.163.com
+  smtp_port: 994

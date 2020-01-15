@@ -94,6 +94,13 @@ func GetDBConfigByID(id string) *DBConfig {
 	return dbInfo
 }
 
+type SendEmailConf struct {
+	Username string
+	Passwd   string
+	STMPHost string
+	STMPPort string
+}
+
 func getConfig(conf_name string, conf_path string) (*viper.Viper, error) {
 	config := viper.New()
 	config.SetConfigName(conf_name)
