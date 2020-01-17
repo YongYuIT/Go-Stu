@@ -1,20 +1,37 @@
 package service
 
 import (
+	"../model"
 	"../tools"
-	"strings"
+	"bytes"
+	"fmt"
+	"html/template"
 )
 
 type EmailService struct {
 }
 
-func (thiz *EmailService) sendSimpleSchaInfoEmail(scha_info string) {
+func (thiz *EmailService) SendSimpleSchaInfoEmail(scha_info string, to string) {
+	linFileName := (&PrintService{}).PrintSchaPolylines(scha_info)
+	lineFileStr := (&tools.FileTool{}).ReadFileTxt(linFileName)
+	content := struct {
+		Disc string
+		Line template.HTML
+	}{"fuck worninggggg11111111111111", template.HTML(lineFileStr)}
+	temp, err := template.ParseFiles("../view/SimpSchaEmailView.html")
+	buf := new(bytes.Buffer)
+	if err == nil {
+		err := temp.Execute(buf, content)
+		if err != nil {
+			fmt.Println("html err", err)
+		}
+	}
 
-	fileTool := &tools.FileTool{}
-	pService := PrintService{}
-	linFileName := pService.PrintSchaPolylines(scha_info)
-	viewHtml := fileTool.ReadFileTxt("../view/SimpSchaEmailView.html")
-	viewHtml = strings.Replace(viewHtml, "##$text_content$##", "fuck worning", -1)
-	lineFileStr := fileTool.ReadFileTxt(linFileName)
-	viewHtml = strings.Replace(viewHtml, "##$html_content$##", lineFileStr, -1)
+	emailModel := &model.Email{}
+	emailModel.Content = buf.String()
+	emailModel.Title = "fuck test"
+	emailModel.To = to
+	emailModel.Attachments = linFileName
+	(&tools.EmailTool{}).SendEmail(emailModel)
+
 }

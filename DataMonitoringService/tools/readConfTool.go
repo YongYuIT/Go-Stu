@@ -106,12 +106,12 @@ func GetSendEmailConf() *SendEmailConf {
 	if err != nil {
 		return nil
 	}
-	eConf := conf.Get("send_email_conf").(map[string]string)
+	eConf := conf.Get("send_email_conf").(map[string]interface{})
 	conf_item := &SendEmailConf{}
-	conf_item.Username = eConf["usr"]
-	conf_item.Passwd = eConf["pwd"]
-	conf_item.STMPHost = eConf["smtp"]
-	conf_item.STMPPort = eConf["smtp_port"]
+	conf_item.Username = eConf["usr"].(string)
+	conf_item.Passwd = eConf["pwd"].(string)
+	conf_item.STMPHost = eConf["smtp"].(string)
+	conf_item.STMPPort = eConf["smtp_port"].(string)
 	return conf_item
 }
 
