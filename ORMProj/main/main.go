@@ -12,3 +12,11 @@ func main() {
 	//db_try.TryPkFk()
 	db_try.TestGP()
 }
+
+/*
+create table f_test.f_stu_info(
+    f_stu_name varchar(255),
+    f_stu_age varchar(255)
+);
+
+*/

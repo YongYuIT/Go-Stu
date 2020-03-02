@@ -33,7 +33,7 @@ func (StuInfo) TableName() string {
 }
 
 func TestGP() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "0.0.0.0", 5432, "yuyong", "123456", "testDB")
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "0.0.0.0", 5432, "yuyong", "123456", "testdb")
 	fmt.Println("get conn str-->" + psqlInfo)
 	db, err := gorm.Open("postgres", psqlInfo)
 	if err != nil {
