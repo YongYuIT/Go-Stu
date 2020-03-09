@@ -102,6 +102,50 @@ type identity struct{
 
 用命令行里面的背书策略语法，试分析！！！
 
+· 链码实例化策略
+
+链码实例化策略用于验证是否有权限进行链码实例化和升级。
+链码实例化策略是在链码打包签名的时候指定的，如果没有指定，默认只有通道管理员才能实例化。
+
+链码实例化策略定义如下：
+type SignedChaincodeDeploymentSpec struct{
+    ChaincodeDeploymentSpec []byte //链码部署规范
+	InstantiationPolicy []byte //链码实例化策略内容
+	OwnerEndorsements []*Endorsement //链码所有者签名背书列表
+}
+
+链码实例化策略是直接写在链码包里面的，用于验证当前操作者是否有权限进行实例化；
+实例化完成之后，策略会存放在链上，用于后续验证操作这是否有权限进行升级。
+
+链码实例化策略和背书策略定义完全一样，验证方法也一样。
+
+· 通道管理策略
+
+通道配置策略定义在通道配置里面，通道配置定义如下：
+
+通道配置是递归定义的
+type ConfigGroup struct{
+    Version uint64 //配置版本
+	Groups map[string]*ConfigGroup //子配置
+	Values map[string]*ConfigValue //配置值
+	Policies map[string]*ConfigPolicy //通道管理策略
+	ModPolicy string //修改配置时的策略（策略名称）
+}
+
+通道管理策略的定义如下
+type ConfigPolicy struct{
+    Version uint64 //策略版本
+	Policy *Policy //策略内容
+	ModPolicy string //修改时的策略（策略名称）
+}
+
+通道的管理策略只要有3种：
+Readers、Writers、Admins
+这一部分结合channel配置文件一起研究！！！
+
+===============================================================================================
+计划：2020-03-10，落实以上需要验证的部分，而后转《深度探索区块链：Hyperledger技术与应用》，第八章
+
 
 
 
