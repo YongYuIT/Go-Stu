@@ -1,0 +1,107 @@
+1、整体安全框架
+
+1.1 策略管理和访问控制
+参考资料《深度探索区块链：Hyperledger技术与应用》，P56
+
+· 策略是一种权限管理的方法，Fabric里面的策略包括：交易背书策略，链码实例化策略，通道管理策略
+
+· Fabric策略定义：
+type Policy struct{
+	Type int32	//策略类型
+	Value [] byte	//策略内容
+}
+
+· 策略类型分为两种：SignaturePolicy（基于签名）、ImplicitMetaPolicy（隐含元策略）
+ImplicitMetaPolicy只用于通道管理
+SignaturePolicy分为两种，SignedBy、NOutOf（包含AND、OR等）
+
+· SignaturePolicy定义：
+
+type SignaturePolicy struct{
+	Type isSignaturePolicy_Type `protobuf_oneof:"Type"`
+}
+
+
+· ImplicitMetaPolicy定义
+
+type ImplicitMetaPolicy struct{
+	SubPolicy string //子策略名称
+	Rule ImplicitMetaPolicy_Rule //策略规则
+}
+
+其中策略规则支持三种：
+ImplicitMetaPolicy_ANY 任意子策略成立，策略成立
+ImplicitMetaPolicy_ALL 所有子策略成立，策略成立
+ImplicitMetaPolicy_MAJORITY 大多数子策略成立，策略成立
+
+--------
+
+· 交易背书策略
+每个通道的每个链码必须指定唯一的背书策略，背书策略在链码实例化的时候指定（待补充验证资料！！！）。
+
+背书由一组签名组成（从背书节点集收集到的），每个Peer节点收到区块时，能根据区块内交易数据本地验证背书是否符合背书策略，不需要与其他节点交互（仔细思考！！！）。
+
+背书成立的充要条件：
+1、所有的背书，背书结果（预执行的结果）都是符合预期的
+2、背书数量满足背书策略
+3、背书都经过期望的背书节点正确签名的（总结数字签名过程！！！《区块链七 非对称加密》《区块链九 以太坊账户》）
+
+
+· 背书策略定义
+
+type SignaturePolicyEnvelope struct{
+    Version int32 //策略版本
+    Rule *SignaturePolicy //策略规则
+	Identities []*commonl.MSPPrincipal //策略内容
+}
+
+其中策略内容定义如：
+
+type MSPPrincipal struct{
+    PrincipalClassification MSPPrincipal_Classification  //签名类型
+	Principal []byte //策略内容
+}
+
+其中签名类型分为：
+
+MSPPrincipal_ROLE：基于MSP角色的验证方法，目前只支持admin、member两种
+MSPPrincipal_ORGANIZATION_UNIT：基于部门
+MSPPrincipal_IDENTITY：基于某个具体身份
+
+当PrincipalClassification（签名类型）是MSPPrincipal_ROLE时，Principal（策略内容）为：
+
+type MSPRole struct{
+    MspIdentifier string //MSP标识符
+	Role MSPRole_MSPRoleType //MSP角色，可选范围：MSPRole_MEMBER和MSPRole_ADMIN
+}
+
+MSPRole_MEMBER：验证是否为同一个MSP的有效签名
+MSPRole_ADMIN：验证是否为MSP预设的ADMIN成员
+
+当PrincipalClassification（签名类型）是MSPPrincipal_ORGANIZATION_UNIT时，Principal（策略内容）为：
+type OrganizationUnit struct{
+    MspIdentifier string //MSP标识
+	OrganizationalUnitIdentifier string//部门标识
+	CertifiersIdentifier []byte //证书标识（证书信任链和组织部门信息的hash）
+}
+
+此时验证策略为：
+验证是否有相同的MSP-->验证是否是有效的证书-->验证组织部门信息是否匹配
+
+当PrincipalClassification（签名类型）是MSPPrincipal_IDENTITY时，Principal（策略内容）为
+
+type identity struct{
+    id *IdentityIdentifier //身份标识（包括MSP标识和身份编号）
+	cert *x509.Certificate //身份证书，即签名公钥（复习x509！！！）
+	pk bccsp.Key //公钥
+	msp *bccspmsp //MSP信息
+}
+
+此时验证策略为：
+只需要验证签名证书是否有效
+
+用命令行里面的背书策略语法，试分析！！！
+
+
+
+
