@@ -1,12 +1,16 @@
-package main
+package test
 
 import (
 	"fmt"
 	"github.com/hpcloud/tail"
+	"testing"
 	"time"
 )
 
-func main() {
+func TestTailFileChanges(t *testing.T) {
+
+	//单元测试不支持输入，所以需要拷贝的主函数测试、运行
+
 	filename := "/home/yong/Go-Stu20200302001/ETLLogMonitoringService/test_path/test1.txt"
 	tails, err := tail.TailFile(filename, tail.Config{
 		ReOpen:    true,

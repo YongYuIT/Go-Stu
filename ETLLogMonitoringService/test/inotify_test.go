@@ -19,6 +19,12 @@ func TestMonPathFileChanges(t *testing.T) {
 	}
 	defer wacher.Close()
 
+	err = wacher.Add("/home/yong/Go-Stu20200302001/ETLLogMonitoringService/test_path/")
+	if err != nil {
+		fmt.Println("add path failed-->", err)
+		return
+	}
+
 	go func() {
 		for {
 			select {
