@@ -1,2 +1,11 @@
 以Go数据可视化库练手
 go-echarts
+
+==================================================================================
+
+Go语言的优越性专题：
+
+1、Go语言的内存管理
+https://studygolang.com/articles/22500?fr=sidebar --> 基础理论学习专题/Go内存分配.pdf
+https://www.cnblogs.com/itbsl/p/10476674.html --> 基础理论学习专题/Go变量逃逸分析.pdf
+https://segmentfault.com/a/1190000018161588 --> 基础理论学习专题/Go GC.pdf
