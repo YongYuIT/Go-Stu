@@ -88,4 +88,9 @@ func TestGPSQL() {
 	fmt.Println("--------------------------------------------------------1")
 	fmt.Println(result)
 	fmt.Println("--------------------------------------------------------2")
+
+	var result_item SqlResult
+	db.Raw("select f_stu_name,f_stu_age from f_test.f_stu_info where f_stu_name = ?","aaa").Scan(&result_item)
+	fmt.Println(result_item)
+	fmt.Println("--------------------------------------------------------3")
 }
