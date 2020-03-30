@@ -1,0 +1,8 @@
+excel_file: aaa.xlsx
+host_name: 0.0.0.0
+port: "5432"
+user_name: yuyong
+passwd: "123456"
+db_name: testdb
+sslmode: disable
+query_sql: "select detial_address,region_name,ps_name from test_sch.test_tab where ps_code = ?"
