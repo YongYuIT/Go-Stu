@@ -1,0 +1,5 @@
+结合fabric2.0复习相关知识
+
+搭建fabric2.0测试网络                           done
+写private data demo                             doing
+研究fabric1.4和2.0链码生命周期及差异
