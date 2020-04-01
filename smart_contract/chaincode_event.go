@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/hyperledger/fabric/core/chaincode/shim"
+	//"github.com/hyperledger/fabric/core/chaincode/shim" //1.4
+	"github.com/hyperledger/fabric-chaincode-go/shim" //2.0 change
 	"strings"
 )
-import pb "github.com/hyperledger/fabric/protos/peer"
+//import pb "github.com/hyperledger/fabric/protos/peer" //1.4
+import pb "github.com/hyperledger/fabric-protos-go/peer" //2.0 change
 
 type ChainCodeContract struct {
 }
