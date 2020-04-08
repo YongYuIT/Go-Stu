@@ -2,4 +2,5 @@
 
 搭建fabric2.0测试网络                           done
 写private data demo                             doing
-研究fabric1.4和2.0链码生命周期及差异            at https://hyperledger-fabric.readthedocs.io/en/latest/chaincode_lifecycle.html#step-three-approve-a-chaincode-definition-for-your-organization
+研究fabric1.4和2.0链码生命周期及差异            at https://hyperledger-fabric.readthedocs.io/en/latest/chaincode_lifecycle.html#step-four-commit-the-chaincode-definition-to-the-channel
+研究fabric2.0背书策略                           at https://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html#setting-chaincode-level-endorsement-policies
