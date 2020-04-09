@@ -138,10 +138,10 @@ $ docker exec -it cli /bin/bash
 # peer lifecycle chaincode approveformyorg --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem --channelID mychannel --name histroy_try_v1 --version 1 --init-required --package-id histroy_try_v1:9e11241ded7f81b8c2fbd835be8caa7990fd07184c0f4117c2a23cb85efdd5c6 --sequence 1 --waitForEvent
 # peer lifecycle chaincode checkcommitreadiness --channelID mychannel --name histroy_try_v1 --version 1 --sequence 1 --output json --init-required
 
-#### 转到peer1.org2，安装 & 批准链码
+#### 转到peer0.org2，安装 & 批准链码
 # export CORE_PEER_ADDRESS=peer0.org2.example.com:9051
 # export CORE_PEER_LOCALMSPID=Org2MSP
-# export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/ca.crt
+# export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 # export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin\@org2.example.com/msp/
 # cd /opt/gopath/src/github.com/hyperledger/fabric-samples/chaincode
 # peer lifecycle chaincode install histroy_try_v1.tar.gz
@@ -150,7 +150,7 @@ $ docker exec -it cli /bin/bash
 # peer lifecycle chaincode approveformyorg --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem --channelID mychannel --name histroy_try_v1 --version 1 --init-required --package-id histroy_try_v1:9e11241ded7f81b8c2fbd835be8caa7990fd07184c0f4117c2a23cb85efdd5c6 --sequence 1 --waitForEvent
 # peer lifecycle chaincode checkcommitreadiness --channelID mychannel --name histroy_try_v1 --version 1 --sequence 1 --output json --init-required
 
-#### 转到peer1.org0，部署链码
+#### 转到peer0.org1，部署链码
 # peer lifecycle chaincode commit -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem --channelID mychannel --name histroy_try_v1 --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses peer0.org2.example.com:9051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt --version 1 --sequence 1 --init-required
 
 # peer lifecycle chaincode querycommitted --channelID mychannel --name histroy_try_v1
