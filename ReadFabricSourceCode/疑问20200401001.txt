@@ -1,0 +1,5 @@
+https://hyperledger-fabric.readthedocs.io/en/latest/chaincode_lifecycle.html#step-two-install-the-chaincode-on-your-peers
+上由这么一段话：
+You need to install the chaincode package on every peer that will execute and endorse transactions. 
+
+如果一个org内有两个节点peer0和peer1，链码只在peer0上安装，并且可以正常调用，那么可以在peer1上调用吗？
