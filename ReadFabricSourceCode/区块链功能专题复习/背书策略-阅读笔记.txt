@@ -21,3 +21,7 @@
 	   而基于签名的背书策略与特定的组织捆绑在一起，一旦参与背书的关键组织加入或退出，那么就必须升级链码以适应变化。
 	   
 4、基于签名的背书策略语法（参考https://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html#endorsement-policy-syntax）
+   基本语法是：'MSP_ID.ROLE'
+   支持的角色：admin、member、client、peer
+   支持的运算：AND、OR、OutOf
+   
