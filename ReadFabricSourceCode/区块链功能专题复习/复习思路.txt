@@ -1,6 +1,6 @@
 结合fabric2.0复习相关知识
 
 搭建fabric2.0测试网络                           done
-写private data demo                             doing
+写private data demo                             概念部分了解完毕，成果见《私有数据-阅读笔记.txt》，尚待在研究fabric couchdb数据存储的基础上，研究私有数据存储。
 研究fabric1.4和2.0链码生命周期及差异            at https://hyperledger-fabric.readthedocs.io/en/latest/chaincode_lifecycle.html#step-four-commit-the-chaincode-definition-to-the-channel
-研究fabric2.0背书策略                           at https://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html#setting-chaincode-level-endorsement-policies
+研究fabric2.0背书策略                           大致读完，成果见《背书策略-阅读笔记.txt》，https://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html#endorsement-policy-syntax之后略读。

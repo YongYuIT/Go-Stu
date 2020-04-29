@@ -1,0 +1,27 @@
+参考：https://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html#endorsement-policies
+
+1、背书策略是以组织为单位的
+
+2、多级背书策略精细满足不同业务需求：
+   2.1、默认情况下，链码的背书策略是定义链码时指定的，背书策略可以覆盖所有所有与链码相关的状态。
+   2.2、对于私有数据集。我们可以针对特定的私有数据集指定背书策略。这个背书策略对私有数据集的所有键起作用，并覆写原来链码级别的背书策略。
+        进一步明确（原文为further restricting）哪些组织可以写这个私有数据集。
+        （PS 从further restricting可以看出，定义在私有数据集级别的背书策略，只能在链码级别的背书策略上进行收缩，而不能扩张）
+   2.3、对于特定的键值对（可以是账本数据，也可以是私有数据集数据），也允许定义键级别的背书策略。这个背书策略将覆写原来链码级别和（如果有）集合级别的背书策略。
+        （PS 同样只能收缩，不能扩张）
+
+3、链码级别的背书策略：
+   3.1 如果自定义链码级别背书策略，需要在批准和提交时指定链码级别背书策略。
+       （PS CLI工具时是使用--signature-policy参数指定）
+   3.2 为链码指定背书策略的方式有两种：（假设使用CLI工具，其他客户端可以类推）
+       a、借助--signature-policy为链码指定基于签名的背书策略
+	   b、借助--channel-config-policy为链码指定基于通道配置的背书策略
+	   如果不为链码指定任何背书策略，那么链码默认使用基于通道配置的背书策略，具体策略是Channel/Application/Endorsement。这个策略规定，如果通道内大多数组织同意即成立（validated by majority）
+	   基于通道配置的背书策略相比基于签名的背书策略而言优点是：基于通道配置的背书策略可以随着通道成员变化（加入和退出）而动态适应。
+	   而基于签名的背书策略与特定的组织捆绑在一起，一旦参与背书的关键组织加入或退出，那么就必须升级链码以适应变化。
+	   
+4、基于签名的背书策略语法（参考https://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html#endorsement-policy-syntax）
+   基本语法是：'MSP_ID.ROLE'
+   支持的角色：admin、member、client、peer
+   支持的运算：AND、OR、OutOf
+   
