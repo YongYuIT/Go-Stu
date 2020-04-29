@@ -7,5 +7,6 @@ import (
 
 func main() {
 	fmt.Println("env ok")
-	demo.Conn_to_cluster()
+	//demo.Conn_to_cluster()
+	demo.Create_topic()
 }

@@ -1,0 +1,15 @@
+ref to:https://github.com/YongYuIT/Fabric-study/tree/master/hello-fabric2.0/build-netrowk/test2-orderer-with-kafka
+
+$ docker stop $(docker ps -aq)
+$ docker rm -f $(docker ps -aq)
+$ docker network prune
+$ docker volume rm $(docker volume list)
+$ cd thk_network
+$ docker-compose -f docker-compose-zookeeper.yaml up -d
+
+$ docker-compose -f docker-compose-kafka.yaml up -d
+
+$ docker exec -it kafka1.thinking.com /bin/bash
+# cd /kafka/bin
+# ./kafka-topics.sh --create --zookeeper test_1.thinking.com:2181 --replication-factor 2 --partitions 3 --topic test-with-create
+# ./kafka-topics.sh --zookeeper test_1.thinking.com:2181 --describe --topic test-with-create
