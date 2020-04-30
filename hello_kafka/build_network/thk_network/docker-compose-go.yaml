@@ -1,0 +1,15 @@
+version: '2'
+
+networks:
+  thk_blocks:
+
+services:
+  go_prom:
+    image: ubuntu
+    container_name: go_prom
+    command: /bin/hello_kafka
+    tty: true
+    networks:
+      - thk_blocks
+    volumes:
+      - ../../hello_kafka:/bin/hello_kafka

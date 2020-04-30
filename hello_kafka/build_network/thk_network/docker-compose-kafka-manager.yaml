@@ -15,7 +15,7 @@ services:
       - "9000:9000"
     volumes:
       - /mnt/hgfs/java-env/jdk-11.0.7:/java
-      - ../kafka-cmd_1.0.2:/kafka-cmd
+      - ../kafka-cmd:/kafka-cmd
       - /mnt/hgfs/zk-kafka-env/cmak-3.0.0.4:/cmak
     environment:
       - JAVA_HOME=/java

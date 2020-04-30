@@ -13,3 +13,6 @@ $ docker exec -it kafka1.thinking.com /bin/bash
 # cd /kafka/bin
 # ./kafka-topics.sh --create --zookeeper test_1.thinking.com:2181 --replication-factor 2 --partitions 3 --topic test-with-create
 # ./kafka-topics.sh --zookeeper test_1.thinking.com:2181 --describe --topic test-with-create
+
+$ docker-compose -f docker-compose-kafka-manager.yaml up -d
+$ docker-compose -f docker-compose-go.yaml up -d
