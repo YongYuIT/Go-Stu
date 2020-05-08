@@ -35,7 +35,7 @@ func GetMessageFromKafka(topicName string) {
 		go func() {
 			for msg := range partitionConsumer.Messages() {
 				//实验表明，偏移量在特定主题特定分区内是唯一的，单调递增的
-				fmt.Println("recv-->", go_index, "-->", string(msg.Key), ":", string(msg.Value), "-->", msg.Offset)
+				fmt.Println("recv success-->", go_index, "-->", msg.Offset, "-->", string(msg.Key), "-->", string(msg.Value))
 			}
 		}()
 	}

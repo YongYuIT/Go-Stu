@@ -16,3 +16,11 @@ $ docker exec -it kafka1.thinking.com /bin/bash
 
 $ docker-compose -f docker-compose-kafka-manager.yaml up -d
 $ docker-compose -f docker-compose-go.yaml up -d
+
+---------------------------------------------------------------------------
+kafka常用命令
+---------------------------------------------------------------------------
+#### 列举出kafka内所有主题
+# ./kafka-topics.sh --list --bootstrap-server kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092
+#### 列举出kafka内所有主题
+# ./kafka-topics.sh --describe --bootstrap-server kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092

@@ -3,6 +3,7 @@ package demo
 import (
 	"fmt"
 	"github.com/Shopify/sarama"
+	"math/rand"
 	"strconv"
 	"time"
 )
@@ -20,13 +21,15 @@ func Send_message(topname string) {
 	}
 	defer client.Close()
 
-	off := -1
+	off := int64(-1)
 	for {
 		msg := &sarama.ProducerMessage{}
 		msg.Topic = topname
-		fmt.Println("send key-->", strconv.Itoa(off)+"key")
-		msg.Key = sarama.StringEncoder(strconv.Itoa(off) + "key")
-		msg.Value = sarama.StringEncoder(strconv.Itoa(off) + "-->fuck kafka test message")
+		send_key := strconv.FormatInt(time.Now().UnixNano(), 10) + "-key"
+		fmt.Println("send key-->", send_key)
+		msg.Key = sarama.StringEncoder(send_key)
+		send_value := "this is a message No. is " + strconv.Itoa(rand.Intn(1000000))
+		msg.Value = sarama.StringEncoder(send_value)
 
 		part_id, _off, err := client.SendMessage(msg)
 		off = _off
@@ -34,7 +37,7 @@ func Send_message(topname string) {
 			fmt.Println("send error-->", err)
 			return
 		}
-		fmt.Println("send success-->", part_id, off)
+		fmt.Println("send success-->", part_id, "-->", off, "-->", send_key)
 		time.Sleep(5 * time.Second)
 	}
 }
