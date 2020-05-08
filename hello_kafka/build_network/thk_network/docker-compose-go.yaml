@@ -4,10 +4,22 @@ networks:
   thk_blocks:
 
 services:
-  go_prom:
+  go_prom_send:
     image: ubuntu
-    container_name: go_prom
-    command: /bin/hello_kafka
+    container_name: go_prom_send
+    command: /bin/hello_kafka -j send_message
+    tty: true
+    networks:
+      - thk_blocks
+    volumes:
+      - ../../hello_kafka:/bin/hello_kafka
+
+  go_prom_recv:
+    depends_on:
+      - go_prom_send
+    image: ubuntu
+    container_name: go_prom_recv
+    command: /bin/hello_kafka -j recv_message
     tty: true
     networks:
       - thk_blocks

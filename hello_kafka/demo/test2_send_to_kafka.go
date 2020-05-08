@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func Send_message() {
+func Send_message(topname string) {
 	config := sarama.NewConfig()
 	config.Producer.RequiredAcks = sarama.WaitForAll
 	config.Producer.Partitioner = sarama.NewRandomPartitioner
@@ -23,15 +23,18 @@ func Send_message() {
 	off := -1
 	for {
 		msg := &sarama.ProducerMessage{}
-		msg.Topic = "fuck_test"
-		msg.Value = sarama.StringEncoder("fuck kafka test message" + strconv.Itoa(off))
+		msg.Topic = topname
+		fmt.Println("send key-->", strconv.Itoa(off)+"key")
+		msg.Key = sarama.StringEncoder(strconv.Itoa(off) + "key")
+		msg.Value = sarama.StringEncoder(strconv.Itoa(off) + "-->fuck kafka test message")
 
-		pid, off, err := client.SendMessage(msg)
+		part_id, _off, err := client.SendMessage(msg)
+		off = _off
 		if err != nil {
 			fmt.Println("send error-->", err)
 			return
 		}
-		fmt.Println("send success-->", pid, off)
-		time.Sleep(2 * time.Second)
+		fmt.Println("send success-->", part_id, off)
+		time.Sleep(5 * time.Second)
 	}
 }

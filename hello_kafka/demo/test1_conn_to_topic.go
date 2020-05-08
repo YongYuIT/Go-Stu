@@ -19,7 +19,7 @@ func Conn_to_cluster() {
 	fmt.Println("conn success Brokers-->", len(client.Brokers()))
 }
 
-func Create_topic() {
+func Create_topic(topName string) {
 	broker := sarama.NewBroker("0.0.0.0:9093")
 	config := sarama.NewConfig()
 	config.Version = sarama.V2_4_0_0
@@ -33,11 +33,11 @@ func Create_topic() {
 	defer broker.Close()
 
 	topInfo := &sarama.TopicDetail{}
-	topInfo.NumPartitions = 2     //两个分区
-	topInfo.ReplicationFactor = 3 //三个副本
+	topInfo.NumPartitions = 4     //两个分区
+	topInfo.ReplicationFactor = 2 //三个副本
 
 	topInfos := make(map[string]*sarama.TopicDetail)
-	topInfos["fuck_test"] = topInfo
+	topInfos[topName] = topInfo
 
 	req := sarama.CreateTopicsRequest{
 		TopicDetails: topInfos,
