@@ -24,6 +24,7 @@ func GetMessageFromKafka(topicName string) {
 	fmt.Println("find parts-->", len(partitions))
 
 	for i := 0; i < len(partitions); i++ {
+		//sarama.OffsetNewest决定了消费者每次都是从头消费消息
 		partitionConsumer, err := consumer.ConsumePartition(topicName, partitions[i], sarama.OffsetNewest)
 		if err != nil {
 			fmt.Println("get part consu failed-->", err)
@@ -42,4 +43,15 @@ func GetMessageFromKafka(topicName string) {
 
 	inputReader := bufio.NewReader(os.Stdin)
 	inputReader.ReadString('\n')
+}
+
+//上面的GetMessageFromKafka方法没有考虑断点问题。这个方法将消费的标识存到zk里面，后面每次启动从上次的标识开始接收数据
+func GetMessageFromKafkaWithOff(topicName string) {
+
+}
+
+func GetMessageFromKafkaGroup(topicName string) {
+	conf := sarama.NewConfig()
+	//决定分区分配策略，即组内哪个消费者得到哪个分区
+	conf.Consumer.Group.Rebalance.Strategy = sarama.BalanceStrategyRange
 }
