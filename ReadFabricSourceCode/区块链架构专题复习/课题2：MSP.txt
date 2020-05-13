@@ -1,0 +1,3 @@
+参考：https://hyperledger-fabric.readthedocs.io/en/latest/membership/membership.html#membership-service-provider-msp
+
+1、尝试从头搭建FabricNetwork，领会MSP，特别是各个证书的作用
