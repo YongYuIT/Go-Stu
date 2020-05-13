@@ -24,3 +24,16 @@ kafka常用命令
 # ./kafka-topics.sh --list --bootstrap-server kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092
 #### 列举出kafka内所有主题
 # ./kafka-topics.sh --describe --bootstrap-server kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092
+
+
+---------------------------------------------------------------------------
+zk常用命令
+---------------------------------------------------------------------------
+$ docker exec -it test_1.thinking.com /bin/bash
+# cd /zookeeper/bin/
+# sh zkCli.sh
+####查看节点信息
+ls /
+ls /fuck_test20200508008_off/part_0
+get /fuck_test20200508008_off/part_0
+

@@ -18,7 +18,7 @@ func main() {
 		fmt.Println("hello word")
 	}
 
-	topicName := "fuck_test20200508006"
+	topicName := "fuck_test20200509004"
 
 	if strings.EqualFold(job_name, "conn_to_kafka") {
 		demo.Conn_to_cluster()
@@ -27,7 +27,8 @@ func main() {
 	} else if strings.EqualFold(job_name, "send_message") {
 		demo.Send_message(topicName)
 	} else if strings.EqualFold(job_name, "recv_message") {
-		demo.GetMessageFromKafka(topicName)
+		//demo.GetMessageFromKafka(topicName)
+		demo.GetMessageFromKafkaWithOff(topicName)
 	}
 
 }
