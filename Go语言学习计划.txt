@@ -9,6 +9,3 @@ Go语言的优越性专题：
 https://studygolang.com/articles/22500?fr=sidebar --> 基础理论学习专题/Go内存分配.pdf
 https://www.cnblogs.com/itbsl/p/10476674.html --> 基础理论学习专题/Go变量逃逸分析.pdf
 https://segmentfault.com/a/1190000018161588 --> 基础理论学习专题/Go GC.pdf
-
-
-以tensorflow-go学习Go的深入技术（特别是与C/C++相关的部分）
