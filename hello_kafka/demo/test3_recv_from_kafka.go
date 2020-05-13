@@ -104,6 +104,7 @@ func GetMessageFromKafkaWithOff(topicName string) {
 			kafka_start_off = sarama.OffsetNewest
 		} else {
 			kafka_start_off, err = strconv.ParseInt(string(off_data), 10, 64)
+			kafka_start_off += 1 //加一很重要，避免重复消费
 			if err != nil {
 				fmt.Println("read zk off data err-->", err, state.Version, off_data)
 			}
@@ -121,8 +122,14 @@ func GetMessageFromKafkaWithOff(topicName string) {
 		go func() {
 			fmt.Println("start read at part-->", go_index, partitionConsumer == nil)
 			for msg := range partitionConsumer.Messages() {
+				zk_data, state, err := conn.Get(sub_path)
+				fmt.Println("zk before-->", string(zk_data))
+				state, err = conn.Set(sub_path, []byte(strconv.FormatInt(msg.Offset, 10)), state.Version)
+				if err != nil {
+					fmt.Println("write zk err --> ", err)
+				}
 				fmt.Println("recv success-->", go_index, "-->", msg.Offset, "-->", string(msg.Key), "-->", string(msg.Value))
-				conn.Set(sub_path, []byte(strconv.FormatInt(msg.Offset, 10)), state.Version)
+				fmt.Println("write zk success-->", state.Version, "-->", msg.Offset)
 			}
 		}()
 	}

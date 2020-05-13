@@ -3,6 +3,7 @@ package demo
 import (
 	"fmt"
 	"github.com/samuel/go-zookeeper/zk"
+	"strconv"
 	"time"
 )
 
@@ -25,19 +26,20 @@ func ConnToZK() {
 	}
 	fmt.Println("get init-->", string(data), "-->", state.Version)
 
-	state, err = conn.Set(path, []byte("first data"), state.Version)
-	if err != nil {
-		fmt.Println("set_data_err", err)
-		return
-	}
-	fmt.Println("set data-->", "-->", state.Version)
+	for i := 0; i < 10; i++ {
+		state, err = conn.Set(path, []byte("data-->"+strconv.Itoa(i)), state.Version)
+		if err != nil {
+			fmt.Println("set_data_err", err)
+			return
+		}
+		fmt.Println("set data-->", "-->", state.Version)
 
-	data, state, err = conn.Get(path)
-	if err != nil {
-		fmt.Println("get_data_err", err)
-		return
+		data, state, err = conn.Get(path)
+		if err != nil {
+			fmt.Println("get_data_err", err)
+			return
+		}
+		fmt.Println("get data-->", string(data), "-->", state.Version)
 	}
-	fmt.Println("get init-->", string(data), "-->", state.Version)
-
 	return
 }

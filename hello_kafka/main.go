@@ -18,7 +18,7 @@ func main() {
 		fmt.Println("hello word")
 	}
 
-	topicName := "fuck_test20200509004"
+	topicName := "fuck_test20200513006"
 
 	if strings.EqualFold(job_name, "conn_to_kafka") {
 		demo.Conn_to_cluster()
