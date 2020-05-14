@@ -20,12 +20,16 @@ $ docker-compose -f docker-compose-go.yaml up -d
 ---------------------------------------------------------------------------
 kafka常用命令
 ---------------------------------------------------------------------------
+export KAFKAS=kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092
 #### 列举出kafka内所有主题
-# ./kafka-topics.sh --list --bootstrap-server kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092
+# ./kafka-topics.sh --list --bootstrap-server ${KAFKAS}
 #### 列举出kafka内所有主题
-# ./kafka-topics.sh --describe --bootstrap-server kafka1.thinking.com:9092,kafka2.thinking.com:9092,kafka3.thinking.com:9092,kafka4.thinking.com:9092
-
-
+# ./kafka-topics.sh --describe --bootstrap-server ${KAFKAS}
+#### 创建消费者组
+# ./kafka-console-consumer.sh --topic fuck_test20200513006 --consumer-property group.id=fuck_test_001_grp --bootstrap-server ${KAFKAS}
+#### 查看消费者组
+# ./kafka-consumer-groups.sh --list --bootstrap-server ${KAFKAS}
+# ./kafka-consumer-groups.sh --group fuck_test_003_grp --describe --bootstrap-server ${KAFKAS}
 ---------------------------------------------------------------------------
 zk常用命令
 ---------------------------------------------------------------------------

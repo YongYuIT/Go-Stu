@@ -2,6 +2,7 @@ package demo
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"github.com/Shopify/sarama"
 	"github.com/samuel/go-zookeeper/zk"
@@ -11,8 +12,11 @@ import (
 	"time"
 )
 
+var kafka_address = []string{"kafka1.thinking.com:9092", "kafka2.thinking.com:9092", "kafka3.thinking.com:9092", "kafka4.thinking.com:9092"}
+var zk_address = []string{"test_1.thinking.com:2181", "test_2.thinking.com:2181", "test_3.thinking.com:2181"}
+
 func GetMessageFromKafka(topicName string) {
-	consumer, err := sarama.NewConsumer([]string{"kafka1.thinking.com:9092", "kafka2.thinking.com:9092", "kafka3.thinking.com:9092", "kafka4.thinking.com:9092"}, nil)
+	consumer, err := sarama.NewConsumer(kafka_address, nil)
 	if err != nil {
 		fmt.Println("conn kafka failed-->", err)
 		return
@@ -51,7 +55,7 @@ func GetMessageFromKafka(topicName string) {
 
 //上面的GetMessageFromKafka方法没有考虑断点问题。这个方法将消费的标识存到zk里面，后面每次启动从上次的标识开始接收数据
 func GetMessageFromKafkaWithOff(topicName string) {
-	consumer, err := sarama.NewConsumer([]string{"kafka1.thinking.com:9092", "kafka2.thinking.com:9092", "kafka3.thinking.com:9092", "kafka4.thinking.com:9092"}, nil)
+	consumer, err := sarama.NewConsumer(kafka_address, nil)
 	if err != nil {
 		fmt.Println("conn kafka failed-->", err)
 		return
@@ -64,7 +68,7 @@ func GetMessageFromKafkaWithOff(topicName string) {
 		return
 	}
 
-	conn, _, err := zk.Connect([]string{"test_1.thinking.com:2181", "test_2.thinking.com:2181", "test_3.thinking.com:2181"}, 10*time.Second)
+	conn, _, err := zk.Connect(zk_address, 10*time.Second)
 	if err != nil {
 		fmt.Println("zk conn error-->", err)
 		return
@@ -138,8 +142,55 @@ func GetMessageFromKafkaWithOff(topicName string) {
 	inputReader.ReadString('\n')
 }
 
-func GetMessageFromKafkaGroup(topicName string) {
+func GetMessageFromKafkaGroup(topicName string, p_name string) {
 	conf := sarama.NewConfig()
+	conf.Version = sarama.V2_4_0_0
 	//决定分区分配策略，即组内哪个消费者得到哪个分区
 	conf.Consumer.Group.Rebalance.Strategy = sarama.BalanceStrategyRange
+	//默认的组消费偏移
+	conf.Consumer.Offsets.Initial = sarama.OffsetNewest
+	//消费组名称
+	group_name := "fuck_test_003_grp"
+	group, err := sarama.NewConsumerGroup(kafka_address, group_name, conf)
+	if err != nil {
+		fmt.Println("create err-->", err, "-->", p_name, "-->", group == nil)
+	} else {
+		fmt.Println("create success-->", p_name)
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+
+	//此方法为阻塞方法，在重平衡（组员发生变化）时会退出。需要优化，避免重平衡后直接停止了消费。
+	err = group.Consume(ctx, []string{topicName}, myHandler{p_name, topicName})
+	if err != nil {
+		fmt.Println("cus init err-->", err)
+	} else {
+		fmt.Println("cus init success")
+	}
+
+	inputReader := bufio.NewReader(os.Stdin)
+	inputReader.ReadString('\n')
+	cancel()
+}
+
+type myHandler struct {
+	Pid   string
+	Topic string
+}
+
+func (this myHandler) Setup(sess sarama.ConsumerGroupSession) error {
+	return nil
+}
+
+func (this myHandler) Cleanup(sess sarama.ConsumerGroupSession) error {
+	return nil
+
+}
+
+func (this myHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, cla sarama.ConsumerGroupClaim) error {
+	for msg := range cla.Messages() {
+		fmt.Println("recv success-->", this.Pid, "-->", msg.Partition, "-->", msg.Offset, "-->", string(msg.Key), "-->", string(msg.Value))
+		// 更新位移
+		sess.MarkMessage(msg, "")
+	}
+	return nil
 }

@@ -20,7 +20,7 @@ func Conn_to_cluster() {
 }
 
 func Create_topic(topName string) {
-	broker := sarama.NewBroker("0.0.0.0:9094")
+	broker := sarama.NewBroker("0.0.0.0:9092")
 	config := sarama.NewConfig()
 	config.Version = sarama.V2_4_0_0
 	broker.Open(config)

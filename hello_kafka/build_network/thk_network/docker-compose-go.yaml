@@ -25,3 +25,27 @@ services:
       - thk_blocks
     volumes:
       - ../../hello_kafka:/bin/hello_kafka
+
+  go_prom_recv_group_1:
+    depends_on:
+      - go_prom_send
+    image: ubuntu
+    container_name: go_prom_recv_group_1
+    command: /bin/hello_kafka -j recv_message_grp -p test_1
+    tty: true
+    networks:
+      - thk_blocks
+    volumes:
+      - ../../hello_kafka:/bin/hello_kafka
+
+  go_prom_recv_group_2:
+    depends_on:
+      - go_prom_send
+    image: ubuntu
+    container_name: go_prom_recv_group_2
+    command: /bin/hello_kafka -j recv_message_grp -p test_2
+    tty: true
+    networks:
+      - thk_blocks
+    volumes:
+      - ../../hello_kafka:/bin/hello_kafka

@@ -4,14 +4,18 @@ import (
 	"flag"
 	"fmt"
 	"hello_kafka/demo"
+	"strconv"
 	"strings"
+	"time"
 )
 
 func main() {
 	fmt.Println("env ok")
 
 	var job_name string
+	var proc_name string
 	flag.StringVar(&job_name, "j", "hello", "任务名，默认hello")
+	flag.StringVar(&proc_name, "p", strconv.FormatInt(time.Now().UnixNano(), 10), "进程标识")
 	flag.Parse()
 
 	if strings.EqualFold(job_name, "hello") {
@@ -29,6 +33,8 @@ func main() {
 	} else if strings.EqualFold(job_name, "recv_message") {
 		//demo.GetMessageFromKafka(topicName)
 		demo.GetMessageFromKafkaWithOff(topicName)
+	} else if strings.EqualFold(job_name, "recv_message_grp") {
+		demo.GetMessageFromKafkaGroup(topicName, proc_name)
 	}
 
 }
