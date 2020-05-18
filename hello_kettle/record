@@ -1,0 +1,2 @@
+$ docker run --name yongMySQL -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
+$ docker run --name YongPG -e POSTGRES_PASSWORD=123456 -e POSTGRES_USER=yuyong -p 5432:5432 -d postgres

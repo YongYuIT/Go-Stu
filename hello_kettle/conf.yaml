@@ -1,0 +1,17 @@
+conns:
+  mysql_conn:
+    host: 0.0.0.0
+    port: "3306"
+    user_name: root
+    pwd: "123456"
+    db_name: yuyong
+    sslmode: false
+  pg_conn:
+    host: 0.0.0.0
+    port: "5432"
+    user_name: yuyong
+    pwd: "123456"
+    db_name: yuyong
+    sslmode: false
+need_hand_tab:
+  - "yuyong.test_001-->mytest.test_001"
