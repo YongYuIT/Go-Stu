@@ -81,10 +81,10 @@ func main() {
 	fmt.Println("postgres mysql success")
 	defer pgConn.Close()
 
-	tabNames := config.Get("need_hand_tab").([]interface{})
-	for _, tabName := range tabNames {
-		fmt.Println("need tab-->", tabName)
-		tools.HandleTab(nil, tabName.(string), mySqlConn, nil)
-		//doc.WriteToFile(tabName + ".ktr")
+	tabs := config.Get("need_hand_tab").([]interface{})
+	for _, tab := range tabs {
+		fmt.Println("need tab-->", tab)
+		file := tools.HandleTab(ktr_els, tab.(string), mySqlConn, nil)
+		doc.WriteToFile(file + ".ktr")
 	}
 }
