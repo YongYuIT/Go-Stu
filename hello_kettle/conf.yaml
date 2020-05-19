@@ -13,5 +13,7 @@ conns:
     pwd: "123456"
     db_name: yuyong
     sslmode: false
-need_hand_tab:
-  - "yuyong.test_001-->mytest.test_001"
+need_hand_tabs:
+  - source_tab: yuyong.test_001
+    tag_tab: mytest.test_001
+    key_col: aaa
