@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>duichou_tmp_mysql_gp</name>
+    <name>duichou_tmp_mysql_gp_full</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,11 +9,6 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-      <parameter>
-        <name>etl_update_time</name>
-        <default_value>&#x27;1900-01-01 00&#x3a;00&#x3a;00&#x27;</default_value>
-        <description/>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -458,7 +453,7 @@
     <created_date>2020&#x2f;05&#x2f;18 11&#x3a;34&#x3a;16.688</created_date>
     <modified_user>-</modified_user>
     <modified_date>2020&#x2f;05&#x2f;18 11&#x3a;34&#x3a;16.688</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -533,12 +528,12 @@
       <schema_name/>
     </partitioning>
     <connection>mysql_tmp</connection>
-    <sql>select &#x2a; from tmp_in_tab_name where update_time&#x3e;&#x24;&#x7b;etl_update_time&#x7d;</sql>
+    <sql>select &#x2a; from tmp_in_tab_name</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
-    <lazy_conversion_active>Y</lazy_conversion_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -568,7 +563,7 @@
     <schema>pg_tmp_sha</schema>
     <table>pg_tmp_pwd</table>
     <commit>1000</commit>
-    <truncate>N</truncate>
+    <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>

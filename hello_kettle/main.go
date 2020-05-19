@@ -22,7 +22,7 @@ func main() {
 	}
 
 	doc := etree.NewDocument()
-	err := doc.ReadFromFile("duichou_tmp_mysql_gp.ktr")
+	err := doc.ReadFromFile("duichou_tmp_mysql_gp_full.ktr")
 	if err != nil {
 		fmt.Println("read doc err-->", err)
 		return
@@ -85,6 +85,6 @@ func main() {
 	for _, tab := range tabs {
 		fmt.Println("need tab-->", tab)
 		file := tools.HandleTab(ktr_els, tab.(string), mySqlConn, nil)
-		doc.WriteToFile(file + ".ktr")
+		doc.WriteToFile(file + "_full.ktr")
 	}
 }
