@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 var uploadPath = "./tmp/"
@@ -15,13 +16,13 @@ var uploadPath = "./tmp/"
 func main() {
 	//所有者，组,其他人
 	//rw- --- ---
-	dir, err := os.Stat("./tmp")
+	dir, err := os.Stat(uploadPath)
 	isExist := false
 	if err == nil {
 		isExist = true
 	}
 	if !isExist || !dir.IsDir() {
-		err := os.Mkdir("./tmp", 0700)
+		err := os.Mkdir(uploadPath, 0700)
 		if err != nil {
 			fmt.Println("init err-->", err)
 			return
@@ -29,6 +30,7 @@ func main() {
 	}
 	fmt.Println("test env success")
 	http.HandleFunc("/upload", DoUpload)
+	http.HandleFunc("/download", DoDownload)
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -84,5 +86,32 @@ func DoUpload(writer http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(writer, "write file err-->", err)
 		return
 	}
-	fmt.Fprint(writer, "success")
+	fmt.Fprint(writer, "success-->", fileName+fileEndings[0])
+}
+
+func DoDownload(writer http.ResponseWriter, req *http.Request) {
+	param := req.URL.Query()
+	filename := param["filename"][0]
+	if strings.EqualFold("", filename) {
+		fmt.Fprint(writer, "params err!")
+		return
+	}
+	filepath := filepath.Join(uploadPath, filename)
+	dir, err := os.Stat(filepath)
+	isExist := false
+	if err == nil {
+		isExist = true
+	}
+	if !isExist || dir.IsDir() {
+		fmt.Fprint(writer, "file not exist")
+		return
+	}
+
+	//全部读取到内存，有问题
+	fileData, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		fmt.Fprint(writer, "read file err-->", err)
+		return
+	}
+	writer.Write(fileData)
 }
