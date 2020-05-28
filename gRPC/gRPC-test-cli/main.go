@@ -19,13 +19,12 @@
 package main
 
 import (
+	pb "github.com/YongYuIT/Go-Stu/tree/master/gRPC/gRPC-test/proto-src"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 	"log"
 	"os"
 	"time"
-
-	"golang.org/x/net/context"
-	"google.golang.org/grpc"
-	pb "../gRPC-test/proto-src"
 )
 
 const (
