@@ -21,12 +21,12 @@
 package main
 
 import (
-	"log"
-	"net"
+	pb "gRPC-test/proto-src"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	pb "./proto-src"
+	"log"
+	"net"
 )
 
 const (
