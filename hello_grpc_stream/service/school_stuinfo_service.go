@@ -6,6 +6,7 @@ import (
 	"hello_grpc_stream/tools"
 	"math/rand"
 	"strings"
+	"time"
 )
 
 type SchoolStuInfoServiceServerImp struct {
@@ -16,7 +17,7 @@ func (this *SchoolStuInfoServiceServerImp) GetStusByClassInfo(classinfo *pb.Clas
 	if strings.EqualFold(classinfo.GradeName, "test_remote_err") {
 		return fmt.Errorf("this is an funk remote err")
 	}
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 20; i++ {
 		info := pb.StuInfo{}
 		if rand.Intn(1) == 0 {
 			info.StuGender = "M"
@@ -26,6 +27,7 @@ func (this *SchoolStuInfoServiceServerImp) GetStusByClassInfo(classinfo *pb.Clas
 		info.StuHomeAdd = tools.GetRandStr(10 + rand.Intn(10))
 		info.StuName = tools.GetName()
 		stream.Send(&info)
+		time.Sleep(3 * time.Second)
 	}
 	return nil
 }
