@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1d17c896-6c47-4b3b-beea-240155e72c08" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../hello_dfs/test/test_file.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hello_dfs/test/test_file_cpy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hello_dfs/tmp/914993ae-9d69-42af-8876-82c41ba27122.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hello_grpc_stream/.idea/hello_grpc_stream.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/hello_grpc_stream_client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gRPC/gRPC-test-cli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gRPC/gRPC-test-cli/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gRPC/gRPC-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gRPC/gRPC-test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hello_grpc_stream/service/school_stuinfo_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/../hello_grpc_stream/service/school_stuinfo_service.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="$PROJECT_DIR$/../../env_init/go_home/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+    <option name="urls">
+      <list>
+        <option value="file://$PROJECT_DIR$/../../env_init/go_home/go-path" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1cYzcD5Ku0zM9AVQhTT8jPThXWV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
+  </component>
+  <component name="RunManager">
+    <configuration name="go build hello_grpc_stream_client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="hello_grpc_stream_client" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="hello_grpc_stream_client" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build hello_grpc_stream_client" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+    <environment>
+      <map>
+        <entry key="$ go env -w GO111MODULE" value="on" />
+      </map>
+    </environment>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1802" height="299" key="GridCell.Tab.0.bottom" timestamp="1590721893162">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.0.bottom/70.27.1848.951@70.27.1848.951" timestamp="1590721893162" />
+    <state width="1802" height="299" key="GridCell.Tab.0.center" timestamp="1590721893161">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.0.center/70.27.1848.951@70.27.1848.951" timestamp="1590721893161" />
+    <state width="1802" height="299" key="GridCell.Tab.0.left" timestamp="1590721893159">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.0.left/70.27.1848.951@70.27.1848.951" timestamp="1590721893159" />
+    <state width="1802" height="299" key="GridCell.Tab.0.right" timestamp="1590721893162">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.0.right/70.27.1848.951@70.27.1848.951" timestamp="1590721893162" />
+    <state width="1802" height="299" key="GridCell.Tab.1.bottom" timestamp="1590721860287">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.1.bottom/70.27.1848.951@70.27.1848.951" timestamp="1590721860287" />
+    <state width="1802" height="299" key="GridCell.Tab.1.center" timestamp="1590721860285">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.1.center/70.27.1848.951@70.27.1848.951" timestamp="1590721860285" />
+    <state width="1802" height="299" key="GridCell.Tab.1.left" timestamp="1590721860284">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.1.left/70.27.1848.951@70.27.1848.951" timestamp="1590721860284" />
+    <state width="1802" height="299" key="GridCell.Tab.1.right" timestamp="1590721860286">
+      <screen x="70" y="27" width="1848" height="951" />
+    </state>
+    <state width="1802" height="299" key="GridCell.Tab.1.right/70.27.1848.951@70.27.1848.951" timestamp="1590721860286" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
