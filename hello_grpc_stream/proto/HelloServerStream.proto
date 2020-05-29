@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package HelloServerStreamPkg;
+
+//学生资料查询服务
+service SchoolStuInfoService{
+  //根据班级id获取所有学生名单
+  rpc getStusByClassInfo(ClassInfo) returns(stream  StuInfo){}
+}
+
+message ClassInfo{
+  string gradeName = 1; //在消息定义中，每个字段都有唯一的一个数字标识符。这些标识符是用来在消息的二进制格式中识别各个字段的，一旦开始使用就不能够再改变。
+  string className = 2;
+}
+
+message StuInfo{
+  string stuName = 1;
+  string stuGender = 2;
+  string stuHomeAdd = 3;
+}
