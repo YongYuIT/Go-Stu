@@ -39,8 +39,21 @@ func main() {
 		return
 	}
 
+	//优化：读取sheet1，避免重复读取
 	s1_row_start := 2
-	s3_row_start := 2
+	data_Sheet1 := [][2]string{}
+	for {
+		s1_str := excelFile.GetCellValue("Sheet1", "A"+strconv.Itoa(s1_row_start))
+		s1_id := excelFile.GetCellValue("Sheet1", "B"+strconv.Itoa(s1_row_start))
+		if strings.EqualFold("", strings.Trim(s1_id, " ")) {
+			break
+		}
+		if strings.EqualFold("", strings.Trim(s1_str, " ")) {
+			continue
+		}
+		data_Sheet1 = append(data_Sheet1, [2]string{s1_str, s1_id})
+		s1_row_start += 1
+	}
 
 	//优化：读取sheet2，避免重复读取、比较
 	s2_row_start := 2
@@ -58,17 +71,11 @@ func main() {
 		s2_row_start += 1
 	}
 
-	for {
-		s1_str := excelFile.GetCellValue("Sheet1", "A"+strconv.Itoa(s1_row_start))
-		s1_id := excelFile.GetCellValue("Sheet1", "B"+strconv.Itoa(s1_row_start))
-		if strings.EqualFold("", strings.Trim(s1_id, " ")) {
-			break
-		}
-		if strings.EqualFold("", strings.Trim(s1_str, " ")) {
-			continue
-		}
-		fmt.Println("handling--->", s1_str)
-
+	s3_row_start := 2
+	for sheet1_index := 0; sheet1_index < len(data_Sheet1); sheet1_index++ {
+		s1_str := data_Sheet1[sheet1_index][0]
+		s1_id := data_Sheet1[sheet1_index][1]
+		fmt.Println("handing-->", s1_str)
 		for sheet2_index := 0; sheet2_index < len(data_Sheet2); sheet2_index++ {
 			s2_str := data_Sheet2[sheet2_index][0]
 			s2_id := data_Sheet2[sheet2_index][1]
@@ -84,8 +91,6 @@ func main() {
 				s3_row_start += 1
 			}
 		}
-
 		excelFile.Save()
-		s1_row_start += 1
 	}
 }
