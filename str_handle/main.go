@@ -38,8 +38,26 @@ func main() {
 		fmt.Println("read excel file err:", err)
 		return
 	}
+
 	s1_row_start := 2
 	s3_row_start := 2
+
+	//优化：读取sheet2，避免重复读取、比较
+	s2_row_start := 2
+	data_Sheet2 := [][2]string{}
+	for {
+		s2_str := excelFile.GetCellValue("Sheet2", "A"+strconv.Itoa(s2_row_start))
+		s2_id := excelFile.GetCellValue("Sheet2", "B"+strconv.Itoa(s2_row_start))
+		if strings.EqualFold("", strings.Trim(s2_id, " ")) {
+			break
+		}
+		if strings.EqualFold("", strings.Trim(s2_str, " ")) {
+			continue
+		}
+		data_Sheet2 = append(data_Sheet2, [2]string{s2_str, s2_id})
+		s2_row_start += 1
+	}
+
 	for {
 		s1_str := excelFile.GetCellValue("Sheet1", "A"+strconv.Itoa(s1_row_start))
 		s1_id := excelFile.GetCellValue("Sheet1", "B"+strconv.Itoa(s1_row_start))
@@ -50,19 +68,10 @@ func main() {
 			continue
 		}
 		fmt.Println("handling--->", s1_str)
-		s2_row_start := 2
-		for {
-			s2_str := excelFile.GetCellValue("Sheet2", "A"+strconv.Itoa(s2_row_start))
-			s2_id := excelFile.GetCellValue("Sheet2", "B"+strconv.Itoa(s2_row_start))
-			if strings.EqualFold("", strings.Trim(s2_id, " ")) {
-				break
-			}
-			if strings.EqualFold("", strings.Trim(s2_str, " ")) {
-				continue
-			}
-			if strings.EqualFold("true", debug) {
-				fmt.Println("comping", s1_str, s2_str)
-			}
+
+		for sheet2_index := 0; sheet2_index < len(data_Sheet2); sheet2_index++ {
+			s2_str := data_Sheet2[sheet2_index][0]
+			s2_id := data_Sheet2[sheet2_index][1]
 			s1_s2 := tools.Compstr(s2_str, s1_str)
 			s2_s1 := tools.Compstr(s1_str, s2_str)
 			if s1_s2 > rates1_s2 || s2_s1 > rates2_s1 {
@@ -74,8 +83,8 @@ func main() {
 				excelFile.SetCellValue("Sheet3", "F"+strconv.Itoa(s3_row_start), s2_s1)
 				s3_row_start += 1
 			}
-			s2_row_start += 1
 		}
+
 		excelFile.Save()
 		s1_row_start += 1
 	}
