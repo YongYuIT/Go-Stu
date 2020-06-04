@@ -10,10 +10,13 @@ import (
 )
 
 func main() {
+
+	var debug string
 	var s1_s2 string
 	var s2_s1 string
 	flag.StringVar(&s1_s2, "s1_s2", "0.5", "s1/s2 默认0.5")
 	flag.StringVar(&s2_s1, "s2_s1", "0.5", "s2/s1 默认0.5")
+	flag.StringVar(&debug, "debug", "false", "s2/s1 默认false")
 	flag.Parse()
 
 	rates1_s2, err := strconv.ParseFloat(s1_s2, 64)
@@ -28,7 +31,7 @@ func main() {
 		return
 	}
 
-	fmt.Println("s1/s2", rates1_s2, "s2/s1", rates2_s1)
+	fmt.Println("s1/s2", rates1_s2, "s2/s1", rates2_s1, "debug", debug)
 
 	excelFile, err := excelize.OpenFile("comp_datas.xlsx")
 	if err != nil {
@@ -39,17 +42,27 @@ func main() {
 	s3_row_start := 2
 	for {
 		s1_str := excelFile.GetCellValue("Sheet1", "A"+strconv.Itoa(s1_row_start))
-		if strings.EqualFold("", strings.Trim(s1_str, " ")) {
+		s1_id := excelFile.GetCellValue("Sheet1", "B"+strconv.Itoa(s1_row_start))
+		if strings.EqualFold("", strings.Trim(s1_id, " ")) {
 			break
 		}
-		s1_id := excelFile.GetCellValue("Sheet1", "B"+strconv.Itoa(s1_row_start))
+		if strings.EqualFold("", strings.Trim(s1_str, " ")) {
+			continue
+		}
+		fmt.Println("handling--->", s1_str)
 		s2_row_start := 2
 		for {
 			s2_str := excelFile.GetCellValue("Sheet2", "A"+strconv.Itoa(s2_row_start))
-			if strings.EqualFold("", strings.Trim(s2_str, " ")) {
+			s2_id := excelFile.GetCellValue("Sheet2", "B"+strconv.Itoa(s2_row_start))
+			if strings.EqualFold("", strings.Trim(s2_id, " ")) {
 				break
 			}
-			s2_id := excelFile.GetCellValue("Sheet2", "B"+strconv.Itoa(s2_row_start))
+			if strings.EqualFold("", strings.Trim(s2_str, " ")) {
+				continue
+			}
+			if strings.EqualFold("true", debug) {
+				fmt.Println("comping", s1_str, s2_str)
+			}
 			s1_s2 := tools.Compstr(s2_str, s1_str)
 			s2_s1 := tools.Compstr(s1_str, s2_str)
 			if s1_s2 > rates1_s2 || s2_s1 > rates2_s1 {

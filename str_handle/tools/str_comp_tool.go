@@ -1,7 +1,9 @@
 package tools
 
 // rate=comp_str/base
-func Compstr(base_str string, comp_str string) float64 {
+func Compstr(_base_str string, _comp_str string) float64 {
+	base_str := []rune(_base_str)
+	comp_str := []rune(_comp_str)
 	mached := 0
 	org_base_size := len(base_str)
 	for comp_index := 0; comp_index < len(comp_str); comp_index++ {
