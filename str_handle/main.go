@@ -91,6 +91,9 @@ func main() {
 				s3_row_start += 1
 			}
 		}
-		excelFile.Save()
+		if s3_row_start%1000 == 0 {
+			excelFile.Save()
+		}
 	}
+	excelFile.Save()
 }
