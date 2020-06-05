@@ -2,8 +2,10 @@ package service
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	uuid "github.com/satori/go.uuid"
+	"hello_hdf/tools"
 	"io/ioutil"
 	"mime"
 	"net/http"
@@ -12,8 +14,6 @@ import (
 	"strconv"
 	"strings"
 )
-
-var UploadPath = "./tmp/"
 
 type TKHHttpService struct {
 	Port int
@@ -93,7 +93,8 @@ func (this *TKHHttpService) DoUpload(writer http.ResponseWriter, req *http.Reque
 		fmt.Fprint(writer, "unknown err-->", err)
 		return
 	}
-	newPath := filepath.Join(UploadPath, fileName+fileEndings[0])
+	fullName := fileName + fileEndings[0]
+	newPath := filepath.Join(tools.CatchPath, fullName)
 	fmt.Println("upload file-->", filetype, newPath)
 
 	newFile, err := os.Create(newPath)
@@ -106,6 +107,7 @@ func (this *TKHHttpService) DoUpload(writer http.ResponseWriter, req *http.Reque
 		fmt.Fprint(writer, "write file err-->", err)
 		return
 	}
+	RecordUpload(fileName, FileDiscribe{FileFullName: fullName, FileTag: tag, FileSize: int64(len(fileBytes))})
 	fmt.Fprint(writer, "success-->", fileName+fileEndings[0])
 }
 
@@ -132,7 +134,7 @@ func (this *TKHHttpService) DoUploadBig(writer http.ResponseWriter, req *http.Re
 	defer file.Close()
 
 	fileName := uuid.NewV4().String()
-	newPath := filepath.Join(UploadPath, fileName)
+	newPath := filepath.Join(tools.UploadPath, fileName)
 	fmt.Println("upload file-->", newPath)
 	newFile, err := os.Create(newPath)
 	if err != nil {
@@ -188,7 +190,7 @@ func (this *TKHHttpService) DoDownload(writer http.ResponseWriter, req *http.Req
 		fmt.Fprint(writer, "params err!")
 		return
 	}
-	filepath := filepath.Join(UploadPath, filename)
+	filepath := filepath.Join(tools.UploadPath, filename)
 	dir, err := os.Stat(filepath)
 	isExist := false
 	if err == nil {
@@ -206,4 +208,20 @@ func (this *TKHHttpService) DoDownload(writer http.ResponseWriter, req *http.Req
 		return
 	}
 	writer.Write(fileData)
+}
+
+type FileDiscribe struct {
+	FileId       string `json:"-"`
+	FileFullName string
+	FileTag      string
+	FileSize     int64
+}
+
+func recordUploadFailes(flie FileDiscribe) {
+	json_str, err := json.Marshal(flie)
+	if err != nil {
+		fmt.Println("get json err-->", err)
+		return
+	}
+	ThisDB.Put([]byte(flie.FileId), json_str, nil)
 }
