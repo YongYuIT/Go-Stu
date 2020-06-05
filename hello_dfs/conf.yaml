@@ -1,0 +1,3 @@
+zk_hosts: 0.0.0.0:2181,0.0.0.0:2182,0.0.0.0:2183
+root_cache_path: /home/yong/Desktop/Go-Stu20200526001/hello_dfs
+file_api_port: 8080
