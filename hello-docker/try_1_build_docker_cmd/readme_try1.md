@@ -147,4 +147,37 @@ $ export GO15VENDOREXPERIMENT=1
 $ export GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,direct
 $ make -f docker.Makefile binary
 failed to solve with frontend dockerfile.v0: failed to build LLB: failed to load cache key: failed to do request: Head https://registry.docker-cn.com/v2/library/golang/manifests/1.13.15-alpine: dial tcp 106.14.52.175:443: connect: connection refused
+$ make binary
+Building statically linked build/docker-linux-amd64
+$ build/docker version
+Client:
+ Version:           unknown-version
+ API version:       1.40
+ Go version:        go1.14.1
+ Git commit:        
+ Built:             Wed Dec 23 02:37:18 2020
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.12
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.10
+  Git commit:       48a66213fe
+  Built:            Mon Jun 22 15:44:15 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+$ build/docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ~~~
