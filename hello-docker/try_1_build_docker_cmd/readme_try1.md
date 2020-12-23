@@ -1,4 +1,4 @@
-# build and install Server.Engine
+# build and install Server.Engine (dockerd)
 
 ## download source code
 ~~~shell script
@@ -115,7 +115,7 @@ Server: Docker Engine - Community
   GitCommit:        fec3683
 ~~~
 
-# build all part of docker
+# build and install Client (docker client not dockerd)
 
 ~~~shell script
 $ export GO111MODULE=off
@@ -128,3 +128,23 @@ $ VERSION=testbuild DOCKER_GITCOMMIT=1 ./hack/make.sh
 ~~~
 
 fuck, where is docker and docker-proxy?
+
+## download source code for docker
+
+* https://github.com/docker
+
+~~~shell script
+$ wget https://github.com/docker/cli/archive/v20.10.1.zip
+$ unzip cli-20.10.1.zip
+$ cd $GOPATH/src/github.com/docker/
+$ mv cli-20.10.1 .
+$ mv cli-20.10.1 cli
+$ ls
+cli  docker
+$ cd cli
+$ export GO111MODULE=off
+$ export GO15VENDOREXPERIMENT=1
+$ export GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,direct
+$ make -f docker.Makefile binary
+failed to solve with frontend dockerfile.v0: failed to build LLB: failed to load cache key: failed to do request: Head https://registry.docker-cn.com/v2/library/golang/manifests/1.13.15-alpine: dial tcp 106.14.52.175:443: connect: connection refused
+~~~
