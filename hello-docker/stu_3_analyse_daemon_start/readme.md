@@ -1,6 +1,13 @@
-#Analyse API server start process
+## Daemon main parts
 
-## find func which exec start cmd 
+* Docker Daemon
+    * Docker Server: 接收/分发Docker Client发出的请求
+    * Engine: 容器管理，大部分Job管理
+    * Job: Engine内部最基本的工作单元
+
+## Analyse API server start process
+
+### find func which exec start cmd 
 
 ~~~go
 //cmd/dockerd/docker.go:71
@@ -61,21 +68,11 @@ func (s *Server) Wait(waitChan chan error) {
 }
 ~~~
 
-## 分析apiserver具体内容
+### 分析apiserver具体内容
 
 * apiserver实例化: cli.api = apiserver.New(serverConfig)
-* apiserver与http handler绑定: 
+* apiserver与http handler绑定: s.serveAPI()
 ~~~go
-//api/server/server.go:198
-func (s *Server) Wait(waitChan chan error) {
-	if err := s.serveAPI(); err != nil {
-		logrus.Errorf("ServeAPI error: %v", err)
-		waitChan <- err
-		return
-	}
-	waitChan <- nil
-}
-
 //api/server/server.go:79
 func (s *Server) serveAPI() error {
 ...
@@ -110,7 +107,7 @@ func (s *Server) InitRouter(routers ...router.Router) {
 
 s.routers分两部分，一部分是s.routers，另一部分是routers...
 
-##追查routers...
+### 追查routers...
 ~~~go
 //cmd/dockerd/daemon.go:470
 func initRouter(opts routerOptions) {
@@ -141,7 +138,7 @@ func initRouter(opts routerOptions) {
 }
 ~~~
 
-##以image.NewRouter(opts.daemon.ImageService())为例追查
+### 以image.NewRouter(opts.daemon.ImageService())为例追查
 
 ~~~go
 //daemon/daemon.go:1550
