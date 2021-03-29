@@ -27,18 +27,18 @@ func init() {
 	flag.IntVar(&projNum, "P", -1, "num of proj")
 	flag.StringVar(&varName, "V", "", "version of proj")
 
-	projMap[1] = "proj1"
-	projMap[2] = "proj2"
-	projMap[3] = "proj3"
-	projMap[4] = "proj4"
-	projMap[5] = "proj5"
-	projMap[6] = "proj6"
-	projMap[7] = "proj7"
-	projMap[8] = "proj8"
-	projMap[9] = "proj9"
-	projMap[10] = "proj10"
-	projMap[11] = "proj11"
-	projMap[12] ="proj12"
+	projMap[1] = "gateway"
+	projMap[2] = "webserver"
+	projMap[3] = "webase-transaction"
+	projMap[4] = "webase-sign"
+	projMap[5] = "webase-chain-manager"
+	projMap[6] = "webase-stat"
+	projMap[7] = "webase-data"
+	projMap[8] = "hyperledger-transaction"
+	projMap[9] = "hyperledger-sign"
+	projMap[10] = "hyperledger-chain-manager"
+	projMap[11] = "hyperledger-stat"
+	projMap[12] = "hyperledger-data"
 }
 
 func doUploadAndCmd() {
