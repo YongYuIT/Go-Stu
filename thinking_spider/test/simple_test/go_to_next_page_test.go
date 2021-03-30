@@ -25,7 +25,7 @@ func Test_go_to_next_page(test *testing.T) {
 
 	c.OnHTML("div[class='a-text-center']", func(element *colly.HTMLElement) {
 		url := element.ChildAttr("li[class=a-selected] a[href]", "href")
-		pageInfo := utils.GetPageInfo(website+url, "ref")
+		pageInfo := utils.GetUrlValueByKey(website+url, "ref")
 		element.ForEach("li[class=a-normal] a[href]", func(i int, pageListItem *colly.HTMLElement) {
 			nextPageUrl := pageListItem.Attr("href")
 			nextTag := utils.GetNextPageStr(pageInfo)
@@ -39,7 +39,7 @@ func Test_go_to_next_page(test *testing.T) {
 
 func Test_getPageInfo(test *testing.T) {
 	url := "/s?k=programming+books&__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&qid=1616999276&ref=sr_pg_1"
-	pageInfo := utils.GetPageInfo(website+url, "ref")
+	pageInfo := utils.GetUrlValueByKey(website+url, "ref")
 	fmt.Println("current page in-->", url, "-->", pageInfo)
 }
 

@@ -3,41 +3,7 @@ package config
 import "fmt"
 import "github.com/spf13/viper"
 
-type SprierConfig struct {
-	WebSite                string
-	MaxDeep                int
-	KeyWords               string
-	PageHandlerQue         string
-	ProductItemsHandlerQue string
-	PagesKey               string
-	PageCurrentQue         string
-	PageNextQue            string
-	PageAttr               string
-	PageUrlTag             string
-	PageStartTag           string
-	Items                  *Items
-}
-
-type Items struct {
-	ProductItemQue string
-	Item           *Item
-}
-
-type Item struct {
-	ItemAsinAttr string
-	ItemUUIDAttr string
-	ItemDescQue  string
-	ItemDescAttr string
-	ItemSalesQue string
-	ItemIndex    string
-}
-
-type DBConfig struct {
-	Conn string
-	Type string
-}
-
-var CurrentSprierConfig = &SprierConfig{}
+var CurrentDefaultConfig = &SpiderConfig{}
 var DBConn = &DBConfig{}
 
 func init() {
@@ -62,31 +28,38 @@ func init() {
 	fmt.Println("apply-->", apply)
 	applyConfig := config.Get(apply).(map[string]interface{})
 	//此处代码用反射精简
-	CurrentSprierConfig.WebSite = applyConfig["web_site"].(string)
-	CurrentSprierConfig.MaxDeep = applyConfig["max_deep"].(int)
-	CurrentSprierConfig.KeyWords = applyConfig["key_words"].(string)
-	CurrentSprierConfig.PageHandlerQue = applyConfig["page_handler_que"].(string)
-	CurrentSprierConfig.ProductItemsHandlerQue = applyConfig["product_items_handler_que"].(string)
-	CurrentSprierConfig.PagesKey = applyConfig["pages_key"].(string)
-	CurrentSprierConfig.PageCurrentQue = applyConfig["page_current_que"].(string)
-	CurrentSprierConfig.PageNextQue = applyConfig["page_next_que"].(string)
-	CurrentSprierConfig.PageAttr = applyConfig["page_attr"].(string)
-	CurrentSprierConfig.PageUrlTag = applyConfig["page_url_tag"].(string)
-	CurrentSprierConfig.PageStartTag = applyConfig["page_start_tag"].(string)
+	CurrentDefaultConfig.WebSite = applyConfig["web_site"].(string)
+	CurrentDefaultConfig.MaxDeep = applyConfig["max_deep"].(int)
+	CurrentDefaultConfig.DelaySpider = applyConfig["delay_spider"].(int)
+	CurrentDefaultConfig.KeyWords = applyConfig["key_words"].(string)
+	CurrentDefaultConfig.PageHandlerQue = applyConfig["page_handler_que"].(string)
+	CurrentDefaultConfig.ProductItemsHandlerQue = applyConfig["product_items_handler_que"].(string)
+	CurrentDefaultConfig.PagesKey = applyConfig["pages_key"].(string)
+	CurrentDefaultConfig.PageCurrentQue = applyConfig["page_current_que"].(string)
+	CurrentDefaultConfig.PageNextQue = applyConfig["page_next_que"].(string)
+	CurrentDefaultConfig.PageAttr = applyConfig["page_attr"].(string)
+	CurrentDefaultConfig.PageUrlTag = applyConfig["page_url_tag"].(string)
+	CurrentDefaultConfig.PageStartTag = applyConfig["page_start_tag"].(string)
+
+	priceLevelConfig := applyConfig["price_level"].(map[string]interface{})
+	CurrentDefaultConfig.PriceLevelConfig = &PriceLevelConfig{}
+	CurrentDefaultConfig.PriceLevelConfig.PriceStrQue = priceLevelConfig["price_str_que"].(string)
+	CurrentDefaultConfig.PriceLevelConfig.PriceListQue = priceLevelConfig["price_list_que"].(string)
 
 	itemsConfig := applyConfig["items"].(map[string]interface{})
-	CurrentSprierConfig.Items = &Items{}
-	CurrentSprierConfig.Items.ProductItemQue = itemsConfig["product_item_que"].(string)
+	CurrentDefaultConfig.ItemConfig = &ItemConfig{}
+	CurrentDefaultConfig.ItemConfig.ProductItemQue = itemsConfig["product_item_que"].(string)
 
 	itemConfig := itemsConfig["item"].(map[string]interface{})
-	CurrentSprierConfig.Items.Item = &Item{}
+	CurrentDefaultConfig.ItemConfig.Item = &Item{}
 	//此处代码用反射精简
-	CurrentSprierConfig.Items.Item.ItemAsinAttr = itemConfig["item_asin_attr"].(string)
-	CurrentSprierConfig.Items.Item.ItemUUIDAttr = itemConfig["item_uuid_attr"].(string)
-	CurrentSprierConfig.Items.Item.ItemDescQue = itemConfig["item_desc_que"].(string)
-	CurrentSprierConfig.Items.Item.ItemDescAttr = itemConfig["item_desc_attr"].(string)
-	CurrentSprierConfig.Items.Item.ItemSalesQue = itemConfig["item_sales_que"].(string)
-	CurrentSprierConfig.Items.Item.ItemIndex = itemConfig["item_index_attr"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemAsinAttr = itemConfig["item_asin_attr"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemUUIDAttr = itemConfig["item_uuid_attr"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemDescQue = itemConfig["item_desc_que"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemDescAttr = itemConfig["item_desc_attr"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemSalesQue = itemConfig["item_sales_que"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemIndex = itemConfig["item_index_attr"].(string)
+	CurrentDefaultConfig.ItemConfig.Item.ItemPriceQue = itemConfig["item_price_que"].(string)
 
-	fmt.Println("get init config-->", CurrentSprierConfig)
+	fmt.Println("get init config-->", CurrentDefaultConfig)
 }

@@ -12,11 +12,11 @@ import (
 )
 
 func Test_pages_data(test *testing.T) {
-	startUrl := utils.GetUrl(config.CurrentSprierConfig.WebSite, []string{"k=" + utils.GetKeyWords(config.CurrentSprierConfig.KeyWords), "ref=nb_sb_noss"})
+	startUrl := utils.GetUrlWithKVs(config.CurrentDefaultConfig.WebSite, []string{"k=" + utils.GetKeyWords(config.CurrentDefaultConfig.KeyWords), "ref=nb_sb_noss"})
 	fmt.Println("startUrl-->", startUrl)
 
 	collyPro := colly.NewCollector(
-		colly.MaxDepth(config.CurrentSprierConfig.MaxDeep),
+		colly.MaxDepth(config.CurrentDefaultConfig.MaxDeep),
 	)
 	collyPro.OnRequest(func(r *colly.Request) {
 		fmt.Println("Visiting-->", r.URL)
@@ -25,9 +25,13 @@ func Test_pages_data(test *testing.T) {
 	collyPro.OnResponse(func(response *colly.Response) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
 	})
-	collyPro.OnHTML(config.CurrentSprierConfig.PageHandlerQue, handler.PageHandler)
-	collyPro.OnHTML(config.CurrentSprierConfig.ProductItemsHandlerQue, handler.ProductItemHandler)
+	collyPro.OnHTML(config.CurrentDefaultConfig.PageHandlerQue, handler.GetPageHandler(config.CurrentDefaultConfig))
+	collyPro.OnHTML(config.CurrentDefaultConfig.ProductItemsHandlerQue, handler.GetProductItemHandler(config.CurrentDefaultConfig))
 
 	collyPro.Visit(startUrl)
 
+}
+
+func Test_CNY(test *testing.T) {
+	fmt.Println(utils.GetPrice("¥71.93"))
 }

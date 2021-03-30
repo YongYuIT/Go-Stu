@@ -8,7 +8,7 @@ import (
 	"thinking_spider/config"
 )
 
-func GetUrl(host string, kvs []string) string {
+func GetUrlWithKVs(host string, kvs []string) string {
 	url := host + "/s?"
 	for i, kv := range kvs {
 		if i > 0 {
@@ -31,7 +31,7 @@ func GetKeyWords(keyStr string) string {
 	return keyWords
 }
 
-func GetPageInfo(urlstr string, key string) string {
+func GetUrlValueByKey(urlstr string, key string) string {
 	thisUrl, err := url.Parse(urlstr)
 	if err != nil {
 		return ""
@@ -40,11 +40,15 @@ func GetPageInfo(urlstr string, key string) string {
 	if err != nil {
 		return ""
 	}
-	return kvs[key][0]
+	if len(kvs[key]) > 0 {
+		return kvs[key][0]
+	} else {
+		return ""
+	}
 }
 
 func GetPageNum(str string) int {
-	page := str[len(config.CurrentSprierConfig.PageUrlTag):]
+	page := str[len(config.CurrentDefaultConfig.PageUrlTag):]
 	num, err := strconv.Atoi(page)
 	if err != nil {
 		return -1
@@ -58,4 +62,17 @@ func GetNextPageStr(current string) string {
 		return ""
 	}
 	return fmt.Sprintf("sr_pg_%d", num+1)
+}
+
+func GetPrice(str string) float32 {
+	if strings.Contains(str, "¥") {
+		str = str[len("¥"):]
+	} else if strings.Contains(str, "$") {
+		str = str[len("$"):]
+	}
+	value, err := strconv.ParseFloat(str, 32)
+	if err != nil {
+		return -1
+	}
+	return float32(value)
 }
