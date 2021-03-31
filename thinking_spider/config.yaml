@@ -58,4 +58,3 @@ com:
 database:
   conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"
   type: "mysql"
-

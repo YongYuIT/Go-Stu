@@ -13,7 +13,7 @@ import (
 
 func GetProductItemHandler(config *config.SpiderConfig) colly.HTMLCallback {
 	return func(element *colly.HTMLElement) {
-		element.ForEach(config.ItemConfig.ProductItemQue, func(i int, eItemDiv *colly.HTMLElement) {
+		element.ForEach(config.ItemsConfig.ProductItemQue, func(i int, eItemDiv *colly.HTMLElement) {
 			record := model.NewKeyWordProdRecord()
 			record.KeyWord = config.KeyWords
 			record.PriceLevel = config.CurrentPriceLevel
@@ -23,16 +23,16 @@ func GetProductItemHandler(config *config.SpiderConfig) colly.HTMLCallback {
 			} else {
 				record.Page = utils.GetPageNum(utils.GetUrlValueByKey(eItemDiv.Request.URL.String(), config.PagesKey))
 			}
-			record.Asin = eItemDiv.Attr(config.ItemConfig.Item.ItemAsinAttr)
-			pageIndex, err := strconv.Atoi(eItemDiv.Attr(config.ItemConfig.Item.ItemIndex))
+			record.Asin = eItemDiv.Attr(config.ItemsConfig.Item.ItemAsinAttr)
+			pageIndex, err := strconv.Atoi(eItemDiv.Attr(config.ItemsConfig.Item.ItemIndexAttr))
 			if err != nil {
 				fmt.Println("get item error-->", err)
 			}
 			record.PageIndex = pageIndex
-			record.Uuid = eItemDiv.Attr(config.ItemConfig.Item.ItemUUIDAttr)
-			record.Desc = eItemDiv.ChildAttr(config.ItemConfig.Item.ItemDescQue, config.ItemConfig.Item.ItemDescAttr)
-			record.Price = utils.GetPrice(eItemDiv.ChildText(config.ItemConfig.Item.ItemPriceQue))
-			record.Sales, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemConfig.Item.ItemSalesQue), ",", ""))
+			record.Uuid = eItemDiv.Attr(config.ItemsConfig.Item.ItemUUIDAttr)
+			record.Desc = eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemDescQue, config.ItemsConfig.Item.ItemDescAttr)
+			record.Price = utils.GetPrice(eItemDiv.ChildText(config.ItemsConfig.Item.ItemPriceQue))
+			record.Sales, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemsConfig.Item.ItemSalesQue), ",", ""))
 			if err != nil {
 				fmt.Println("get item error-->", err)
 				record.Sales = -1

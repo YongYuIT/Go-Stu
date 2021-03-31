@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"os"
 	"thinking_spider/config"
 	_ "thinking_spider/config"
 	"thinking_spider/model"
@@ -15,7 +16,7 @@ func init() {
 	db, err := gorm.Open(config.DBConn.Type, config.DBConn.Conn)
 	if err != nil {
 		fmt.Println("conn db err-->", db)
-		return
+		os.Exit(1)
 	}
 	thizDB = db
 }
