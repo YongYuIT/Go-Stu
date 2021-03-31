@@ -8,7 +8,7 @@ import (
 func GetPagesDataSpider() *spider_interface.Spider {
 
 	spider := spider_interface.NewSpider()
-	spider.Ctrl.OnHTML(spider.Config.PageHandlerQue, handler.GetPageHandler(spider.Config))
+	spider.Ctrl.OnHTML(spider.Config.PageHandlerQue, handler.GetPageHandler(spider))
 	spider.Ctrl.OnHTML(spider.Config.ProductItemsHandlerQue, handler.GetProductItemHandler(spider.Config))
 
 	return spider

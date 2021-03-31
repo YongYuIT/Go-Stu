@@ -29,6 +29,7 @@ cn:
 
 
 com:
+  model: "debug"
   web_site: "https://www.amazon.com"
   max_deep: 1
   delay_spider: 2
@@ -54,6 +55,17 @@ com:
   price_level:
     price_str_que:  "span[class='a-size-base a-color-base']"
     price_list_que: "div#priceRefinements a[data-routing][class='a-link-normal s-navigation-item']"
+  cookies:
+    session_id:
+      name: "session-id"
+      value: "147-6489143-1689104"
+      domain: ".amazon.com"
+      path:  "/"
+    ubid_main:
+      name: "ubid-main"
+      value: "132-6250557-3411723"
+      domain: ".amazon.com"
+      path:  "/"
 
 database:
   conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"

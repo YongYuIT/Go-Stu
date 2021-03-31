@@ -29,7 +29,9 @@ func GetPriceLevelHandler(priceLevelSpider *spider_interface.Spider, pageSpider 
 		} else {
 			//内容页
 			pageSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
-				return element.Request.URL.String()
+				startUrl := element.Request.URL.String()
+				pageSpider.Ctrl.SetCookies(startUrl, priceLevelSpider.Ctrl.Cookies(element.Request.URL.String()))
+				return startUrl
 			})
 			level, err := url.QueryUnescape(currentthkPTag)
 			if err == nil {

@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"reflect"
 	"strings"
@@ -32,6 +33,9 @@ func init() {
 	applyConfig := config.Get(apply).(map[string]interface{})
 	autoSetValueFromConfig(CurrentDefaultConfig, applyConfig)
 
+	cookies := applyConfig["cookies"].(map[string]interface{})
+	CurrentDefaultConfig.Cookies = autoSetCookies(cookies)
+
 	priceLevelConfig := applyConfig["price_level"].(map[string]interface{})
 	CurrentDefaultConfig.PriceLevelConfig = &PriceLevelConfig{}
 	autoSetValueFromConfig(CurrentDefaultConfig.PriceLevelConfig, priceLevelConfig)
@@ -44,6 +48,36 @@ func init() {
 	CurrentDefaultConfig.ItemsConfig.Item = &Item{}
 	autoSetValueFromConfig(CurrentDefaultConfig.ItemsConfig.Item, itemConfig)
 	fmt.Println("get init config-->", CurrentDefaultConfig.ItemsConfig.Item)
+}
+
+func autoSetCookies(cookiesConfig map[string]interface{}) []*http.Cookie {
+	cookies := []*http.Cookie{}
+	sidCookieConfig := cookiesConfig["session_id"].(map[string]interface{})
+	sidCookie := &http.Cookie{}
+	autoSetCookie(sidCookie, sidCookieConfig)
+	cookies = append(cookies, sidCookie)
+
+	umainCookieConfig := cookiesConfig["ubid_main"].(map[string]interface{})
+	umainCookie := &http.Cookie{}
+	autoSetCookie(umainCookie, umainCookieConfig)
+	cookies = append(cookies, umainCookie)
+	return cookies
+}
+
+func autoSetCookie(cookie *http.Cookie, cookieConfig map[string]interface{}) {
+	val := reflect.ValueOf(cookie)
+	val = val.Elem()
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Type().Field(i)
+		fieldName := field.Name
+		fieldValue := val.FieldByName(fieldName)
+		configVal := cookieConfig[strings.ToLower(fieldName)]
+		if configVal == nil {
+			continue
+		}
+		value := configVal.(string)
+		fieldValue.Set(reflect.ValueOf(value))
+	}
 }
 
 func autoSetValueFromConfig(tagObg interface{}, config map[string]interface{}) {

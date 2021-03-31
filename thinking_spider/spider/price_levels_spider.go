@@ -6,9 +6,8 @@ import (
 )
 
 func GetPriceLevelDataSpider() *spider_interface.Spider {
-	pageSpider := GetPagesDataSpider()
 	priceLevelspider := spider_interface.NewSpider()
-	priceLevelHandler := handler.GetPriceLevelHandler(priceLevelspider, pageSpider)
+	priceLevelHandler := handler.GetPriceLevelHandler(priceLevelspider, GetPagesDataSpider())
 	priceLevelspider.Ctrl.OnHTML(priceLevelspider.Config.PriceLevelConfig.PriceListQue, priceLevelHandler)
 	return priceLevelspider
 }

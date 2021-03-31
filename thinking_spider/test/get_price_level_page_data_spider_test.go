@@ -12,9 +12,11 @@ func Test_getDataSpider(test *testing.T) {
 	priceLevelDataSpider := spider.GetPriceLevelDataSpider()
 	priceLevelDataSpider.Config.MaxDeep = 2
 	priceLevelDataSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
-		return utils.GetUrlWithKVs(spiderConfig.WebSite, []string{"k=" + utils.GetKeyWords(spiderConfig.KeyWords), "ref=nb_sb_noss"})
-
+		startPage := utils.GetUrlWithKVs(spiderConfig.WebSite, []string{"k=" + utils.GetKeyWords(spiderConfig.KeyWords), "ref=nb_sb_noss"})
+		priceLevelDataSpider.Ctrl.SetCookies(startPage, spiderConfig.Cookies)
+		return startPage
 	})
+
 	priceLevelDataSpider.StartSpider()
 	database.CloseDB()
 }

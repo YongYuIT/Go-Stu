@@ -1,6 +1,9 @@
 package config
 
+import "net/http"
+
 type SpiderConfig struct {
+	Model                  string            `config:"model"`
 	WebSite                string            `config:"web_site"`
 	MaxDeep                int               `config:"max_deep"`
 	DelaySpider            int               `config:"delay_spider"`
@@ -16,6 +19,7 @@ type SpiderConfig struct {
 	CurrentPriceLevel      string            //not read from yaml file
 	ItemsConfig            *ItemsConfig      `config:"items"`
 	PriceLevelConfig       *PriceLevelConfig `config:"price_level"`
+	Cookies                []*http.Cookie    `cookies`
 }
 
 type ItemsConfig struct {

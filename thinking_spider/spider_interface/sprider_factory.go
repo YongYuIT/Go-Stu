@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/gocolly/colly"
 	"github.com/gocolly/colly/extensions"
+	"os"
+	"strings"
 	"thinking_spider/config"
 	"time"
 )
@@ -13,6 +15,10 @@ type Spider struct {
 	startUrl string
 	Config   *config.SpiderConfig
 }
+
+const (
+	DEBUG_MODEL = "debug"
+)
 
 func NewSpider() *Spider {
 
@@ -31,6 +37,16 @@ func NewSpider() *Spider {
 
 	spider.Ctrl.OnResponse(func(response *colly.Response) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
+		if strings.EqualFold(DEBUG_MODEL, spider.Config.Model) {
+			os.MkdirAll("./logs/tmp_html/", os.ModePerm)
+			file, err := os.Create(fmt.Sprintf("./logs/tmp_html/%d.html", time.Now().Unix()))
+			if err != nil {
+				return
+			}
+			defer file.Close()
+			fmt.Fprintf(file, "<!-- "+response.Request.URL.String()+" -->\n")
+			fmt.Fprintf(file, string(response.Body))
+		}
 	})
 
 	return spider

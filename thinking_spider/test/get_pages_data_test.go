@@ -8,6 +8,7 @@ import (
 	_ "thinking_spider/config"
 	_ "thinking_spider/database"
 	"thinking_spider/handler"
+	"thinking_spider/spider_interface"
 	"thinking_spider/utils"
 )
 
@@ -25,7 +26,7 @@ func Test_pages_data(test *testing.T) {
 	collyPro.OnResponse(func(response *colly.Response) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
 	})
-	collyPro.OnHTML(config.CurrentDefaultConfig.PageHandlerQue, handler.GetPageHandler(config.CurrentDefaultConfig))
+	collyPro.OnHTML(config.CurrentDefaultConfig.PageHandlerQue, handler.GetPageHandler(spider_interface.NewSpider()))
 	collyPro.OnHTML(config.CurrentDefaultConfig.ProductItemsHandlerQue, handler.GetProductItemHandler(config.CurrentDefaultConfig))
 
 	collyPro.Visit(startUrl)
