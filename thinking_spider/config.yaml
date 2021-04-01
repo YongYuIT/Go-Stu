@@ -33,7 +33,7 @@ com:
   web_site: "https://www.amazon.com"
   max_deep: 1
   delay_spider: 2
-  key_words: "coat hangers"
+  key_words: "Fruit knife"
   page_handler_que: "div[class='a-text-center']"
   product_items_handler_que: "div[class='s-main-slot s-result-list s-search-results sg-row']"
   pages_key: "ref"
@@ -42,6 +42,7 @@ com:
   page_attr: "href"
   page_url_tag: "sr_pg_"
   page_start_tag: "nb_sb_noss"
+  region_que: "div#nav-global-location-slot span[class='nav-line-2 nav-progressive-content']"
   items:
     product_item_que: "div[data-asin]"
     item:

@@ -16,6 +16,7 @@ type SpiderConfig struct {
 	PageAttr               string            `config:"page_attr"`
 	PageUrlTag             string            `config:"page_url_tag"`
 	PageStartTag           string            `config:"page_start_tag"`
+	RegionQue              string            `config:"region_que"`
 	CurrentPriceLevel      string            //not read from yaml file
 	ItemsConfig            *ItemsConfig      `config:"items"`
 	PriceLevelConfig       *PriceLevelConfig `config:"price_level"`

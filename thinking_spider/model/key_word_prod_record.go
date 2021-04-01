@@ -16,6 +16,7 @@ type KeyWordProdRecord struct {
 	Price      float32 `sql:"type:decimal(10,2);"`
 	ShopName   string
 	PriceLevel string
+	DeliverTo  string
 }
 
 func NewKeyWordProdRecord() *KeyWordProdRecord {

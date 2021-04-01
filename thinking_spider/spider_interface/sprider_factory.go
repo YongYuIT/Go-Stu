@@ -14,10 +14,37 @@ type Spider struct {
 	Ctrl     *colly.Collector
 	startUrl string
 	Config   *config.SpiderConfig
+	pageVals map[string]string
+}
+
+type PageKey struct {
+	urlString string
+	keyName   string
+}
+
+func (this *PageKey) string() string {
+	return this.urlString + "##$$##&&##" + this.keyName
+}
+
+func (this *Spider) GetPageValue(url string, name string) string {
+	pageKey := &PageKey{
+		urlString: url,
+		keyName:   name,
+	}
+	return this.pageVals[pageKey.string()]
+}
+
+func (this *Spider) SetPageValue(url string, name string, value string) {
+	pageKey := &PageKey{
+		urlString: url,
+		keyName:   name,
+	}
+	this.pageVals[pageKey.string()] = value
 }
 
 const (
 	DEBUG_MODEL = "debug"
+	REGION_NAME = "region_name"
 )
 
 func NewSpider() *Spider {
@@ -26,6 +53,7 @@ func NewSpider() *Spider {
 
 	cpyConfig := (*config.CurrentDefaultConfig)
 	spider.Config = &cpyConfig
+	spider.pageVals = make(map[string]string)
 
 	spider.Ctrl = colly.NewCollector(
 		colly.MaxDepth(spider.Config.MaxDeep),
@@ -38,8 +66,9 @@ func NewSpider() *Spider {
 	spider.Ctrl.OnResponse(func(response *colly.Response) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
 		if strings.EqualFold(DEBUG_MODEL, spider.Config.Model) {
-			os.MkdirAll("./logs/tmp_html/", os.ModePerm)
-			file, err := os.Create(fmt.Sprintf("./logs/tmp_html/%d.html", time.Now().Unix()))
+			logPath := "./logs/tmp_html/"
+			os.MkdirAll(logPath, os.ModePerm)
+			file, err := os.Create(fmt.Sprintf(logPath+"%d.html", time.Now().Unix()))
 			if err != nil {
 				return
 			}
