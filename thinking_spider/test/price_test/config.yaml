@@ -21,7 +21,7 @@ cn:
       item_uuid_attr: "data-uuid"
       item_desc_que: "img[class='s-image']"
       item_desc_attr: "alt"
-      item_sales_que: "a[class='a-link-normal'] span[class='a-size-base']"
+      item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
   price_level:
     price_str_que:  "span[class='a-size-base a-color-base']"
     price_list_que: "div#priceRefinements a[data-routing][class='a-link-normal s-navigation-item']"

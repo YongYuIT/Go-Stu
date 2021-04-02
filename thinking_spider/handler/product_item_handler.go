@@ -34,10 +34,10 @@ func GetProductItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
 			record.Uuid = eItemDiv.Attr(config.ItemsConfig.Item.ItemUUIDAttr)
 			record.Desc = eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemDescQue, config.ItemsConfig.Item.ItemDescAttr)
 			record.Price = utils.GetPrice(eItemDiv.ChildText(config.ItemsConfig.Item.ItemPriceQue))
-			record.Sales, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemsConfig.Item.ItemSalesQue), ",", ""))
+			record.Range, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemsConfig.Item.ItemRangeQue), ",", ""))
 			if err != nil {
 				fmt.Println("get item error-->", err)
-				record.Sales = -1
+				record.Range = -1
 			}
 			saveRecord(record)
 		})

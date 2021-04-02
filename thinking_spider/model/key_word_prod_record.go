@@ -12,7 +12,7 @@ type KeyWordProdRecord struct {
 	Asin       string
 	Uuid       string
 	Desc       string
-	Sales      int
+	Range      int
 	Price      float32 `sql:"type:decimal(10,2);"`
 	ShopName   string
 	PriceLevel string
@@ -23,7 +23,7 @@ func NewKeyWordProdRecord() *KeyWordProdRecord {
 	return &KeyWordProdRecord{
 		Page:      -1,
 		PageIndex: -1,
-		Sales:     -1,
+		Range:     -1,
 		Price:     -1,
 	}
 }

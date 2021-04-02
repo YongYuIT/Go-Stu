@@ -3,16 +3,33 @@ package simple_test
 import (
 	"fmt"
 	"github.com/gocolly/colly"
+	"os"
 	"strings"
 	"testing"
 	"thinking_spider/utils"
+	"time"
 )
 
-const website = "https://www.amazon.cn"
+const website = "https://www.amazon.com"
+
+func Test_when_robot(test *testing.T) {
+	for i := 0; i < 500; i++ {
+		go go_to_next_page()
+	}
+
+	for true {
+		fmt.Println("waiting")
+		time.Sleep(time.Duration(2) * time.Second)
+	}
+}
 
 func Test_go_to_next_page(test *testing.T) {
+	go_to_next_page()
+}
+
+func go_to_next_page() {
 	c := colly.NewCollector(
-		colly.MaxDepth(10),
+		colly.MaxDepth(5),
 	)
 
 	c.OnRequest(func(r *colly.Request) {
@@ -21,6 +38,15 @@ func Test_go_to_next_page(test *testing.T) {
 
 	c.OnResponse(func(response *colly.Response) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
+		logPath := "./logs/tmp_html/"
+		os.MkdirAll(logPath, os.ModePerm)
+		file, err := os.Create(fmt.Sprintf(logPath+"%d.html", time.Now().Unix()))
+		if err != nil {
+			return
+		}
+		defer file.Close()
+		fmt.Fprintf(file, "<!-- "+response.Request.URL.String()+" -->\n")
+		fmt.Fprintf(file, string(response.Body))
 	})
 
 	c.OnHTML("div[class='a-text-center']", func(element *colly.HTMLElement) {
@@ -34,7 +60,25 @@ func Test_go_to_next_page(test *testing.T) {
 			}
 		})
 	})
-	c.Visit(website + "/s?k=programming+books&__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&ref=nb_sb_noss")
+
+	c.OnHTML("div[class='a-container a-padding-double-large'] p[class='a-last']", func(element *colly.HTMLElement) {
+		if strings.Contains(element.Text, "robot") {
+			fmt.Println("ant robot when req-->",
+				element.Request.URL.String(),
+				"\n time:", time.Now().Format(time.RFC850),
+				"\n keyword: ", "book")
+		}
+	})
+
+	c.OnError(func(response *colly.Response, err error) {
+		fmt.Println("find a error when req-->",
+			response.Request.URL.String(),
+			"\n time:", time.Now().Format(time.RFC850),
+			"\n keyword: ", "book",
+			"\n details for error", err)
+	})
+
+	c.Visit(website + "/s?k=book")
 }
 
 func Test_getPageInfo(test *testing.T) {

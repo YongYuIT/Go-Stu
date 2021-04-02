@@ -21,7 +21,7 @@ cn:
       item_uuid_attr: "data-uuid"
       item_desc_que: "img[class='s-image']"
       item_desc_attr: "alt"
-      item_sales_que: "a[class='a-link-normal'] span[class='a-size-base']"
+      item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
       item_price_que: "span[class='a-price'][data-a-color='base'] span[class='a-offscreen']"
   price_level:
     price_str_que:  "span[class='a-size-base a-color-base']"
@@ -42,6 +42,7 @@ com:
   page_attr: "href"
   page_url_tag: "sr_pg_"
   page_start_tag: "nb_sb_noss"
+  robort_que: "div[class='a-container a-padding-double-large'] p[class='a-last']"
   items:
     product_item_que: "div[data-asin]"
     item:
@@ -50,7 +51,7 @@ com:
       item_uuid_attr: "data-uuid"
       item_desc_que: "img[class='s-image']"
       item_desc_attr: "alt"
-      item_sales_que: "a[class='a-link-normal'] span[class='a-size-base']"
+      item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
       item_price_que: "span[class='a-price'][data-a-color='base'] span[class='a-offscreen']"
   price_level:
     price_str_que:  "span[class='a-size-base a-color-base']"

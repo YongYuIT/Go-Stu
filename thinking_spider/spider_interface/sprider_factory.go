@@ -78,6 +78,23 @@ func NewSpider() *Spider {
 		}
 	})
 
+	spider.Ctrl.OnError(func(response *colly.Response, err error) {
+		fmt.Println("find a error when req-->",
+			response.Request.URL.String(),
+			"\n time:", time.Now().Format(time.RFC850),
+			"\n keyword: ", spider.Config.KeyWords,
+			"\n details for error", err)
+	})
+
+	spider.Ctrl.OnHTML(spider.Config.RobortQue, func(element *colly.HTMLElement) {
+		if strings.Contains(element.Text, "robot") {
+			fmt.Println("ant robot when req-->",
+				element.Request.URL.String(),
+				"\n time:", time.Now().Format(time.RFC850),
+				"\n keyword: ", spider.Config.KeyWords)
+		}
+	})
+
 	return spider
 }
 

@@ -18,6 +18,8 @@ type SpiderConfig struct {
 	PageStartTag           string            `config:"page_start_tag"`
 	RegionQue              string            `config:"region_que"`
 	CurrentPriceLevel      string            //not read from yaml file
+	PricesLevels           string            `config:"prices_levels"`
+	RobortQue              string            `config:"robort_que"`
 	ItemsConfig            *ItemsConfig      `config:"items"`
 	PriceLevelConfig       *PriceLevelConfig `config:"price_level"`
 	Cookies                []*http.Cookie    `cookies`
@@ -39,6 +41,6 @@ type Item struct {
 	ItemDescQue   string `config:"item_desc_que"`
 	ItemPriceQue  string `config:"item_price_que"`
 	ItemDescAttr  string `config:"item_desc_attr"`
-	ItemSalesQue  string `config:"item_sales_que"`
+	ItemRangeQue  string `config:"item_range_que"`
 	ItemIndexAttr string `config:"item_index_attr"`
 }

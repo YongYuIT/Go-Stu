@@ -22,7 +22,7 @@ func Test_hello_fix(test *testing.T) {
 	c.OnHTML(config.CurrentDefaultConfig.ProductItemsHandlerQue, func(element *colly.HTMLElement) {
 		element.ForEach(config.CurrentDefaultConfig.ItemsConfig.ProductItemQue, func(i int, eItemDiv *colly.HTMLElement) {
 			asin := eItemDiv.Attr(config.CurrentDefaultConfig.ItemsConfig.Item.ItemAsinAttr)
-			sales := eItemDiv.ChildText(config.CurrentDefaultConfig.ItemsConfig.Item.ItemSalesQue)
+			sales := eItemDiv.ChildText(config.CurrentDefaultConfig.ItemsConfig.Item.ItemRangeQue)
 			price := eItemDiv.ChildText(config.CurrentDefaultConfig.ItemsConfig.Item.ItemPriceQue)
 			fmt.Println("asin-->", asin, "-->", sales, "-->", price)
 		})

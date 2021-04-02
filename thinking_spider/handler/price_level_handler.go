@@ -21,6 +21,12 @@ func GetPriceLevelHandler(priceLevelSpider *spider_interface.Spider, pageSpider 
 			priceStr := element.ChildText(priceLevelSpider.Config.PriceLevelConfig.PriceStrQue)
 			fmt.Println(priceUrl, "-->", priceStr)
 
+			if !(strings.EqualFold(priceLevelSpider.Config.PricesLevels, "")) {
+				if !strings.Contains(priceLevelSpider.Config.PricesLevels, priceStr) {
+					return
+				}
+			}
+
 			cookie := priceLevelSpider.Ctrl.Cookies(element.Request.URL.String())
 			priceUrl = priceLevelSpider.Config.WebSite + priceUrl + "&" + thkPTag + "=" + url.QueryEscape(priceStr)
 			priceLevelSpider.Ctrl.SetCookies(priceUrl, cookie)
