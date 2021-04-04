@@ -10,12 +10,12 @@ com:
   cookies:
     session_id:
       name: "session-id"
-      value: "147-6489143-1689104"
+      value: "147-1594123-2406033"
       domain: ".amazon.com"
       path:  "/"
     ubid_main:
       name: "ubid-main"
-      value: "132-6250557-3411723"
+      value: "134-3831618-4351141"
       domain: ".amazon.com"
       path:  "/"
   page_handler_que: "div[class='a-text-center']"
