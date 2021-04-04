@@ -3,7 +3,7 @@ apply: "com"
 com:
   model: "info"
   web_site: "https://www.amazon.com"
-  max_deep: 2
+  max_deep: 10
   delay_spider: 2
   key_words: "Fruit knife"
   prices_levels: "Under $25;$25 to $50"

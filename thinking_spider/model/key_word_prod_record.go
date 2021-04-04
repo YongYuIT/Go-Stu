@@ -11,7 +11,7 @@ type KeyWordProdRecord struct {
 	PageIndex  int
 	Asin       string
 	Uuid       string
-	Desc       string
+	Titles     string
 	Range      int
 	Price      float32 `sql:"type:decimal(10,2);"`
 	ShopName   string
