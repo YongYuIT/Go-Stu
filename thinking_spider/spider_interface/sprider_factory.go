@@ -74,7 +74,8 @@ func NewSpider() *Spider {
 			}
 			defer file.Close()
 			fmt.Fprintf(file, "<!-- "+response.Request.URL.String()+" -->\n")
-			fmt.Fprintf(file, string(response.Body))
+			//fmt.Fprintf(file, string(response.Body))
+			file.Write(response.Body)
 		}
 	})
 

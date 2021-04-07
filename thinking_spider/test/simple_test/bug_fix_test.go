@@ -39,7 +39,9 @@ func Test_hello_fix(test *testing.T) {
 			return
 		}
 		defer file.Close()
-		fmt.Fprintf(file, string(response.Body))
+		//fmt.Fprintf(file, string(response.Body))
+		fmt.Fprintf(file, "<!-- "+response.Request.URL.String()+" -->\n")
+		file.Write(response.Body)
 	})
 
 	cookie1 := &http.Cookie{}

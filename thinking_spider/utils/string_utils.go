@@ -76,3 +76,16 @@ func GetPrice(str string) float32 {
 	}
 	return float32(value)
 }
+
+func GetStarts(str string) float32 {
+	if !strings.Contains(str, "out") {
+		return -1
+	}
+	str = str[:strings.Index(str, "out")]
+	str = strings.TrimSpace(str)
+	value, err := strconv.ParseFloat(str, 32)
+	if err != nil {
+		return -1
+	}
+	return float32(value)
+}

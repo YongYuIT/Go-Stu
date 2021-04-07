@@ -13,6 +13,7 @@ require (
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/spf13/viper v1.7.1
 	github.com/temoto/robotstxt v1.1.1 // indirect
+	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2 // indirect
 	golang.org/x/net v0.0.0-20210326220855-61e056675ecf // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 )

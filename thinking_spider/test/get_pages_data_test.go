@@ -27,8 +27,8 @@ func Test_pages_data(test *testing.T) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
 	})
 	collyPro.OnHTML(config.CurrentDefaultConfig.PageHandlerQue, handler.GetPageHandler(spider_interface.NewSpider()))
-	collyPro.OnHTML(config.CurrentDefaultConfig.ProductItemsHandlerQue, handler.GetProductItemHandler(config.CurrentDefaultConfig))
-
+	//abort
+	//collyPro.OnHTML(config.CurrentDefaultConfig.ProductItemsHandlerQue, handler.GetProductItemHandler(config.CurrentDefaultConfig))
 	collyPro.Visit(startUrl)
 
 }

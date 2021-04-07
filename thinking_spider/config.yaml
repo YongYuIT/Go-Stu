@@ -38,6 +38,8 @@ com:
       item_desc_attr: "alt"
       item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
       item_price_que: "span[class='a-price'][data-a-color='base'] span[class='a-offscreen']"
+      item_starts_que: "div[class='a-section a-spacing-none a-spacing-top-micro'] div[class='a-row a-size-small'] span"
+      item_detail_url_que: "a[class='a-link-normal s-no-outline']"
   price_level:
     price_str_que:  "span[class='a-size-base a-color-base']"
     price_list_que: "div#priceRefinements a[data-routing][class='a-link-normal s-navigation-item']"

@@ -34,10 +34,13 @@ func GetProductItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
 			record.Uuid = eItemDiv.Attr(config.ItemsConfig.Item.ItemUUIDAttr)
 			record.Titles = eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemDescQue, config.ItemsConfig.Item.ItemDescAttr)
 			record.Price = utils.GetPrice(eItemDiv.ChildText(config.ItemsConfig.Item.ItemPriceQue))
-			record.Range, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemsConfig.Item.ItemRangeQue), ",", ""))
+			record.Ratings, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemsConfig.Item.ItemRangeQue), ",", ""))
+			record.Starts = utils.GetStarts(eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemStartsQue, "aria-label"))
+			record.DetialUrl = eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemDetailUrlQue, "href")
+
 			if err != nil {
 				fmt.Println("get item error-->", err)
-				record.Range = -1
+				record.Ratings = -1
 			}
 			saveRecord(record)
 		})
