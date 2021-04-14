@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/jinzhu/gorm"
+	"thinking_spider/database"
 )
 
 type KeyWordProdRecord struct {
@@ -28,4 +29,11 @@ func NewKeyWordProdRecord() *KeyWordProdRecord {
 		Ratings:   -1,
 		Price:     -1,
 	}
+}
+
+func SaveKeyWordProdRecord(record *KeyWordProdRecord) {
+	if !database.CurrentDB.HasTable(record) {
+		database.CurrentDB.AutoMigrate(record)
+	}
+	database.CurrentDB.Create(record)
 }

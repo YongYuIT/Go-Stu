@@ -2,12 +2,12 @@ package config
 
 import (
 	"fmt"
+	"github.com/spf13/viper"
 	"net/http"
 	"os"
 	"reflect"
 	"strings"
 )
-import "github.com/spf13/viper"
 
 var CurrentDefaultConfig = &SpiderConfig{}
 var DBConn = &DBConfig{}
@@ -28,6 +28,9 @@ func init() {
 	var database = config.Get("database").(map[string]interface{})
 	autoSetValueFromConfig(DBConn, database)
 
+	if config.Get("apply") == nil {
+		return
+	}
 	var apply = config.Get("apply").(string)
 	fmt.Println("apply-->", apply)
 	applyConfig := config.Get(apply).(map[string]interface{})

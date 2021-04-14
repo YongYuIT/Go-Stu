@@ -1,12 +1,12 @@
 package database
 
 import (
+	"charts/config"
+	_ "charts/config"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"os"
-	"thinking_spider/config"
-	_ "thinking_spider/config"
 )
 
 var CurrentDB *gorm.DB

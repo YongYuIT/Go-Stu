@@ -38,5 +38,4 @@ func main() {
 	})
 
 	priceLevelDataSpider.StartSpider()
-
 }

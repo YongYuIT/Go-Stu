@@ -5,7 +5,6 @@ import (
 	"github.com/gocolly/colly"
 	"strconv"
 	"strings"
-	"thinking_spider/database"
 	"thinking_spider/model"
 	"thinking_spider/spider_interface"
 	"thinking_spider/utils"
@@ -49,5 +48,5 @@ func GetProductItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
 
 func saveRecord(record *model.KeyWordProdRecord) {
 	fmt.Println("record-->", record)
-	database.SaveKeyWordProdRecord(record)
+	model.SaveKeyWordProdRecord(record)
 }
