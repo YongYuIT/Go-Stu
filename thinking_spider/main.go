@@ -37,5 +37,5 @@ func main() {
 		return startPage
 	})
 
-	priceLevelDataSpider.StartSpider()
+	//priceLevelDataSpider.StartSpider()
 }

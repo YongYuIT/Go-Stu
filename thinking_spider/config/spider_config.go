@@ -23,6 +23,7 @@ type SpiderConfig struct {
 	ItemsConfig            *ItemsConfig      `config:"items"`
 	PriceLevelConfig       *PriceLevelConfig `config:"price_level"`
 	Cookies                []*http.Cookie    `cookies`
+	DetailsConfig          *DetailsConfig    `config:"details"`
 }
 
 type ItemsConfig struct {
@@ -33,6 +34,14 @@ type ItemsConfig struct {
 type PriceLevelConfig struct {
 	PriceStrQue  string `config:"price_str_que"`
 	PriceListQue string `config:"price_list_que"`
+}
+
+type DetailsConfig struct {
+	DescsQue    string `config:"descs_que"`
+	AsinQue     string `config:"asin_que"`
+	SoldByQue   string `config:"sold_by_que"`
+	SoldIdQue   string `config:"sold_id_que"`
+	ProdDescQue string `config:"prod_desc_que"`
 }
 
 type Item struct {

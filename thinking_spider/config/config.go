@@ -39,6 +39,10 @@ func init() {
 	cookies := applyConfig["cookies"].(map[string]interface{})
 	CurrentDefaultConfig.Cookies = autoSetCookies(cookies)
 
+	detailsConfig := applyConfig["details"].(map[string]interface{})
+	CurrentDefaultConfig.DetailsConfig = &DetailsConfig{}
+	autoSetValueFromConfig(CurrentDefaultConfig.DetailsConfig, detailsConfig)
+
 	priceLevelConfig := applyConfig["price_level"].(map[string]interface{})
 	CurrentDefaultConfig.PriceLevelConfig = &PriceLevelConfig{}
 	autoSetValueFromConfig(CurrentDefaultConfig.PriceLevelConfig, priceLevelConfig)

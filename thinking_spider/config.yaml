@@ -43,7 +43,12 @@ com:
   price_level:
     price_str_que:  "span[class='a-size-base a-color-base']"
     price_list_que: "div#priceRefinements a[data-routing][class='a-link-normal s-navigation-item']"
-
+  details:
+    descs_que: "ul[class='a-unordered-list a-vertical a-spacing-mini'] li[id!='replacementPartsFitmentBullet'] span[class='a-list-item']"
+    asin_que: "input[type='hidden'][id='ftSelectAsin']"
+    sold_by_que: "span[class='a-size-small'] a#sellerProfileTriggerId"
+    sold_id_que: "input[type='hidden'][id='ftSelectMerchant']"
+    prod_desc_que: "div#productDescription[class='a-section a-spacing-small'] p"
 
 database:
   conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"
