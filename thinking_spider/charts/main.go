@@ -22,53 +22,62 @@ func init() {
 }
 
 type LineItem struct {
-	DataTime  time.Time `gorm:"column:data_time"`
-	DataValue float32   `gorm:"column:data_value" sql:"type:decimal(10,2);"`
-	DataKey   string    `gorm:"column:data_key"`
+	Key
+	TimeValue
+}
+
+type TimeValue struct {
+	DataValue float32 `gorm:"column:data_value" sql:"type:decimal(10,2);"`
+	DTime
+}
+
+type Key struct {
+	DataKey string `gorm:"column:data_key"`
+}
+
+type DTime struct {
+	DataTime time.Time `gorm:"column:data_time"`
 }
 
 func (LineItem) TableName() string {
 	return table
 }
 
-type Key struct {
-	Key string `gorm:"column:data_key"`
-}
-
-type TimeShow struct {
-	TimeValue time.Time `gorm:"column:data_time"`
-}
-
 func main() {
 	flag.Parse()
 	defer database.CloseDB()
 
-	keys := []Key{}
-	rows, err := database.CurrentDB.Raw("select data_key from table_example group by (data_key)").Rows()
-	defer rows.Close()
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		for rows.Next() {
-			item := Key{}
-			database.CurrentDB.ScanRows(rows, &item)
-			keys = append(keys, item)
+	//1. 统计出应画几条线
+	var keys []Key
+	database.CurrentDB.Raw("select data_key from table_example group by (data_key)").Scan(&keys)
+	//2. 统计完全时间轴
+	times := []DTime{}
+	database.CurrentDB.Raw("select data_time from table_example group by data_time order by data_time").Scan(&times)
+	//3. 根据实际数据，参照完全时间轴，补齐缺失数据
+	kvs := make(map[string]*[]TimeValue)
+	for i := range keys {
+		kvs[keys[i].DataKey] = &[]TimeValue{}
+		thisKVS := kvs[keys[i].DataKey]
+		var lineItems []LineItem
+		database.CurrentDB.Find(&lineItems, "data_key = ?", keys[i].DataKey).Order("data_time")
+		for i2 := range times {
+			*thisKVS = append(*thisKVS, TimeValue{})
+			(*thisKVS)[i2].DataTime = times[i2].DataTime
+			(*thisKVS)[i2].DataValue = -1
+			for i3 := range lineItems {
+				if lineItems[i3].DataTime.Equal((*thisKVS)[i2].DataTime) {
+					(*thisKVS)[i2].DataValue = lineItems[i3].DataValue
+				}
+			}
+			if (*thisKVS)[i2].DataValue == -1 {
+				if i2 > 0 {
+					(*thisKVS)[i2].DataValue = (*thisKVS)[i2-1].DataValue
+				}
+			}
 		}
-	}
 
-	times := []TimeShow{}
-	rows, err = database.CurrentDB.Raw("select data_time from table_example group by data_time order by data_time").Rows()
-	defer rows.Close()
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		for rows.Next() {
-			item := TimeShow{}
-			database.CurrentDB.ScanRows(rows, &item)
-			times = append(times, item)
-		}
 	}
-
+	//画图
 	// create a new line instance
 	line := v2charts.NewLine()
 	// set some global options like Title/Legend/ToolTip or anything else
@@ -77,22 +86,22 @@ func main() {
 		v2charts.WithTitleOpts(opts.Title{
 			Title:    "Line from amazon",
 			Subtitle: "from tab: " + table,
-		}))
+		}),
+		v2charts.WithLegendOpts(opts.Legend{Show: true}),
+	)
 
 	// Put data into instance
 	var timesStr []string
 	for _, show := range times {
-		timesStr = append(timesStr, show.TimeValue.String())
+		timesStr = append(timesStr, show.DataTime.String())
 	}
 	line = line.SetXAxis(timesStr)
-	for _, key := range keys {
-		line = line.AddSeries(key.Key, generateLineItems(key.Key, times), func(s *v2charts.SingleSeries) {
-			s.Name = key.Key
-		})
+	for i := range keys {
+		line = line.AddSeries(keys[i].DataKey, generateLineItems(*kvs[keys[i].DataKey]))
 	}
-
 	line.SetSeriesOptions(v2charts.WithLineChartOpts(opts.LineChart{Smooth: true}))
 
+	//output to html file
 	file_name := "./" + table + ".html"
 	f, err := os.Create(file_name)
 	if err != nil {
@@ -100,34 +109,14 @@ func main() {
 		return
 	}
 	line.Render(f)
+
 }
 
 // generate random data for line chart
-func generateLineItems(key string, times []TimeShow) []opts.LineData {
-
-	var lineItems []LineItem
-	database.CurrentDB.Find(&lineItems, "data_key = ?", key).Order("data_time")
-	fmt.Println("get-->", key, "-->", len(lineItems))
-
-	var lastValue float32 = 0
+func generateLineItems(tValues []TimeValue) []opts.LineData {
 	items := make([]opts.LineData, 0)
-	for _, item := range lineItems {
-		if findTime(times, item.DataTime) {
-			items = append(items, opts.LineData{Value: item.DataValue})
-		} else {
-			items = append(items, opts.LineData{Value: lastValue})
-		}
-		lastValue = item.DataValue
+	for _, item := range tValues {
+		items = append(items, opts.LineData{Value: item.DataValue})
 	}
-
 	return items
-}
-
-func findTime(times []TimeShow, time time.Time) bool {
-	for _, show := range times {
-		if show.TimeValue.Equal(time) {
-			return true
-		}
-	}
-	return false
 }
