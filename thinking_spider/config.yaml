@@ -46,7 +46,7 @@ com:
   details:
     descs_que: "ul[class='a-unordered-list a-vertical a-spacing-mini'] li[id!='replacementPartsFitmentBullet'] span[class='a-list-item']"
     asin_que: "input[type='hidden'][id='ftSelectAsin']"
-    sold_by_que: "span[class='a-size-small'] a#sellerProfileTriggerId"
+    sold_by_que: "div[class='a-fixed-left-grid a-spacing-small']"
     sold_id_que: "input[type='hidden'][id='ftSelectMerchant']"
     prod_desc_que: "div#productDescription[class='a-section a-spacing-small'] p"
 

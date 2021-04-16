@@ -1,6 +1,10 @@
 package model
 
-import "github.com/jinzhu/gorm"
+import (
+	"fmt"
+	"github.com/jinzhu/gorm"
+	"thinking_spider/database"
+)
 
 type ProdRecord struct {
 	gorm.Model
@@ -14,4 +18,23 @@ type ProdRecord struct {
 	SoldByAsin string
 	ShipsFrom  string
 	ProdDesc   string `sql:"type:text;"`
+}
+
+func SaveProdRecord(record *ProdRecord) {
+	if !database.CurrentDB.HasTable(record) {
+		database.CurrentDB.AutoMigrate(record)
+	}
+	database.CurrentDB.Create(record)
+}
+
+type AsinUrl struct {
+	DetialUrl string `gorm:"column:detial_url"`
+	Asin      string `gorm:"column:asin"`
+}
+
+func GetUrlByKeyWords(keyword string) *[]AsinUrl {
+	getUrlByAsin := fmt.Sprintf("select detial_url, asin from (select detial_url, asin, row_number() over (partition by asin order by created_at desc) as aindex from key_word_prod_records where key_word='%s') t where t.aindex = 1 and detial_url != ''", keyword)
+	var asinUrls []AsinUrl
+	database.CurrentDB.Raw(getUrlByAsin).Scan(&asinUrls)
+	return &asinUrls
 }

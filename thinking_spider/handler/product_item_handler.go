@@ -17,7 +17,7 @@ func GetProductItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
 			record := model.NewKeyWordProdRecord()
 			record.KeyWord = config.KeyWords
 			record.PriceLevel = config.CurrentPriceLevel
-			record.DeliverTo = spider.GetPageValue(element.Request.URL.String(), spider_interface.REGION_NAME)
+			record.DeliverTo = spider.GetPageValue(element.Request.URL.String(), spider_interface.REGION_NAME).(string)
 			pageinfo := utils.GetUrlValueByKey(eItemDiv.Request.URL.String(), config.PagesKey)
 			if strings.EqualFold(pageinfo, config.PageStartTag) || strings.Contains(pageinfo, "sr_nr_") {
 				record.Page = 1

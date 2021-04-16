@@ -14,7 +14,7 @@ type Spider struct {
 	Ctrl     *colly.Collector
 	startUrl string
 	Config   *config.SpiderConfig
-	pageVals map[string]string
+	pageVals map[string]interface{}
 }
 
 type PageKey struct {
@@ -26,7 +26,7 @@ func (this *PageKey) string() string {
 	return this.urlString + "##$$##&&##" + this.keyName
 }
 
-func (this *Spider) GetPageValue(url string, name string) string {
+func (this *Spider) GetPageValue(url string, name string) interface{} {
 	pageKey := &PageKey{
 		urlString: url,
 		keyName:   name,
@@ -34,7 +34,7 @@ func (this *Spider) GetPageValue(url string, name string) string {
 	return this.pageVals[pageKey.string()]
 }
 
-func (this *Spider) SetPageValue(url string, name string, value string) {
+func (this *Spider) SetPageValue(url string, name string, value interface{}) {
 	pageKey := &PageKey{
 		urlString: url,
 		keyName:   name,
@@ -53,7 +53,7 @@ func NewSpider() *Spider {
 
 	cpyConfig := (*config.CurrentDefaultConfig)
 	spider.Config = &cpyConfig
-	spider.pageVals = make(map[string]string)
+	spider.pageVals = make(map[string]interface{})
 
 	spider.Ctrl = colly.NewCollector(
 		colly.MaxDepth(spider.Config.MaxDeep),
@@ -74,7 +74,6 @@ func NewSpider() *Spider {
 			}
 			defer file.Close()
 			fmt.Fprintf(file, "<!-- "+response.Request.URL.String()+" -->\n")
-			//fmt.Fprintf(file, string(response.Body))
 			file.Write(response.Body)
 		}
 	})
