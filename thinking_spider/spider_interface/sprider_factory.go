@@ -62,7 +62,7 @@ func NewSpider() *Spider {
 			extensions.Referer(collector)
 		},
 	)
-
+	spider.Ctrl.SetRequestTimeout(time.Second * 60)
 	spider.Ctrl.OnResponse(func(response *colly.Response) {
 		fmt.Println("resp-code-->", response.Request.URL, "-->", response.StatusCode)
 		if strings.EqualFold(DEBUG_MODEL, spider.Config.Model) {

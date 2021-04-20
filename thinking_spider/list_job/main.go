@@ -2,10 +2,24 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"os"
 	"os/exec"
+)
+
+const (
+	KEYWORD_TASK = "KEYWORD_TASK"
+	DETAIL_TASK  = "DETAIL_TASK"
+)
+
+func init() {
+	flag.StringVar(&task, "t", KEYWORD_TASK, "set task")
+}
+
+var (
+	task string
 )
 
 func main() {
@@ -22,7 +36,7 @@ func main() {
 		str, err := reader.ReadString('\n')
 		fmt.Print("doing job-->", str)
 
-		runCommand("./thinking_spider", "-k", str[:len(str)-1])
+		runCommand("./thinking_spider", "-k", str[:len(str)-1], "-t", task)
 
 		if err == io.EOF {
 			break
