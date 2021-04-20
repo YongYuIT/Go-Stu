@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 const (
@@ -34,6 +35,9 @@ func main() {
 	reader := bufio.NewReader(file)
 	for {
 		str, err := reader.ReadString('\n')
+		if strings.EqualFold(str, "") {
+			continue
+		}
 		fmt.Print("doing job-->", str)
 
 		runCommand("./thinking_spider", "-k", str[:len(str)-1], "-t", task)

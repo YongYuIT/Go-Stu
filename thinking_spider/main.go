@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"strings"
 	"thinking_spider/cert_check"
 	"thinking_spider/config"
@@ -35,10 +36,10 @@ func main() {
 
 	if strings.EqualFold(task, KEYWORD_TASK) {
 		doKeyWorkTask()
-	}
-
-	if strings.EqualFold(task, DETAIL_TASK) {
+	} else if strings.EqualFold(task, DETAIL_TASK) {
 		doDetailTask()
+	} else {
+		fmt.Println("not task matches")
 	}
 }
 

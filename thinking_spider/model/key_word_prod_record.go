@@ -20,6 +20,7 @@ type KeyWordProdRecord struct {
 	PriceLevel string
 	DeliverTo  string
 	DetialUrl  string `sql:"type:text;"`
+	MainPicUrl string `sql:"type:text;"`
 }
 
 func NewKeyWordProdRecord() *KeyWordProdRecord {

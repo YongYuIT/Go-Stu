@@ -36,6 +36,7 @@ func GetProductItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
 			record.Ratings, err = strconv.Atoi(strings.ReplaceAll(eItemDiv.ChildText(config.ItemsConfig.Item.ItemRangeQue), ",", ""))
 			record.Starts = utils.GetStarts(eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemStartsQue, "aria-label"))
 			record.DetialUrl = eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemDetailUrlQue, "href")
+			record.MainPicUrl = eItemDiv.ChildAttr(config.ItemsConfig.Item.ItemImgUrlQue, "src")
 
 			if err != nil {
 				fmt.Println("get item error-->", err)

@@ -54,4 +54,5 @@ type Item struct {
 	ItemIndexAttr    string `config:"item_index_attr"`
 	ItemStartsQue    string `config:"item_starts_que"`
 	ItemDetailUrlQue string `config:"item_detail_url_que"`
+	ItemImgUrlQue    string `config:"item_img_url_que"`
 }
