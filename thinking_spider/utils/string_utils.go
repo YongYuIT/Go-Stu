@@ -1,11 +1,9 @@
 package utils
 
 import (
-	"fmt"
 	"net/url"
 	"strconv"
 	"strings"
-	"thinking_spider/config"
 )
 
 func GetUrlWithKVs(host string, kvs []string) string {
@@ -42,26 +40,46 @@ func GetUrlValueByKey(urlstr string, key string) string {
 	}
 	if len(kvs[key]) > 0 {
 		return kvs[key][0]
-	} else {
-		return ""
 	}
+	//find an other way
+	if strings.Contains(urlstr, key) {
+		subStr := urlstr[strings.Index(urlstr, key):]
+		subStr = subStr[strings.Index(subStr, "=")+1 : strings.Index(subStr, "?")]
+		return subStr
+	}
+	return ""
 }
 
 func GetPageNum(str string) int {
-	page := str[len(config.CurrentDefaultConfig.PageUrlTag):]
-	num, err := strconv.Atoi(page)
-	if err != nil {
-		return -1
+	i := len(str) - 1
+	for {
+		if i < 0 {
+			break
+		}
+		if str[i] < '0' || str[i] > '9' {
+			break
+		}
+		i--
 	}
-	return num
+	if i < 0 {
+		return -1
+	} else {
+		numStr := str[i+1:]
+		num, err := strconv.Atoi(numStr)
+		if err != nil {
+			return -1
+		}
+		return num
+	}
 }
 
 func GetNextPageStr(current string) string {
 	num := GetPageNum(current)
+	numStr := strconv.Itoa(num)
 	if num == -1 {
 		return ""
 	}
-	return fmt.Sprintf("sr_pg_%d", num+1)
+	return current[:len(current)-len(numStr)] + strconv.Itoa(num+1)
 }
 
 func GetPrice(str string) float32 {

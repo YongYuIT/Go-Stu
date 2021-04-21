@@ -11,7 +11,7 @@ func Test_use_spider_get_pages_data(test *testing.T) {
 	var thisConfig = *config.CurrentDefaultConfig
 	thisConfig.MaxDeep = 2
 	thisConfig.DelaySpider = 2
-	spider := spider.GetPagesDataSpider()
+	spider := spider.GetPagesDataSpiderByKeyWord()
 	spider.Config.MaxDeep = 2
 	spider.Config.DelaySpider = 2
 	spider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {

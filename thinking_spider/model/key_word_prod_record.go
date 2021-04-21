@@ -7,29 +7,24 @@ import (
 
 type KeyWordProdRecord struct {
 	gorm.Model
+	BasicProdInfo
+	Uuid       string
 	KeyWord    string
 	Page       int
 	PageIndex  int
-	Asin       string
-	Uuid       string
-	Titles     string
-	Ratings    int
-	Starts     float32 `sql:"type:decimal(10,2);"`
-	Price      float32 `sql:"type:decimal(10,2);"`
 	ShopName   string
 	PriceLevel string
-	DeliverTo  string
-	DetialUrl  string `sql:"type:text;"`
-	MainPicUrl string `sql:"type:text;"`
+	Price      float32 `sql:"type:decimal(10,2);"`
 }
 
 func NewKeyWordProdRecord() *KeyWordProdRecord {
-	return &KeyWordProdRecord{
+	kw := &KeyWordProdRecord{
 		Page:      -1,
 		PageIndex: -1,
-		Ratings:   -1,
 		Price:     -1,
 	}
+	kw.Ratings = -1
+	return kw
 }
 
 func SaveKeyWordProdRecord(record *KeyWordProdRecord) {

@@ -9,14 +9,14 @@ import "thinking_spider/handler"
 
 func GetDetailDataSpider() *spider_interface.Spider {
 	detailSpider := spider_interface.NewSpider()
-	record := &model.ProdRecord{}
+	record := &model.ProdDetailRecord{}
 	detailSpider.Ctrl.OnHTML(handler.Get5DescsHandler(detailSpider, record))
 	detailSpider.Ctrl.OnHTML(handler.GetAsin(detailSpider, record))
 	detailSpider.Ctrl.OnHTML(handler.GetSoldBy(detailSpider, record))
 	detailSpider.Ctrl.OnHTML(handler.GetProdDesc(detailSpider, record))
 	detailSpider.Ctrl.OnHTML(handler.GetSoldID(detailSpider, record))
 	detailSpider.Ctrl.OnHTML("head", func(element *colly.HTMLElement) {
-		model.SaveProdRecord(record)
+		model.SaveProdDetailRecord(record)
 	})
 	return detailSpider
 }

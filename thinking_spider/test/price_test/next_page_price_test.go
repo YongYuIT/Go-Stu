@@ -51,7 +51,7 @@ func Test_go_to_next_page_price(test *testing.T) {
 		} else {
 			//内容页
 			startUrl := element.Request.URL.String()
-			spider := spider.GetPagesDataSpider(startUrl)
+			spider := spider.GetPagesDataSpiderByKeyWord(startUrl)
 			spider.Config.WebSite = website
 			spider.StartSpider()
 		}

@@ -6,7 +6,7 @@ import (
 	"thinking_spider/database"
 )
 
-type ProdRecord struct {
+type ProdDetailRecord struct {
 	gorm.Model
 	Asin       string
 	Desc1      string `sql:"type:text;"`
@@ -20,7 +20,7 @@ type ProdRecord struct {
 	ProdDesc   string `sql:"type:text;"`
 }
 
-func SaveProdRecord(record *ProdRecord) {
+func SaveProdDetailRecord(record *ProdDetailRecord) {
 	if !database.CurrentDB.HasTable(record) {
 		database.CurrentDB.AutoMigrate(record)
 	}

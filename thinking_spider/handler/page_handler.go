@@ -17,7 +17,9 @@ func GetPageHandler(pageSpider *spider_interface.Spider) colly.HTMLCallback {
 			nextTag := utils.GetNextPageStr(currentPageInfo)
 			if strings.Contains(nextPageUrl, nextTag) {
 				cookie := pageSpider.Ctrl.Cookies(element.Request.URL.String())
-				nextPageUrl = config.WebSite + nextPageUrl
+				if !strings.Contains(nextPageUrl, "http") {
+					nextPageUrl = config.WebSite + nextPageUrl
+				}
 				pageSpider.Ctrl.SetCookies(nextPageUrl, cookie)
 				pageListItem.Request.Visit(nextPageUrl)
 			}

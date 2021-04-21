@@ -8,7 +8,7 @@ import (
 	"thinking_spider/spider_interface"
 )
 
-func Get5DescsHandler(spider *spider_interface.Spider, record *model.ProdRecord) (string, colly.HTMLCallback) {
+func Get5DescsHandler(spider *spider_interface.Spider, record *model.ProdDetailRecord) (string, colly.HTMLCallback) {
 	callback := func(element *colly.HTMLElement) {
 		if record.Desc1 == "" {
 			record.Desc1 = strings.TrimSpace(element.Text)
@@ -25,14 +25,14 @@ func Get5DescsHandler(spider *spider_interface.Spider, record *model.ProdRecord)
 	return spider.Config.DetailsConfig.DescsQue, callback
 }
 
-func GetAsin(spider *spider_interface.Spider, record *model.ProdRecord) (string, colly.HTMLCallback) {
+func GetAsin(spider *spider_interface.Spider, record *model.ProdDetailRecord) (string, colly.HTMLCallback) {
 	callback := func(element *colly.HTMLElement) {
 		record.Asin = element.Attr("value")
 	}
 	return spider.Config.DetailsConfig.AsinQue, callback
 }
 
-func GetSoldBy(spider *spider_interface.Spider, record *model.ProdRecord) (string, colly.HTMLCallback) {
+func GetSoldBy(spider *spider_interface.Spider, record *model.ProdDetailRecord) (string, colly.HTMLCallback) {
 	callback := func(element *colly.HTMLElement) {
 		value := element.ChildText("div[class='a-row'] span[class='a-size-small']")
 		if strings.Contains(element.ChildText("span[class='a-size-small a-color-tertiary']"), "Ships") {
@@ -44,7 +44,7 @@ func GetSoldBy(spider *spider_interface.Spider, record *model.ProdRecord) (strin
 	return spider.Config.DetailsConfig.SoldByQue, callback
 }
 
-func GetProdDesc(spider *spider_interface.Spider, record *model.ProdRecord) (string, colly.HTMLCallback) {
+func GetProdDesc(spider *spider_interface.Spider, record *model.ProdDetailRecord) (string, colly.HTMLCallback) {
 
 	callback := func(element *colly.HTMLElement) {
 		descs := ""
@@ -75,7 +75,7 @@ func GetProdDesc(spider *spider_interface.Spider, record *model.ProdRecord) (str
 	return spider.Config.DetailsConfig.ProdDescQue, callback
 }
 
-func GetSoldID(spider *spider_interface.Spider, record *model.ProdRecord) (string, colly.HTMLCallback) {
+func GetSoldID(spider *spider_interface.Spider, record *model.ProdDetailRecord) (string, colly.HTMLCallback) {
 	callback := func(element *colly.HTMLElement) {
 		record.SoldByAsin = element.Attr("value")
 	}
