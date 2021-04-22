@@ -42,7 +42,7 @@ func Test_basic(test *testing.T) {
 
 	spider := spider.GetBasicPageDataSpider()
 	spider.Config.KeyWords = "Kitchen & Dining##Bakeware##Bakers & Casseroles##Casseroles"
-	c.OnHTML("ol#zg-ordered-list", handler.GetNewReaseItemHandler(spider))
+	c.OnHTML("ol#zg-ordered-list", handler.GetNewReleaseItemHandler(spider))
 
 	sessionId := &http.Cookie{}
 	sessionId.Name = "session-id"

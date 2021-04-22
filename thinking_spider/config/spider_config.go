@@ -5,6 +5,7 @@ import "net/http"
 type SpiderConfig struct {
 	Model                  string            `config:"model"`
 	WebSite                string            `config:"web_site"`
+	NewRelease             string            `config:"new_release"`
 	MaxDeep                int               `config:"max_deep"`
 	DelaySpider            int               `config:"delay_spider"`
 	KeyWords               string            `config:"key_words"`

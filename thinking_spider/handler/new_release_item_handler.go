@@ -8,22 +8,22 @@ import (
 	"thinking_spider/spider_interface"
 )
 
-func GetNewReaseItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
+func GetNewReleaseItemHandler(spider *spider_interface.Spider) colly.HTMLCallback {
 	return func(element *colly.HTMLElement) {
 		element.ForEach("li[class='zg-item-immersion']", func(i int, listEle *colly.HTMLElement) {
 			release := model.NewNewReleaseProdRecord()
 			types := strings.Split(spider.Config.KeyWords, "##")
-			if len(types) > 0 {
-				release.Type1 = types[0]
-			}
 			if len(types) > 1 {
-				release.Type2 = types[1]
+				release.Type1 = types[1]
 			}
 			if len(types) > 2 {
-				release.Type3 = types[2]
+				release.Type2 = types[2]
 			}
 			if len(types) > 3 {
-				release.Type4 = types[3]
+				release.Type3 = types[3]
+			}
+			if len(types) > 4 {
+				release.Type4 = types[4]
 			}
 			indexStr := listEle.ChildText("span[class='zg-badge-text']")[1:]
 			index, err := strconv.Atoi(indexStr)

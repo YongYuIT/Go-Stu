@@ -18,8 +18,9 @@ var (
 )
 
 const (
-	KEYWORD_TASK = "KEYWORD_TASK"
-	DETAIL_TASK  = "DETAIL_TASK"
+	KEYWORD_TASK     = "KEYWORD_TASK"
+	DETAIL_TASK      = "DETAIL_TASK"
+	NEW_RELEASE_TASK = "NEW_RELEASE_TASK"
 )
 
 func init() {
@@ -38,9 +39,22 @@ func main() {
 		doKeyWorkTask()
 	} else if strings.EqualFold(task, DETAIL_TASK) {
 		doDetailTask()
+	} else if strings.EqualFold(task, NEW_RELEASE_TASK) {
+		doReleaseTask()
 	} else {
 		fmt.Println("not task matches")
 	}
+}
+
+func doReleaseTask() {
+	newReleaseTypesSpider := spider.GetNewReleaseTypeSpider()
+	newReleaseTypesSpider.Config.MaxDeep = 3
+	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
+		startUrl := newReleaseTypesSpider.Config.NewRelease
+		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
+		return startUrl
+	})
+	newReleaseTypesSpider.StartSpider()
 }
 
 func doDetailTask() {

@@ -13,7 +13,7 @@ func GetPagesDataSpiderByKeyWord() *spider_interface.Spider {
 
 func GetPageDataSpiderByNewRease() *spider_interface.Spider {
 	spider := GetBasicPageDataSpider()
-	spider.Ctrl.OnHTML("ol#zg-ordered-list", handler.GetNewReaseItemHandler(spider))
+	spider.Ctrl.OnHTML("ol#zg-ordered-list", handler.GetNewReleaseItemHandler(spider))
 	return spider
 }
 
