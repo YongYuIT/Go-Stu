@@ -31,7 +31,10 @@ func GetNewReleaseItemHandler(spider *spider_interface.Spider) colly.HTMLCallbac
 				release.Index = index
 			}
 			asin := listEle.ChildAttr("span[class='aok-inline-block zg-item'] a[href]", "href")
-			release.Asin = asin[strings.Index(asin, "dp/")+3 : strings.Index(asin, "dp/")+13]
+			asinStartIndex := strings.Index(asin, "dp/")
+			if asinStartIndex > 0 {
+				release.Asin = asin[asinStartIndex+3 : asinStartIndex+13]
+			}
 			release.Titles = listEle.ChildText("div[aria-hidden='true']")
 			ratings, err := strconv.Atoi(listEle.ChildText("a[class='a-size-small a-link-normal']"))
 			if err == nil {
