@@ -49,7 +49,7 @@ func DoListTask(sql_file string) {
 	}
 
 	sort.Slice(keys, func(i, j int) bool {
-		return keys[i][0] > keys[j][0]
+		return keys[i][0] < keys[j][0]
 	})
 	for i := range keys {
 		tabTitle += fmt.Sprintf("<td>%s</td>", keys[i])
