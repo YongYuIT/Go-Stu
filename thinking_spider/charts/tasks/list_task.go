@@ -10,21 +10,9 @@ import (
 )
 
 const (
-	startHtml = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Title</title>\n</head>\n<body>\n\n<table border=\"1\">\n    <tr>\n        <td>KeyWord</td>\n        <td>Page</td>\n        <td>PageIndex</td>\n        <td>Asin</td>\n        <td>Titles</td>\n        <td>Ratings</td>\n        <td>Starts</td>\n        <td>Price</td>\n        <td>MainPicUrl</td>\n        <td>Select</td>\n    </tr>"
+	startHtml = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Title</title>\n</head>\n<body>\n\n<table border=\"1\">\n"
 	endHtml   = "</table>\n</body>\n</html>"
 )
-
-type InfoWithPic struct {
-	KeyWord    string
-	Page       int
-	PageIndex  int
-	Asin       string
-	Titles     string
-	Ratings    int
-	Starts     float32 `sql:"type:decimal(10,2);"`
-	Price      float32 `sql:"type:decimal(10,2);"`
-	MainPicUrl string  `sql:"type:text;"`
-}
 
 func DoListTask(sql_file string) {
 	if strings.EqualFold("", sql_file) {
@@ -51,34 +39,40 @@ func DoListTask(sql_file string) {
 	defer file.Close()
 	fmt.Fprintf(file, startHtml)
 	//write data start
-	var infos []InfoWithPic
+	var infos []map[string]interface{}
 	database.CurrentDB.Raw(queString).Scan(&infos)
+	keys := []string{}
+	tabTitle := "<tr>"
+	for s := range infos[0] {
+		keys = append(keys, s)
+		tabTitle += fmt.Sprintf("<td>%s</td>", s)
+	}
+	tabTitle += "</tr>"
+	fmt.Fprintf(file, tabTitle)
 	for i, info := range infos {
 		fmt.Println("print-->", i)
-		itemStr := fmt.Sprintf("<tr name=\"items\"> "+
-			"<td>%s</td>"+
-			"<td>%d</td>"+
-			"<td>%d</td>"+
-			"<td>%s</td>"+
-			"<td>%s</td>"+
-			"<td>%d</td>"+
-			"<td>%f</td>"+
-			"<td>%f</td>"+
-			"<td><img height=100 src=\"%s\"/></td>"+
-			"<td><input type='checkbox' value=%d name=\"prod\" /></td>"+
-			"</tr>",
-			info.KeyWord,
-			info.Page,
-			info.PageIndex,
-			info.Asin,
-			info.Titles,
-			info.Ratings,
-			info.Starts,
-			info.Price,
-			info.MainPicUrl,
-			i,
-		)
-		fmt.Fprintf(file, itemStr)
+		itemStrFormat := "<tr name=\"items\"> "
+		for i2 := 0; i2 < len(keys); i2++ {
+			key := keys[i2]
+			value := info[key]
+			_, isStr := value.(string)
+			if isStr {
+				if strings.Contains(key, "pic_url") {
+					itemStrFormat += fmt.Sprintf("<td><img height=100 src=\"%s\"/></td>", value)
+				} else {
+					itemStrFormat += fmt.Sprintf("<td>%s</td>", value)
+				}
+			} else {
+				_, isInt := value.(int64)
+				if isInt {
+					itemStrFormat += fmt.Sprintf("<td>%d</td>", value)
+				} else {
+					itemStrFormat += fmt.Sprintf("<td>%f</td>", value)
+				}
+			}
+		}
+		itemStrFormat += "</tr>"
+		fmt.Fprintf(file, itemStrFormat)
 	}
 	//write data end
 	fmt.Fprintf(file, endHtml)

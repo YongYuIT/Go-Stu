@@ -1,3 +1,1 @@
-select *
-from `key_word_prod_records-bak20210420001`
-where uuid != ''
+select asin,page,page_index,ratings,starts,main_pic_url from `key_word_prod_records-bak20210420001` where uuid!='' limit 100

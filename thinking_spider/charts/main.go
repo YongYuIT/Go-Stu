@@ -1,7 +1,6 @@
 package main
 
 import (
-	"charts/database"
 	_ "charts/database"
 	"charts/tasks"
 	"flag"
@@ -30,7 +29,6 @@ const (
 func main() {
 
 	flag.Parse()
-	defer database.CloseDB()
 
 	if strings.EqualFold(LINE_TASK, task) {
 		tasks.TableName = table
