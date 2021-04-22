@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"sort"
 	"strings"
 	"time"
 )
@@ -45,8 +46,15 @@ func DoListTask(sql_file string) {
 	tabTitle := "<tr>"
 	for s := range infos[0] {
 		keys = append(keys, s)
-		tabTitle += fmt.Sprintf("<td>%s</td>", s)
 	}
+
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i][0] > keys[j][0]
+	})
+	for i := range keys {
+		tabTitle += fmt.Sprintf("<td>%s</td>", keys[i])
+	}
+
 	tabTitle += "</tr>"
 	fmt.Fprintf(file, tabTitle)
 	for i, info := range infos {
