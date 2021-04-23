@@ -5,7 +5,7 @@ com:
   web_site: "https://www.amazon.com"
   new_release: "https://www.amazon.com/gp/new-releases/kitchen/"
   max_deep: 2
-  delay_spider: 10
+  delay_spider: 2
   key_words: "Fruit knife"
   prices_levels: "Under $25;$25 to $50"
   cookies:

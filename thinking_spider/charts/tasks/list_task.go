@@ -66,7 +66,7 @@ func DoListTask(sql_file string) {
 			_, isStr := value.(string)
 			if isStr {
 				if strings.Contains(key, "pic_url") {
-					itemStrFormat += fmt.Sprintf("<td><img height=100 src=\"%s\"/></td>", value)
+					itemStrFormat += "<td><img height=100 src=\"" + value.(string) + "\"/></td>"
 				} else {
 					itemStrFormat += fmt.Sprintf("<td>%s</td>", value)
 				}
@@ -80,7 +80,7 @@ func DoListTask(sql_file string) {
 			}
 		}
 		itemStrFormat += "</tr>"
-		fmt.Fprintf(file, itemStrFormat)
+		file.Write([]byte(itemStrFormat))
 	}
 	//write data end
 	fmt.Fprintf(file, endHtml)
