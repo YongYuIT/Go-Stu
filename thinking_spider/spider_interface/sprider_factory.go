@@ -42,6 +42,10 @@ func (this *Spider) SetPageValue(url string, name string, value interface{}) {
 	this.pageVals[pageKey.string()] = value
 }
 
+func (this *Spider) SetHandler(goquerySelector string, f colly.HTMLCallback) {
+	this.Ctrl.OnHTML(goquerySelector, f)
+}
+
 const (
 	DEBUG_MODEL = "debug"
 	REGION_NAME = "region_name"

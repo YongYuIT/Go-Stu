@@ -15,7 +15,7 @@ const (
 	endHtml   = "</table>\n</body>\n</html>"
 )
 
-func DoListTask(sql_file string) {
+func DoListTask(sql_file string, contentFunc func(file *os.File, infos []map[string]interface{})) {
 	if strings.EqualFold("", sql_file) {
 		fmt.Println("you need to set a sql file by -f")
 		return
@@ -42,6 +42,12 @@ func DoListTask(sql_file string) {
 	//write data start
 	var infos []map[string]interface{}
 	database.CurrentDB.Raw(queString).Scan(&infos)
+	contentFunc(file, infos)
+	//write data end
+	fmt.Fprintf(file, endHtml)
+}
+
+func GetTabContent(file *os.File, infos []map[string]interface{}) {
 	keys := []string{}
 	tabTitle := "<tr>"
 	for s := range infos[0] {
@@ -82,6 +88,4 @@ func DoListTask(sql_file string) {
 		itemStrFormat += "</tr>"
 		file.Write([]byte(itemStrFormat))
 	}
-	//write data end
-	fmt.Fprintf(file, endHtml)
 }

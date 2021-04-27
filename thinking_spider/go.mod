@@ -12,6 +12,7 @@ require (
 	github.com/gocolly/colly v1.2.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/kennygrant/sanitize v1.2.4 // indirect
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/spf13/viper v1.7.1
 	github.com/temoto/robotstxt v1.1.1 // indirect
