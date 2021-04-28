@@ -10,10 +10,10 @@ func GetPatentsPageItemHandler(thisSpider *spider_interface.Spider) (string, col
 	callback := func(element1 *colly.HTMLElement) {
 		if strings.Contains(element1.ChildAttr("img[align='MIDDLE']", "src"), "nextlist") {
 			url := element1.Attr("href")
-			isV := thisSpider.GetPageValue("ALL", "isVisit")
+			isV := thisSpider.GetPageValue(url, "isVisit")
 			if isV == nil || !isV.(bool) {
 				nextUrl := "http://patft.uspto.gov" + url
-				thisSpider.SetPageValue("ALL", "isVisit", true)
+				thisSpider.SetPageValue(url, "isVisit", true)
 				element1.Request.Visit(nextUrl)
 			}
 		}
