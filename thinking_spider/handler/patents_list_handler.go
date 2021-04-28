@@ -12,7 +12,8 @@ import (
 
 func GetPatentsListItemHandler(thisSpider *spider_interface.Spider) (string, colly.HTMLCallback) {
 	callback := func(element1 *colly.HTMLElement) {
-		if strings.Contains(element1.ChildText("TH[scope='col']"), "PAT. NO.") {
+		tableFilter := element1.ChildText("TH[scope='col']")
+		if strings.Contains(tableFilter, "PAT. NO.") || strings.Contains(tableFilter, "PUB. APP. NO.") {
 			element1.ForEach("TR", func(i int, element2 *colly.HTMLElement) {
 				if strings.Contains(element2.ChildAttr("TD", "valign"), "top") {
 					fmt.Println("------------------start")
@@ -34,7 +35,7 @@ func GetPatentsListItemHandler(thisSpider *spider_interface.Spider) (string, col
 							fmt.Println("p.id-->", element.Text)
 							record.PID = element.Text
 						}
-						if i == 3 {
+						if (i == 3 && strings.EqualFold(record.Status, "patft")) || (i == 2 && strings.EqualFold(record.Status, "appft")) {
 							fmt.Println("title-->", strings.TrimSpace(element.Text))
 							record.Title = strings.TrimSpace(element.Text)
 							detailUrl := thisSpider.Config.WebSite + element.ChildAttr("a", "href")

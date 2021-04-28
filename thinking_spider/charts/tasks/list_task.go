@@ -47,7 +47,63 @@ func DoListTask(sql_file string, contentFunc func(file *os.File, infos []map[str
 	fmt.Fprintf(file, endHtml)
 }
 
-func GetTabContent(file *os.File, infos []map[string]interface{}) {
+const LineCount = 6
+
+func GetGradeContent(file *os.File, infos []map[string]interface{}) {
+	line := len(infos) / LineCount
+	if line*LineCount < len(infos) {
+		line += 1
+	}
+
+	keys := []string{}
+	for s := range infos[0] {
+		keys = append(keys, s)
+	}
+
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i][0] < keys[j][0]
+	})
+
+	for l := 0; l < line; l++ {
+		tabLine := "<tr>"
+		for i := 0; i < LineCount; i++ {
+			tableItem := "<td> <ul>"
+			index := l*LineCount + i
+			if index >= len(infos) {
+				break
+			}
+			info := infos[index]
+			for k := 0; k < len(keys); k++ {
+				key := keys[k]
+				value := info[key]
+
+				_, isStr := value.(string)
+				if isStr {
+					if strings.Contains(key, "pic_url") {
+						tableItem += "<img height=200 src=\"" + value.(string) + "\"/>"
+					} else {
+						tableItem += fmt.Sprintf("<li>%s</li>", value)
+					}
+				} else {
+					_, isInt := value.(int64)
+					if isInt {
+						tableItem += fmt.Sprintf("<li>%d</li>", value)
+					} else {
+						tableItem += fmt.Sprintf("<li>%f</li>", value)
+					}
+				}
+
+			}
+			tableItem += "</ul> </td>"
+			tabLine += tableItem
+		}
+		tabLine += "</tr>"
+		file.Write([]byte(tabLine))
+	}
+
+}
+
+func GetListContent(file *os.File, infos []map[string]interface{}) {
 	keys := []string{}
 	tabTitle := "<tr>"
 	for s := range infos[0] {

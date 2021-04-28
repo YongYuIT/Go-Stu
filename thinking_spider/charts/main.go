@@ -43,9 +43,9 @@ func main() {
 		tasks.DoLineTask()
 	} else if strings.EqualFold(LIST_TASK, task) {
 		if strings.EqualFold(LIST_LIST, listStyle) {
-			tasks.DoListTask(sqlFile, tasks.GetTabContent)
+			tasks.DoListTask(sqlFile, tasks.GetListContent)
 		} else {
-
+			tasks.DoListTask(sqlFile, tasks.GetGradeContent)
 		}
 	} else {
 		fmt.Println("you need to set a task")
