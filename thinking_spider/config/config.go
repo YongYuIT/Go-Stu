@@ -36,25 +36,39 @@ func init() {
 	applyConfig := config.Get(apply).(map[string]interface{})
 	autoSetValueFromConfig(CurrentDefaultConfig, applyConfig)
 
-	cookies := applyConfig["cookies"].(map[string]interface{})
-	CurrentDefaultConfig.Cookies = autoSetCookies(cookies)
+	p_cookies := applyConfig["cookies"]
+	if p_cookies != nil {
+		cookies := p_cookies.(map[string]interface{})
+		CurrentDefaultConfig.Cookies = autoSetCookies(cookies)
+	}
 
-	detailsConfig := applyConfig["details"].(map[string]interface{})
-	CurrentDefaultConfig.DetailsConfig = &DetailsConfig{}
-	autoSetValueFromConfig(CurrentDefaultConfig.DetailsConfig, detailsConfig)
+	p_detailsConfig := applyConfig["details"]
+	if p_detailsConfig != nil {
+		detailsConfig := p_detailsConfig.(map[string]interface{})
+		CurrentDefaultConfig.DetailsConfig = &DetailsConfig{}
+		autoSetValueFromConfig(CurrentDefaultConfig.DetailsConfig, detailsConfig)
+	}
 
-	priceLevelConfig := applyConfig["price_level"].(map[string]interface{})
-	CurrentDefaultConfig.PriceLevelConfig = &PriceLevelConfig{}
-	autoSetValueFromConfig(CurrentDefaultConfig.PriceLevelConfig, priceLevelConfig)
+	p_priceLevelConfig := applyConfig["price_level"]
+	if p_priceLevelConfig != nil {
+		priceLevelConfig := p_priceLevelConfig.(map[string]interface{})
+		CurrentDefaultConfig.PriceLevelConfig = &PriceLevelConfig{}
+		autoSetValueFromConfig(CurrentDefaultConfig.PriceLevelConfig, priceLevelConfig)
+	}
 
-	itemsConfig := applyConfig["items"].(map[string]interface{})
-	CurrentDefaultConfig.ItemsConfig = &ItemsConfig{}
-	autoSetValueFromConfig(CurrentDefaultConfig.ItemsConfig, itemsConfig)
+	p_itemsConfig := applyConfig["items"]
+	var itemsConfig map[string]interface{} = nil
+	if p_itemsConfig != nil {
+		itemsConfig = p_itemsConfig.(map[string]interface{})
+		CurrentDefaultConfig.ItemsConfig = &ItemsConfig{}
+		autoSetValueFromConfig(CurrentDefaultConfig.ItemsConfig, itemsConfig)
+	}
 
-	itemConfig := itemsConfig["item"].(map[string]interface{})
-	CurrentDefaultConfig.ItemsConfig.Item = &Item{}
-	autoSetValueFromConfig(CurrentDefaultConfig.ItemsConfig.Item, itemConfig)
-	fmt.Println("get init config-->", CurrentDefaultConfig.ItemsConfig.Item)
+	if itemsConfig != nil {
+		itemConfig := itemsConfig["item"].(map[string]interface{})
+		CurrentDefaultConfig.ItemsConfig.Item = &Item{}
+		autoSetValueFromConfig(CurrentDefaultConfig.ItemsConfig.Item, itemConfig)
+	}
 }
 
 func autoSetCookies(cookiesConfig map[string]interface{}) []*http.Cookie {
