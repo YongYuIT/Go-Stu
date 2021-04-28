@@ -21,6 +21,7 @@ const (
 	KEYWORD_TASK     = "KEYWORD_TASK"
 	DETAIL_TASK      = "DETAIL_TASK"
 	NEW_RELEASE_TASK = "NEW_RELEASE_TASK"
+	PATENTS_TASK     = "PATENTS_TASK"
 )
 
 func init() {
@@ -41,9 +42,24 @@ func main() {
 		doDetailTask()
 	} else if strings.EqualFold(task, NEW_RELEASE_TASK) {
 		doReleaseTask()
+	} else if strings.EqualFold(task, PATENTS_TASK) {
+		doPatentsTask()
 	} else {
 		fmt.Println("not task matches")
 	}
+}
+
+func doPatentsTask() {
+
+	if !strings.EqualFold(key_words, "") {
+		config.CurrentDefaultConfig.KeyWords = key_words
+	}
+
+	mainspider := spider.GetPatentSpider()
+	mainspider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
+		return mainspider.Config.KeyWords
+	})
+	mainspider.StartSpider()
 }
 
 func doReleaseTask() {

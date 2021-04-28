@@ -12,7 +12,7 @@ func GetPatentsPageItemHandler(thisSpider *spider_interface.Spider) (string, col
 			url := element1.Attr("href")
 			isV := thisSpider.GetPageValue(url, "isVisit")
 			if isV == nil || !isV.(bool) {
-				nextUrl := "http://patft.uspto.gov" + url
+				nextUrl := thisSpider.Config.WebSite + url
 				thisSpider.SetPageValue(url, "isVisit", true)
 				element1.Request.Visit(nextUrl)
 			}

@@ -11,7 +11,8 @@ import (
 func Test_full_func(test *testing.T) {
 	//startPage := "http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&TERM1=Soap+box&FIELD1=&co1=OR&TERM2=Soap+dish&FIELD2=&d=PTXT"
 	//startPage := "http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&TERM1=Trivets&FIELD1=&co1=AND&TERM2=Insulation&FIELD2=&d=PTXT"
-	startPage := "http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&TERM1=Trivets&FIELD1=&co1=AND&TERM2=Insulation&FIELD2=&d=PG01"
+	startPage := "http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&TERM1=Soap+box&FIELD1=&co1=OR&TERM2=Soap+dish&FIELD2=&d=PG01"
+	//startPage := "http://appft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&TERM1=Trivets&FIELD1=&co1=AND&TERM2=Insulation&FIELD2=&d=PG01"
 	fmt.Println("start --> ", startPage)
 	mainspider := spider_interface.NewSpider()
 	mainspider.Config.MaxDeep = 10000

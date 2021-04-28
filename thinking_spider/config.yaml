@@ -1,4 +1,4 @@
-apply: "com"
+apply: "patents"
 
 com:
   model: "debug"
@@ -51,6 +51,13 @@ com:
     sold_by_que: "div[class='a-fixed-left-grid a-spacing-small']"
     sold_id_que: "input[type='hidden'][id='ftSelectMerchant']"
     prod_desc_que: "div#productDescription[class='a-section a-spacing-small'] p"
+
+patents:
+  model: "info"
+  web_site: "http://patft.uspto.gov"
+  max_deep: 2
+  delay_spider: 2
+  key_words: "http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&TERM1=Soap+box&FIELD1=&co1=OR&TERM2=Soap+dish&FIELD2=&d=PTXT"
 
 database:
   conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"
