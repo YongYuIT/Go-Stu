@@ -2,7 +2,7 @@ with clean_data_today as (
     select *
     from (
              select *, row_number() over (partition by asin order by created_at desc) as del_index
-             from new_release_prod_records) t1
+             from `new_release_prod_records-bak20210430001`) t1
     where del_index = 1
 ),
      clean_data_yestaday as (

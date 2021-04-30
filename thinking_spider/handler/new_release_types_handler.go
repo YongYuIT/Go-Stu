@@ -11,34 +11,49 @@ import (
 )
 
 func GetNewReleaseTypesHandler(newReleaseTypesSpider *spider_interface.Spider, someTypeSpider *spider_interface.Spider) colly.HTMLCallback {
-	return func(element *colly.HTMLElement) {
-		lastPage := utils.GetUrlValueByKey(element.Request.URL.String(), "last_page")
-		fmt.Println("start anys page-----------------------start")
-		currentSelect := ""
-		element.ForEach("li span[class='zg_selected']", func(i int, element *colly.HTMLElement) {
-			currentSelect = strings.TrimSpace(element.Text)
-			fmt.Println("current select-->", currentSelect)
-		})
-		element.ForEach("li[class!='zg_browseUp'] a[href]", func(i int, element *colly.HTMLElement) {
-			tagName := element.Text
+	return func(element1 *colly.HTMLElement) {
+
+		lastPage := utils.GetUrlValueByKey(element1.Request.URL.String(), "last_page")
+
+		currentSelect := strings.TrimSpace(element1.ChildText("li span[class='zg_selected']"))
+		currentLevel := utils.GetLevelOfUrl(element1.Request.URL.String())
+		hasNext := false
+		element1.ForEach("li[class!='zg_browseUp'] a[href]", func(i int, element *colly.HTMLElement) {
 			tagUrl := element.Attr("href")
-			fmt.Println(lastPage, "-->", currentSelect, ": get link-->", tagName, "-->", tagUrl)
-			addAttr := url.QueryEscape(lastPage + "##" + currentSelect)
-			nextPage := element.Attr("href") + "?last_page=" + addAttr
-			if strings.Count(lastPage, "##") >= 2 {
-				//内容页
-				someTypeSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
-					someTypeSpider.Ctrl.SetCookies(tagUrl, newReleaseTypesSpider.Ctrl.Cookies(element.Request.URL.String()))
-					return tagUrl
-				})
-				someTypeSpider.Config.KeyWords = lastPage + "##" + currentSelect + "##" + tagName
-				someTypeSpider.StartSpider()
-			} else {
-				cookie := newReleaseTypesSpider.Ctrl.Cookies(element.Request.URL.String())
-				newReleaseTypesSpider.Ctrl.SetCookies(nextPage, cookie)
-				element.Request.Visit(nextPage)
+			tagLevel := utils.GetLevelOfUrl(tagUrl)
+			if tagLevel > currentLevel {
+				hasNext = true
 			}
 		})
-		fmt.Println("start anys page-----------------------end")
+		fmt.Println("current-->", currentSelect, "-->hasNext-->", hasNext)
+		if hasNext {
+			element1.ForEach("li[class!='zg_browseUp'] a[href]", func(i int, element *colly.HTMLElement) {
+				tagUrl := element.Attr("href")
+				tagName := element.Text
+				tagLevel := utils.GetLevelOfUrl(tagUrl)
+				if tagLevel >= currentLevel {
+					addAttr := url.QueryEscape(lastPage + "##" + currentSelect)
+					orgNextUrl := element.Attr("href")
+					isVisit := newReleaseTypesSpider.GetPageValue(orgNextUrl, "isVisit")
+					if isVisit == nil || !isVisit.(bool) {
+						nextPage := orgNextUrl + "?last_page=" + addAttr
+						cookie := newReleaseTypesSpider.Ctrl.Cookies(element.Request.URL.String())
+						newReleaseTypesSpider.Ctrl.SetCookies(nextPage, cookie)
+						element.Request.Visit(nextPage)
+						fmt.Println("get next page-->", tagName)
+						newReleaseTypesSpider.SetPageValue(orgNextUrl, "isVisit", true)
+					}
+				}
+			})
+		} else {
+			fmt.Println("read the page")
+			someTypeSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
+				someTypeSpider.Ctrl.SetCookies(element1.Request.URL.String(), newReleaseTypesSpider.Ctrl.Cookies(element1.Request.URL.String()))
+				return element1.Request.URL.String()
+			})
+			someTypeSpider.Config.KeyWords = lastPage + "##" + currentSelect
+			//someTypeSpider.StartSpider()
+		}
+
 	}
 }

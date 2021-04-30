@@ -11,9 +11,9 @@ type PationsRecord struct {
 	Status    string
 	PID       string
 	Index     int
-	KeyWords  string
-	DetailUrl string
-	PDFUrl    string
+	KeyWords  string `sql:"type:text;"`
+	DetailUrl string `sql:"type:text;"`
+	PDFUrl    string `sql:"type:text;"`
 	PDFPath   string
 	IMGPath   string
 }

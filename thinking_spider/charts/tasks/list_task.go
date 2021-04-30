@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	startHtml = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Title</title>\n</head>\n<body>\n\n<table border=\"1\">\n"
+	startHtml = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Title</title>\n</head>\n<script>\n    function fun() {\n        //获取所有的 checkbox 属性的 input标签\n        obj = document.getElementsByName(\"asin_select\");\n        check_val = [];\n        for (k in obj) {\n            //判断复选框是否被选中\n            if (obj[k].checked)\n                //获取被选中的复选框的值\n                check_val.push(\"'\" + obj[k].value + \"'\");\n        }\n        alert(check_val);\n    }\n</script>\n<body>\n<input type='button' value='提交' onclick=\"fun()\"/>\n<table border=\"1\">"
 	endHtml   = "</table>\n</body>\n</html>"
 )
 
@@ -116,6 +116,7 @@ func GetListContent(file *os.File, infos []map[string]interface{}) {
 	for i := range keys {
 		tabTitle += fmt.Sprintf("<td>%s</td>", keys[i])
 	}
+	tabTitle += "<td>select</td>"
 
 	tabTitle += "</tr>"
 	fmt.Fprintf(file, tabTitle)
@@ -141,6 +142,7 @@ func GetListContent(file *os.File, infos []map[string]interface{}) {
 				}
 			}
 		}
+		itemStrFormat += fmt.Sprintf("<td><input type=\"checkbox\" name=\"asin_select\" value=\"%s\"/></td>", info[keys[0]])
 		itemStrFormat += "</tr>"
 		file.Write([]byte(itemStrFormat))
 	}

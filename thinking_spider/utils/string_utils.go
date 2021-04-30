@@ -107,3 +107,27 @@ func GetStarts(str string) float32 {
 	}
 	return float32(value)
 }
+
+func GetLevelOfUrl(url string) int {
+	nav_tag := "_nav_"
+	k_level := url[strings.Index(url, nav_tag)+len(nav_tag):]
+	keyInfo := strings.Split(k_level, "_")
+	if len(keyInfo) > 1 {
+		index := keyInfo[1]
+		u_index, err := strconv.Atoi(index)
+		if err != nil {
+			return -1
+		}
+		return u_index
+	}
+	return -1
+}
+
+func StrInList(str string, list []string) bool {
+	for i := range list {
+		if strings.EqualFold(list[i], str) {
+			return true
+		}
+	}
+	return false
+}
