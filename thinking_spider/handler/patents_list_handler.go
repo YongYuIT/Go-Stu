@@ -50,6 +50,7 @@ func GetPatentsListItemHandler(thisSpider *spider_interface.Spider) (string, col
 							spider.StartSpider()
 						}
 					})
+					model.SavePationsRecord(record)
 					fmt.Println("------------------end")
 				}
 			})
