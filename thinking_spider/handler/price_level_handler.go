@@ -14,8 +14,12 @@ const thkPTag = "thk_p_tag"
 
 func GetPriceLevelHandler(priceLevelSpider *spider_interface.Spider, pageSpider *spider_interface.Spider) colly.HTMLCallback {
 	return func(element *colly.HTMLElement) {
+		hasPriceLevel := false
+		element.ForEach(priceLevelSpider.Config.PriceLevelConfig.PriceListQue, func(i int, element1 *colly.HTMLElement) {
+			hasPriceLevel = true
+		})
 		currentthkPTag := utils.GetUrlValueByKey(element.Request.URL.String(), thkPTag)
-		if strings.EqualFold(currentthkPTag, "") {
+		if strings.EqualFold(currentthkPTag, "") && hasPriceLevel {
 			//起始页
 			priceUrl := element.Attr(priceLevelSpider.Config.PageAttr)
 			priceStr := element.ChildText(priceLevelSpider.Config.PriceLevelConfig.PriceStrQue)
