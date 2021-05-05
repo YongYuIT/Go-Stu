@@ -1,17 +1,40 @@
-package handler
+package new_release
 
 import (
 	"fmt"
 	"github.com/gocolly/colly"
 	"net/url"
 	"strings"
+	"testing"
 	"thinking_spider/config"
 	"thinking_spider/spider_interface"
 	"thinking_spider/utils"
 )
 
-func GetNewReleaseTypesHandler(newReleaseTypesSpider *spider_interface.Spider, someTypeSpider *spider_interface.Spider) colly.HTMLCallback {
-	return func(element *colly.HTMLElement) {
+func Test_get_tree(test *testing.T) {
+	homeAndKitchen := make(map[string]interface{})
+	config.InitHomeAndKitchen(homeAndKitchen)
+	printMap(homeAndKitchen, "")
+}
+
+func printMap(mapData map[string]interface{}, startSpace string) {
+	for key := range mapData {
+		value := mapData[key].(map[string]interface{})
+		fmt.Println(startSpace+"-->", key)
+		if len(value) > 0 {
+			printMap(value, "    "+startSpace)
+		}
+	}
+}
+
+func Test_Tree(test *testing.T) {
+
+	homeAndKitchen := make(map[string]interface{})
+	config.InitHomeAndKitchen(homeAndKitchen)
+
+	newReleaseTypesSpider := spider_interface.NewSpider()
+	//newReleaseTypesSpider.Config.MaxDeep = 3 这里不要
+	newReleaseTypesSpider.Ctrl.OnHTML("ul#zg_browseRoot", func(element *colly.HTMLElement) {
 
 		lastPage := utils.GetUrlValueByKey(element.Request.URL.String(), "last_page")
 
@@ -24,14 +47,6 @@ func GetNewReleaseTypesHandler(newReleaseTypesSpider *spider_interface.Spider, s
 		if subTree == nil || len(subTree) < 1 {
 			fmt.Println("visit road-->", lastPage)
 			fmt.Println("get page data start with-->", currentSelect, "-->", element.Request.URL.String())
-
-			someTypeSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
-				someTypeSpider.Ctrl.SetCookies(element.Request.URL.String(), newReleaseTypesSpider.Ctrl.Cookies(element.Request.URL.String()))
-				return element.Request.URL.String()
-			})
-			someTypeSpider.Config.KeyWords = lastPage + "##" + currentSelect
-			someTypeSpider.StartSpider()
-
 		} else {
 			element.ForEach("li[class!='zg_browseUp'] a[href]", func(i int, element *colly.HTMLElement) {
 				tagName := strings.TrimSpace(element.Text)
@@ -45,5 +60,13 @@ func GetNewReleaseTypesHandler(newReleaseTypesSpider *spider_interface.Spider, s
 				}
 			})
 		}
-	}
+
+	})
+	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
+		startUrl := "https://www.amazon.com/gp/new-releases/kitchen/"
+		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
+		newReleaseTypesSpider.SetPageValue(startUrl, "tree", homeAndKitchen["Kitchen & Dining"])
+		return startUrl
+	})
+	newReleaseTypesSpider.StartSpider()
 }

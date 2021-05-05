@@ -10,6 +10,8 @@ type NewReleaseProdRecord struct {
 	Type2 string
 	Type3 string
 	Type4 string
+	Type5 string
+	Type6 string
 	Price string
 	Index int
 }

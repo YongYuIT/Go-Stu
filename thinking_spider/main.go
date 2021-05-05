@@ -63,10 +63,14 @@ func doPatentsTask() {
 }
 
 func doReleaseTask() {
+
+	homeAndKitchen := make(map[string]interface{})
+	config.InitHomeAndKitchen(homeAndKitchen)
+
 	newReleaseTypesSpider := spider.GetNewReleaseTypeSpider()
-	newReleaseTypesSpider.Config.MaxDeep = 3
 	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startUrl := newReleaseTypesSpider.Config.NewRelease
+		newReleaseTypesSpider.SetPageValue(startUrl, "tree", homeAndKitchen["Kitchen & Dining"])
 		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
 		return startUrl
 	})

@@ -25,6 +25,12 @@ func GetNewReleaseItemHandler(spider *spider_interface.Spider) colly.HTMLCallbac
 			if len(types) > 4 {
 				release.Type4 = types[4]
 			}
+			if len(types) > 5 {
+				release.Type5 = types[5]
+			}
+			if len(types) > 6 {
+				release.Type6 = types[6]
+			}
 			indexStr := listEle.ChildText("span[class='zg-badge-text']")[1:]
 			index, err := strconv.Atoi(indexStr)
 			if err == nil {

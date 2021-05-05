@@ -14,29 +14,29 @@ const thkPTag = "thk_p_tag"
 
 func GetPriceLevelHandler(priceLevelSpider *spider_interface.Spider, pageSpider *spider_interface.Spider) colly.HTMLCallback {
 	return func(element *colly.HTMLElement) {
-		hasPriceLevel := false
-		element.ForEach(priceLevelSpider.Config.PriceLevelConfig.PriceListQue, func(i int, element1 *colly.HTMLElement) {
-			hasPriceLevel = true
-		})
 		currentthkPTag := utils.GetUrlValueByKey(element.Request.URL.String(), thkPTag)
-		if strings.EqualFold(currentthkPTag, "") && hasPriceLevel {
+		hasPrice := false
+		if strings.EqualFold(currentthkPTag, "") {
 			//起始页
-			priceUrl := element.Attr(priceLevelSpider.Config.PageAttr)
-			priceStr := element.ChildText(priceLevelSpider.Config.PriceLevelConfig.PriceStrQue)
-			fmt.Println(priceUrl, "-->", priceStr)
+			element.ForEach(priceLevelSpider.Config.PriceLevelConfig.PriceListQue, func(i int, element1 *colly.HTMLElement) {
+				hasPrice = true
+				priceUrl := element1.Attr(priceLevelSpider.Config.PageAttr)
+				priceStr := element1.ChildText(priceLevelSpider.Config.PriceLevelConfig.PriceStrQue)
+				fmt.Println(priceUrl, "-->", priceStr)
 
-			if !(strings.EqualFold(priceLevelSpider.Config.PricesLevels, "")) {
-				if !strings.Contains(priceLevelSpider.Config.PricesLevels, priceStr) {
-					return
+				if !(strings.EqualFold(priceLevelSpider.Config.PricesLevels, "")) {
+					if !strings.Contains(priceLevelSpider.Config.PricesLevels, priceStr) {
+						return
+					}
 				}
-			}
+				cookie := priceLevelSpider.Ctrl.Cookies(element1.Request.URL.String())
+				priceUrl = priceLevelSpider.Config.WebSite + priceUrl + "&" + thkPTag + "=" + url.QueryEscape(priceStr)
+				priceLevelSpider.Ctrl.SetCookies(priceUrl, cookie)
+				element1.Request.Visit(priceUrl)
+			})
+		}
 
-			cookie := priceLevelSpider.Ctrl.Cookies(element.Request.URL.String())
-			priceUrl = priceLevelSpider.Config.WebSite + priceUrl + "&" + thkPTag + "=" + url.QueryEscape(priceStr)
-			priceLevelSpider.Ctrl.SetCookies(priceUrl, cookie)
-			element.Request.Visit(priceUrl)
-
-		} else {
+		if !hasPrice || !strings.EqualFold(currentthkPTag, "") {
 			//内容页
 			pageSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 				startUrl := element.Request.URL.String()
