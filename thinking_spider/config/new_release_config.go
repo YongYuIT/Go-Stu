@@ -1,5 +1,7 @@
 package config
 
+import "strings"
+
 func InitHomeAndKitchen(HomeAndKitchen map[string]interface{}) {
 	HomeAndKitchen["Bath"] = make(map[string]interface{})
 	HomeAndKitchen["Bedding"] = make(map[string]interface{})
@@ -460,4 +462,18 @@ func initBakingToolsAndAccessories(BakingToolsAndAccessories map[string]interfac
 	BakingToolsAndAccessories["Parchment"] = make(map[string]interface{})
 	BakingToolsAndAccessories["Rolling Pins"] = make(map[string]interface{})
 	BakingToolsAndAccessories["Sifters"] = make(map[string]interface{})
+}
+
+func GetMapInMap(title string, bigMap map[string]interface{}) map[string]interface{} {
+	for key := range bigMap {
+		if strings.EqualFold(key, title) {
+			return bigMap[key].(map[string]interface{})
+		} else {
+			result := GetMapInMap(title, bigMap[key].(map[string]interface{}))
+			if result != nil {
+				return result
+			}
+		}
+	}
+	return nil
 }

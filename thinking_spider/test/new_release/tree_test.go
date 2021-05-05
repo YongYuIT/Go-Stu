@@ -70,3 +70,11 @@ func Test_Tree(test *testing.T) {
 	})
 	newReleaseTypesSpider.StartSpider()
 }
+
+func Test_get_Tree(test *testing.T) {
+
+	homeAndKitchen := make(map[string]interface{})
+	config.InitHomeAndKitchen(homeAndKitchen)
+	tagMap := config.GetMapInMap("Kitchen & Dining", homeAndKitchen)
+	fmt.Println(tagMap)
+}
