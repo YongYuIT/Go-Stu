@@ -21,7 +21,7 @@ func Test_bug_fix(test *testing.T) {
 	newReleaseTypesSpider.Config.MaxDeep = 3
 	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startUrl := newReleaseTypesSpider.Config.NewRelease
-		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
+		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.GetCookie())
 		return startUrl
 	})
 	newReleaseTypesSpider.StartSpider()

@@ -74,7 +74,7 @@ func doReleaseTask() {
 	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startUrl := newReleaseTypesSpider.Config.NewRelease
 		newReleaseTypesSpider.SetPageValue(startUrl, "tree", config.GetMapInMap(spiderConfig.KeyWords, homeAndKitchen))
-		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
+		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.GetCookie())
 		return startUrl
 	})
 	newReleaseTypesSpider.StartSpider()
@@ -92,7 +92,7 @@ func doDetailTask() {
 		detailSpider.Config.MaxDeep = 1
 		detailSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 			startPage := config.CurrentDefaultConfig.WebSite + asinUrl.DetialUrl
-			detailSpider.Ctrl.SetCookies(startPage, spiderConfig.Cookies)
+			detailSpider.Ctrl.SetCookies(startPage, spiderConfig.GetCookie())
 			return startPage
 		})
 		detailSpider.StartSpider()
@@ -109,7 +109,7 @@ func doKeyWorkTask() {
 	priceLevelDataSpider.Config.MaxDeep = 2
 	priceLevelDataSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startPage := utils.GetUrlWithKVs(spiderConfig.WebSite, []string{"k=" + utils.GetKeyWords(spiderConfig.KeyWords), "ref=nb_sb_noss"})
-		priceLevelDataSpider.Ctrl.SetCookies(startPage, spiderConfig.Cookies)
+		priceLevelDataSpider.Ctrl.SetCookies(startPage, spiderConfig.GetCookie())
 		return startPage
 	})
 	priceLevelDataSpider.StartSpider()

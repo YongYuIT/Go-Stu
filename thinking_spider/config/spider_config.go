@@ -1,6 +1,9 @@
 package config
 
-import "net/http"
+import (
+	"math/rand"
+	"net/http"
+)
 
 type SpiderConfig struct {
 	Model                  string            `config:"model"`
@@ -24,8 +27,12 @@ type SpiderConfig struct {
 	RobortQue              string            `config:"robort_que"`
 	ItemsConfig            *ItemsConfig      `config:"items"`
 	PriceLevelConfig       *PriceLevelConfig `config:"price_level"`
-	Cookies                []*http.Cookie    `cookies`
+	Cookies                [][]*http.Cookie  `cookies`
 	DetailsConfig          *DetailsConfig    `config:"details"`
+}
+
+func (this *SpiderConfig) GetCookie() []*http.Cookie {
+	return this.Cookies[rand.Intn(len(this.Cookies))]
 }
 
 type ItemsConfig struct {

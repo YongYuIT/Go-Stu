@@ -38,7 +38,7 @@ func init() {
 
 	p_cookies := applyConfig["cookies"]
 	if p_cookies != nil {
-		cookies := p_cookies.(map[string]interface{})
+		cookies := p_cookies.([]interface{})
 		CurrentDefaultConfig.Cookies = autoSetCookies(cookies)
 	}
 
@@ -71,21 +71,28 @@ func init() {
 	}
 }
 
-func autoSetCookies(cookiesConfig map[string]interface{}) []*http.Cookie {
-	cookies := []*http.Cookie{}
-	sidCookieConfig := cookiesConfig["session_id"].(map[string]interface{})
-	sidCookie := &http.Cookie{}
-	autoSetCookie(sidCookie, sidCookieConfig)
-	cookies = append(cookies, sidCookie)
+func autoSetCookies(cookiesConfig []interface{} /*map[string]interface{}*/) [][]*http.Cookie {
 
-	umainCookieConfig := cookiesConfig["ubid_main"].(map[string]interface{})
-	umainCookie := &http.Cookie{}
-	autoSetCookie(umainCookie, umainCookieConfig)
-	cookies = append(cookies, umainCookie)
+	cookies := [][]*http.Cookie{}
+	for i := range cookiesConfig {
+		cookieConfig := cookiesConfig[i].(map[interface{}]interface{})["cookie"].(map[interface{}]interface{})
+		cookie := []*http.Cookie{}
+		sidCookieConfig := cookieConfig["session_id"].(map[interface{}]interface{})
+		sidCookie := &http.Cookie{}
+		autoSetCookie(sidCookie, sidCookieConfig)
+		cookie = append(cookie, sidCookie)
+
+		umainCookieConfig := cookieConfig["ubid_main"].(map[interface{}]interface{})
+		umainCookie := &http.Cookie{}
+		autoSetCookie(umainCookie, umainCookieConfig)
+		cookie = append(cookie, umainCookie)
+		cookies = append(cookies, cookie)
+	}
+
 	return cookies
 }
 
-func autoSetCookie(cookie *http.Cookie, cookieConfig map[string]interface{}) {
+func autoSetCookie(cookie *http.Cookie, cookieConfig map[interface{}]interface{}) {
 	val := reflect.ValueOf(cookie)
 	val = val.Elem()
 	for i := 0; i < val.NumField(); i++ {

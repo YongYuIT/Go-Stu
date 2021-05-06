@@ -64,7 +64,7 @@ func Test_Tree(test *testing.T) {
 	})
 	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startUrl := "https://www.amazon.com/gp/new-releases/kitchen/"
-		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
+		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.GetCookie())
 		newReleaseTypesSpider.SetPageValue(startUrl, "tree", homeAndKitchen["Kitchen & Dining"])
 		return startUrl
 	})
