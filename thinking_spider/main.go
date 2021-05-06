@@ -74,7 +74,9 @@ func doReleaseTask() {
 	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startUrl := newReleaseTypesSpider.Config.NewRelease
 		newReleaseTypesSpider.SetPageValue(startUrl, "tree", config.GetMapInMap(spiderConfig.KeyWords, homeAndKitchen))
-		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.GetCookie())
+		cookies := spiderConfig.GetCookie()
+		fmt.Println("set cookies-->", cookies[0].Name, "-->", cookies[0].Value)
+		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, cookies)
 		return startUrl
 	})
 	newReleaseTypesSpider.StartSpider()
@@ -92,7 +94,9 @@ func doDetailTask() {
 		detailSpider.Config.MaxDeep = 1
 		detailSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 			startPage := config.CurrentDefaultConfig.WebSite + asinUrl.DetialUrl
-			detailSpider.Ctrl.SetCookies(startPage, spiderConfig.GetCookie())
+			cookies := spiderConfig.GetCookie()
+			fmt.Println("set cookies-->", cookies[0].Name, "-->", cookies[0].Value)
+			detailSpider.Ctrl.SetCookies(startPage, cookies)
 			return startPage
 		})
 		detailSpider.StartSpider()
@@ -109,7 +113,9 @@ func doKeyWorkTask() {
 	priceLevelDataSpider.Config.MaxDeep = 2
 	priceLevelDataSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startPage := utils.GetUrlWithKVs(spiderConfig.WebSite, []string{"k=" + utils.GetKeyWords(spiderConfig.KeyWords), "ref=nb_sb_noss"})
-		priceLevelDataSpider.Ctrl.SetCookies(startPage, spiderConfig.GetCookie())
+		cookies := spiderConfig.GetCookie()
+		fmt.Println("set cookies-->", cookies[0].Name, "-->", cookies[0].Value)
+		priceLevelDataSpider.Ctrl.SetCookies(startPage, cookies)
 		return startPage
 	})
 	priceLevelDataSpider.StartSpider()
