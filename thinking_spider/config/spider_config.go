@@ -4,6 +4,7 @@ import "net/http"
 
 type SpiderConfig struct {
 	Model                  string            `config:"model"`
+	TaskIndex              int               `config:"task_index"`
 	WebSite                string            `config:"web_site"`
 	NewRelease             string            `config:"new_release"`
 	MaxDeep                int               `config:"max_deep"`

@@ -12,6 +12,7 @@ func GetNewReleaseItemHandler(spider *spider_interface.Spider) colly.HTMLCallbac
 	return func(element *colly.HTMLElement) {
 		element.ForEach("li[class='zg-item-immersion']", func(i int, listEle *colly.HTMLElement) {
 			release := model.NewNewReleaseProdRecord()
+			release.TaskIndex = spider.Config.TaskIndex
 			types := strings.Split(spider.Config.KeyWords, "##")
 			if len(types) > 1 {
 				release.Type1 = types[1]

@@ -6,14 +6,15 @@ import "thinking_spider/database"
 type NewReleaseProdRecord struct {
 	gorm.Model
 	BasicProdInfo
-	Type1 string
-	Type2 string
-	Type3 string
-	Type4 string
-	Type5 string
-	Type6 string
-	Price string
-	Index int
+	Type1     string
+	Type2     string
+	Type3     string
+	Type4     string
+	Type5     string
+	Type6     string
+	Price     string
+	Index     int
+	TaskIndex int
 }
 
 func NewNewReleaseProdRecord() *NewReleaseProdRecord {

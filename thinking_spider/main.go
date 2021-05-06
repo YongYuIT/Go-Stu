@@ -10,6 +10,7 @@ import (
 	"thinking_spider/model"
 	"thinking_spider/spider"
 	"thinking_spider/utils"
+	"time"
 )
 
 var (
@@ -64,13 +65,15 @@ func doPatentsTask() {
 
 func doReleaseTask() {
 
+	config.CurrentDefaultConfig.TaskIndex = (int)(time.Now().Unix())
+
 	homeAndKitchen := make(map[string]interface{})
 	config.InitHomeAndKitchen(homeAndKitchen)
 
 	newReleaseTypesSpider := spider.GetNewReleaseTypeSpider()
 	newReleaseTypesSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 		startUrl := newReleaseTypesSpider.Config.NewRelease
-		newReleaseTypesSpider.SetPageValue(startUrl, "tree", homeAndKitchen["Kitchen & Dining"])
+		newReleaseTypesSpider.SetPageValue(startUrl, "tree", config.GetMapInMap(spiderConfig.KeyWords, homeAndKitchen))
 		newReleaseTypesSpider.Ctrl.SetCookies(startUrl, spiderConfig.Cookies)
 		return startUrl
 	})
