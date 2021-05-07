@@ -92,10 +92,16 @@ func NewSpider() *Spider {
 
 	spider.Ctrl.OnHTML(spider.Config.RobortQue, func(element *colly.HTMLElement) {
 		if strings.Contains(element.Text, "robot") {
+			cookie := spider.Ctrl.Cookies(element.Request.URL.String())
 			fmt.Println("ant robot when req-->",
 				element.Request.URL.String(),
 				"\n time:", time.Now().Format(time.RFC850),
 				"\n keyword: ", spider.Config.KeyWords)
+			if len(cookie) > 0 {
+				fmt.Println("cookies: ", cookie[0].Name, "-->", cookie[0].Value)
+			} else {
+				fmt.Println("no cookies")
+			}
 		}
 	})
 

@@ -26,7 +26,8 @@ func GetNewReleaseTypesHandler(newReleaseTypesSpider *spider_interface.Spider, s
 			fmt.Println("get page data start with-->", currentSelect, "-->", element.Request.URL.String())
 
 			someTypeSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
-				someTypeSpider.Ctrl.SetCookies(element.Request.URL.String(), newReleaseTypesSpider.Ctrl.Cookies(element.Request.URL.String()))
+				//someTypeSpider.Ctrl.SetCookies(element.Request.URL.String(), newReleaseTypesSpider.Ctrl.Cookies(element.Request.URL.String()))
+				someTypeSpider.Ctrl.SetCookies(element.Request.URL.String(), spiderConfig.GetCookie())
 				return element.Request.URL.String()
 			})
 			someTypeSpider.Config.KeyWords = lastPage + "##" + currentSelect

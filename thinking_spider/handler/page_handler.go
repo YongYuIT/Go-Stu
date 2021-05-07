@@ -16,11 +16,12 @@ func GetPageHandler(pageSpider *spider_interface.Spider) colly.HTMLCallback {
 			nextPageUrl := pageListItem.Attr(config.PageAttr)
 			nextTag := utils.GetNextPageStr(currentPageInfo)
 			if strings.Contains(nextPageUrl, nextTag) {
-				cookie := pageSpider.Ctrl.Cookies(element.Request.URL.String())
+				//cookie := pageSpider.Ctrl.Cookies(element.Request.URL.String())
 				if !strings.Contains(nextPageUrl, "http") {
 					nextPageUrl = config.WebSite + nextPageUrl
 				}
-				pageSpider.Ctrl.SetCookies(nextPageUrl, cookie)
+				//pageSpider.Ctrl.SetCookies(nextPageUrl, cookie)
+				pageSpider.Ctrl.SetCookies(nextPageUrl, config.GetCookie())
 				pageListItem.Request.Visit(nextPageUrl)
 			}
 		})

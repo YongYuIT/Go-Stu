@@ -2,7 +2,7 @@ package model
 
 type BasicProdInfo struct {
 	Asin       string
-	Titles     string
+	Titles     string `sql:"type:text;"`
 	Ratings    int
 	Starts     float32 `sql:"type:decimal(10,2);"`
 	DeliverTo  string
