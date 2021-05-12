@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"github.com/gocolly/colly"
+	"net/url"
 	"strconv"
 	"strings"
 	"thinking_spider/model"
@@ -38,6 +39,8 @@ func GetPatentsPDFHandler(thisSpider *spider_interface.Spider) (string, colly.HT
 				record.IMGPath = simg
 			}
 		}
+		//bug need to fix
+		record.DetailUrl = url.PathEscape(record.DetailUrl)
 		model.SavePationsRecord(record)
 	}
 	return "embed[type='application/pdf']", callback

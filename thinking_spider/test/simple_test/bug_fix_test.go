@@ -7,26 +7,15 @@ import (
 	"net/http"
 	"os"
 	"testing"
-	"thinking_spider/config"
-	_ "thinking_spider/config"
 )
 
 func Test_hello_fix(test *testing.T) {
 	c := colly.NewCollector(
-		colly.MaxDepth(1),
+		colly.MaxDepth(10),
 		func(collector *colly.Collector) {
 			extensions.RandomUserAgent(collector)
 			extensions.Referer(collector)
 		})
-
-	c.OnHTML(config.CurrentDefaultConfig.ProductItemsHandlerQue, func(element *colly.HTMLElement) {
-		element.ForEach(config.CurrentDefaultConfig.ItemsConfig.ProductItemQue, func(i int, eItemDiv *colly.HTMLElement) {
-			asin := eItemDiv.Attr(config.CurrentDefaultConfig.ItemsConfig.Item.ItemAsinAttr)
-			sales := eItemDiv.ChildText(config.CurrentDefaultConfig.ItemsConfig.Item.ItemRangeQue)
-			price := eItemDiv.ChildText(config.CurrentDefaultConfig.ItemsConfig.Item.ItemPriceQue)
-			fmt.Println("asin-->", asin, "-->", sales, "-->", price)
-		})
-	})
 
 	c.OnRequest(func(r *colly.Request) {
 		fmt.Println("Visiting", r.URL)
@@ -46,7 +35,7 @@ func Test_hello_fix(test *testing.T) {
 
 	cookie1 := &http.Cookie{}
 	cookie1.Name = "session-id"
-	cookie1.Value = "147-6489143-1689104"
+	cookie1.Value = "143-6303151-7535421"
 	cookie1.Domain = ".amazon.com"
 	cookie1.Path = "/"
 
@@ -64,7 +53,7 @@ func Test_hello_fix(test *testing.T) {
 
 	cookie4 := &http.Cookie{}
 	cookie4.Name = "ubid-main"
-	cookie4.Value = "132-6250557-3411723"
+	cookie4.Value = "134-4873337-3736159"
 	cookie4.Domain = ".amazon.com"
 	cookie4.Path = "/"
 
@@ -89,7 +78,7 @@ func Test_hello_fix(test *testing.T) {
 	cookies := []*http.Cookie{}
 	cookies = append(cookies, cookie1, cookie2, cookie3, cookie4, cookie5, cookie6, cookie7)
 
-	startUrl := "https://www.amazon.com/s?k=coat+hangers&rh=n%3A1055398%2Cp_36%3A1253523011&dc&qid=1617172612&rnid=386465011&ref=sr_nr_p_36_1&thk_p_tag=Under+%2425"
+	startUrl := "https://www.amazon.com/s?k=cheese+spreaders&ref=nb_sb_noss"
 	c.SetCookies(startUrl, cookies)
 
 	c.Visit(startUrl)

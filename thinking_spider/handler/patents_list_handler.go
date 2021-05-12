@@ -39,7 +39,6 @@ func GetPatentsListItemHandler(thisSpider *spider_interface.Spider) (string, col
 							fmt.Println("title-->", strings.TrimSpace(element.Text))
 							record.Title = strings.TrimSpace(element.Text)
 							detailUrl := thisSpider.Config.WebSite + element.ChildAttr("a", "href")
-							record.DetailUrl = detailUrl
 							fmt.Println("url-->", detailUrl)
 							spider := GetPatengsDetailSpider()
 							spider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
