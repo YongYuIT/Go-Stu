@@ -1,7 +1,7 @@
 apply: "com"
 
 com:
-  model: "info"
+  model: "debug"
   task_index: 0
   web_site: "https://www.amazon.com"
   new_release: "https://www.amazon.com/gp/new-releases/kitchen/"
@@ -14,34 +14,12 @@ com:
     - cookie:
         session_id:
           name: "session-id"
-          value: "135-5661648-0524921"
+          value: "144-7059104-3803242"
           domain: ".amazon.com"
           path:  "/"
         ubid_main:
           name: "ubid-main"
-          value: "130-6620617-9250641"
-          domain: ".amazon.com"
-          path:  "/"
-    - cookie:
-        session_id:
-          name: "session-id"
-          value: "135-5661648-0524922"
-          domain: ".amazon.com"
-          path:  "/"
-        ubid_main:
-          name: "ubid-main"
-          value: "130-6620617-9250642"
-          domain: ".amazon.com"
-          path:  "/"
-    - cookie:
-        session_id:
-          name: "session-id"
-          value: "135-5661648-0524923"
-          domain: ".amazon.com"
-          path:  "/"
-        ubid_main:
-          name: "ubid-main"
-          value: "130-6620617-9250643"
+          value: "133-7766908-2678768"
           domain: ".amazon.com"
           path:  "/"
   page_handler_que: "div[class='a-text-center']"
@@ -83,7 +61,7 @@ patents:
   #web_site: "http://appft.uspto.gov"
   max_deep: 2
   delay_spider: 2
-  key_words: "http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=18&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=0&f=S&l=50&co1=OR&d=PTXT&s1=%22folding+Reliable+Chair%22&s2=%22folding+Chair%22&Page=Next&OS=%22folding+Reliable+Chair%22+OR+%22folding+Chair%22&RS=%22folding+Reliable+Chair%22+OR+%22folding+Chair%22"
+  key_words: "https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=0&f=S&l=50&d=PTXT&RS=%22rotating+hook%22+OR+%22360%B0Rotating+Folding+Hook%22&Refine=Refine+Search&Query=%22rotating+hook%22+OR+%22360%B0Rotating+Folding+Hook%22+OR+%22Utility+Hook%22"
 database:
   conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"
   type: "mysql"

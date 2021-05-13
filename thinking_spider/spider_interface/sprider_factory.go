@@ -98,7 +98,9 @@ func NewSpider() *Spider {
 				"\n time:", time.Now().Format(time.RFC850),
 				"\n keyword: ", spider.Config.KeyWords)
 			if len(cookie) > 0 {
-				fmt.Println("cookies: ", cookie[0].Name, "-->", cookie[0].Value)
+				for i := range cookie {
+					fmt.Println("cookies: ", cookie[i].Name, "-->", cookie[i].Value)
+				}
 			} else {
 				fmt.Println("no cookies")
 			}

@@ -81,3 +81,16 @@ func GetSoldID(spider *spider_interface.Spider, record *model.ProdDetailRecord) 
 	}
 	return spider.Config.DetailsConfig.SoldIdQue, callback
 }
+
+func GetDataFirstAvailable(spider *spider_interface.Spider, record *model.ProdDetailRecord) (string, colly.HTMLCallback) {
+	callback := func(element *colly.HTMLElement) {
+		date := ""
+		element.ForEach("tr", func(i int, element *colly.HTMLElement) {
+			itemTitle := element.ChildText("th']")
+			strings.Contains(itemTitle, "Available")
+			date = element.ChildText("td")
+		})
+		record.DateFirstAvailable = date
+	}
+	return "table#productDetails_detailBullets_sections1", callback
+}
