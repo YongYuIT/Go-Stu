@@ -10,7 +10,9 @@ import (
 
 func doSaveRecord(spider *spider_interface.Spider, record *model.ProdDetailRecord, element *colly.HTMLElement) {
 	if strings.EqualFold(record.Asin, "") {
-		record.Asin = spider.GetPageValue(element.Request.URL.String(), "asin").(string)
+		if spider.GetPageValue(element.Request.URL.String(), "asin") != nil {
+			record.Asin = spider.GetPageValue(element.Request.URL.String(), "asin").(string)
+		}
 	}
 	model.SaveProdDetailRecord(record)
 }

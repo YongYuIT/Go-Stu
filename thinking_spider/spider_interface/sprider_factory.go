@@ -127,5 +127,8 @@ func (this *Spider) StartSpider() error {
 
 	this.Ctrl.MaxDepth = this.Config.MaxDeep
 
+	if strings.EqualFold(this.startUrl, "") {
+		return fmt.Errorf("startUrl cannot be empty")
+	}
 	return this.Ctrl.Visit(this.startUrl)
 }
