@@ -44,7 +44,7 @@ com:
           domain: ".amazon.com"
           path:  "/"
         csm_hit:
-          name: "lc-main"
+          name: "csm-hit"
           value: "tb:s-F1Z1QB54R92CYHW77JD0|1620960185179&t:1620960185585&adb:adblk_no"
           domain: "www.amazon.com"
           path:  "/"
@@ -88,7 +88,7 @@ patents:
   #web_site: "http://appft.uspto.gov"
   max_deep: 2
   delay_spider: 2
-  key_words: "https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=0&f=S&l=50&d=PTXT&RS=%22360-Degree+Rotating+Pen+Holder%22+OR+%22pen+pencil+holder%22&Refine=Refine+Search&Query=%22360-Degree+Rotating+Pen+Holder%22+OR+%22pen+pencil+holder%22+OR+%22Pencil+Holder+Desk%22+OR+%22pen+container%22"
+  key_words: "https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=0&f=S&l=50&d=PTXT&Query=%22Cabinet+Turntable%22+OR+%22Turntable+Storage+Container%22+OR+%22Lazy+Susan+Cabinet+Organizer%22+OR+%22lazy+susan+spice+rack+with+Dividers%22+OR+%22Lazy+Susan+Turntable+with+Dividers%22+OR+%22360+Rotating+storage+Container%22+OR+%22Divided+Lazy+Susan+Turntable%22+OR+%22Round+Rotating+Organization%22+"
 database:
   conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"
   type: "mysql"
