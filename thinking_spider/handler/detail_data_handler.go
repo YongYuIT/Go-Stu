@@ -90,7 +90,7 @@ func GetDataFirstAvailable(spider *spider_interface.Spider, record *model.ProdDe
 			strings.Contains(itemTitle, "Available")
 			date = strings.TrimSpace(element.ChildText("td"))
 		})
-		if len(date) < 40 {
+		if len(date) < 40 && strings.Index(date, ",") > -1 {
 			record.DateFirstAvailable = date
 		}
 	}
