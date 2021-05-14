@@ -96,6 +96,7 @@ func doDetailTask() {
 			startPage := config.CurrentDefaultConfig.WebSite + asinUrl.DetialUrl
 			cookies := spiderConfig.GetCookie()
 			fmt.Println("set cookies-->", cookies[0].Name, "-->", cookies[0].Value)
+			detailSpider.SetPageValue(startPage, "asin", asinUrl.Asin)
 			detailSpider.Ctrl.SetCookies(startPage, cookies)
 			return startPage
 		})
