@@ -62,7 +62,7 @@ func NewSpider() *Spider {
 	spider.Ctrl = colly.NewCollector(
 		colly.MaxDepth(spider.Config.MaxDeep),
 		func(collector *colly.Collector) {
-			extensions.RandomUserAgent(collector)
+			//extensions.RandomUserAgent(collector)
 			extensions.Referer(collector)
 		},
 	)
@@ -122,6 +122,7 @@ func (this *Spider) StartSpider() error {
 		fmt.Println("Visiting", r.URL)
 		//降低爬取频率
 		time.Sleep(time.Duration(this.Config.DelaySpider) * time.Second)
+		r.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36")
 	})
 
 	this.Ctrl.MaxDepth = this.Config.MaxDeep
