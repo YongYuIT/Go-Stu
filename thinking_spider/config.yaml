@@ -1,7 +1,7 @@
-apply: "patents"
+apply: "com"
 
 com:
-  model: "debug"
+  model: "info"
   time_out: 120
   task_index: 0
   web_site: "https://www.amazon.com"
@@ -15,12 +15,12 @@ com:
     - cookie:
         session_id:
           name: "session-id"
-          value: "144-7059104-3803242"
+          value: "134-6672367-4790336"
           domain: ".amazon.com"
           path:  "/"
         ubid_main:
           name: "ubid-main"
-          value: "133-7766908-2678768"
+          value: "131-8634864-4156411"
           domain: ".amazon.com"
           path:  "/"
         session_id_time:
@@ -35,7 +35,7 @@ com:
           path:  "/"
         session_token:
           name: "session-token"
-          value: "NsqHDpg+qsbxDpQywkh+DHJjyAteAtcugaQQsZjHjE7a33HeMK7I1oKpMI+MN5bUYXsSkfbMkzS5D0yXJMsgfIcO0OeVlQDQxpYRiUF8zCzYhj6/qVwrJ2jdAoqNcWdJdFjbmrlXfShcGOXJMIMOIAJocdsg1azdbvVvh0Ry/uSfR0DRMiTr2u4/kQKyA9U6"
+          value: "aawuUtwsZhyohVZjHPOr0ZuezfFgFRjcjXSRWQGEj4pmgI5YV9oYZetHuYRjFibBzV0amFdyVWQ1RlBCUpDvCrShLwOHoT58xO59C2nwSJ6I9N4PNr5JXloJ2V8cH1qdlg9x5GhwzLFBWuIH1vs1j6L6PLQNauTWq2fMWOw9fqSY7tp6bKoiYX+JvPO76zN5BYv/UvsP1hwF4B/4qOnLsYMOfB7ppeyJCPI/mJQyBDk1VX5b+ziAuUyUrbatuUjq"
           domain: ".amazon.com"
           path:  "/"
         lc_main:
@@ -45,7 +45,7 @@ com:
           path:  "/"
         csm_hit:
           name: "lc-main"
-          value: "tb:s-G6GZPZWZAQ4CXWS47YA9|1620958707574&t:1620958708154&adb:adblk_no"
+          value: "tb:s-F1Z1QB54R92CYHW77JD0|1620960185179&t:1620960185585&adb:adblk_no"
           domain: "www.amazon.com"
           path:  "/"
   page_handler_que: "div[class='a-text-center']"
