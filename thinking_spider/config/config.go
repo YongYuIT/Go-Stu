@@ -77,42 +77,15 @@ func autoSetCookies(cookiesConfig []interface{} /*map[string]interface{}*/) [][]
 	for i := range cookiesConfig {
 		cookieConfig := cookiesConfig[i].(map[interface{}]interface{})["cookie"].(map[interface{}]interface{})
 		cookie := []*http.Cookie{}
-		sidCookieConfig := cookieConfig["session_id"].(map[interface{}]interface{})
-		sidCookie := &http.Cookie{}
-		autoSetCookie(sidCookie, sidCookieConfig)
-		cookie = append(cookie, sidCookie)
+		for key := range cookieConfig {
+			keyStr := key.(string)
 
-		umainCookieConfig := cookieConfig["ubid_main"].(map[interface{}]interface{})
-		umainCookie := &http.Cookie{}
-		autoSetCookie(umainCookie, umainCookieConfig)
-		cookie = append(cookie, umainCookie)
-
-		sidTimeCookieConfig := cookieConfig["session_id_time"].(map[interface{}]interface{})
-		sidTimeCookie := &http.Cookie{}
-		autoSetCookie(sidTimeCookie, sidTimeCookieConfig)
-		cookie = append(cookie, sidTimeCookie)
-
-		i18nPrefsCookieConfig := cookieConfig["i18n_prefs"].(map[interface{}]interface{})
-		i18nPrefsCookie := &http.Cookie{}
-		autoSetCookie(i18nPrefsCookie, i18nPrefsCookieConfig)
-		cookie = append(cookie, i18nPrefsCookie)
-
-		sTokenCookieConfig := cookieConfig["session_token"].(map[interface{}]interface{})
-		sTokenCookie := &http.Cookie{}
-		autoSetCookie(sTokenCookie, sTokenCookieConfig)
-		cookie = append(cookie, sTokenCookie)
-
-		lcMainCookieConfig := cookieConfig["lc_main"].(map[interface{}]interface{})
-		lcMainCookie := &http.Cookie{}
-		autoSetCookie(lcMainCookie, lcMainCookieConfig)
-		cookie = append(cookie, lcMainCookie)
-
-		csmHitCookieConfig := cookieConfig["csm_hit"].(map[interface{}]interface{})
-		csmHitCookie := &http.Cookie{}
-		autoSetCookie(csmHitCookie, csmHitCookieConfig)
-		cookie = append(cookie, csmHitCookie)
+			someCookieConfig := cookieConfig[keyStr].(map[interface{}]interface{})
+			someCookie := &http.Cookie{}
+			autoSetCookie(someCookie, someCookieConfig)
+			cookie = append(cookie, someCookie)
+		}
 		cookies = append(cookies, cookie)
-
 	}
 
 	return cookies

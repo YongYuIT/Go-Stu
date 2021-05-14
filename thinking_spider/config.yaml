@@ -48,6 +48,11 @@ com:
           value: "tb:s-F1Z1QB54R92CYHW77JD0|1620960185179&t:1620960185585&adb:adblk_no"
           domain: "www.amazon.com"
           path:  "/"
+        skin:
+          name: "csm-hit"
+          value: "noskin"
+          domain: "www.amazon.com"
+          path:  "/"
   page_handler_que: "div[class='a-text-center']"
   product_items_handler_que: "div[class='s-main-slot s-result-list s-search-results sg-row']"
   pages_key: "ref"
