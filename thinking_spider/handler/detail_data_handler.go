@@ -88,7 +88,7 @@ func GetDataFirstAvailable(spider *spider_interface.Spider, record *model.ProdDe
 		element.ForEach("tr", func(i int, element *colly.HTMLElement) {
 			itemTitle := element.ChildText("th']")
 			strings.Contains(itemTitle, "Available")
-			date = element.ChildText("td")
+			date = strings.TrimSpace(element.ChildText("td"))
 		})
 		if len(date) < 40 {
 			record.DateFirstAvailable = date
