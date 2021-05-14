@@ -34,7 +34,7 @@ type AsinUrl struct {
 }
 
 func GetUrlByKeyWords(keyword string) *[]AsinUrl {
-	getUrlByAsin := fmt.Sprintf("select detial_url, asin from (select detial_url, asin, row_number() over (partition by asin order by created_at desc) as aindex from key_word_prod_records_source where key_word='%s') t where t.aindex = 1 and detial_url != ''", keyword)
+	getUrlByAsin := fmt.Sprintf("select detial_url, asin\nfrom (select detial_url, asin, row_number() over (partition by asin order by created_at desc) as aindex\n      from key_word_prod_records_source\n      where key_word = '%s'\n        and asin not in (select asin from prod_detail_records)) t\nwhere t.aindex = 1\n  and detial_url != ''", keyword)
 	var asinUrls []AsinUrl
 	database.CurrentDB.Raw(getUrlByAsin).Scan(&asinUrls)
 	return &asinUrls
