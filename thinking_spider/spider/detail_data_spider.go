@@ -1,7 +1,6 @@
 package spider
 
 import (
-	"github.com/gocolly/colly"
 	"thinking_spider/model"
 	"thinking_spider/spider_interface"
 )
@@ -16,8 +15,5 @@ func GetDetailDataSpider() *spider_interface.Spider {
 	detailSpider.Ctrl.OnHTML(handler.GetProdDesc(detailSpider, record))
 	detailSpider.Ctrl.OnHTML(handler.GetSoldID(detailSpider, record))
 	detailSpider.Ctrl.OnHTML(handler.GetDataFirstAvailable(detailSpider, record))
-	detailSpider.Ctrl.OnHTML("head", func(element *colly.HTMLElement) {
-		model.SaveProdDetailRecord(record)
-	})
 	return detailSpider
 }

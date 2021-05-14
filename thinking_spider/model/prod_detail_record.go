@@ -25,7 +25,13 @@ func SaveProdDetailRecord(record *ProdDetailRecord) {
 	if !database.CurrentDB.HasTable(record) {
 		database.CurrentDB.AutoMigrate(record)
 	}
-	database.CurrentDB.Create(record)
+	if database.CurrentDB.NewRecord(record) {
+		fmt.Println("create record-->", record.ID)
+		database.CurrentDB.Create(record)
+	} else {
+		fmt.Println("update record-->", record.ID)
+		database.CurrentDB.Save(record)
+	}
 }
 
 type AsinUrl struct {
