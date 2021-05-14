@@ -7,6 +7,7 @@ import (
 
 type SpiderConfig struct {
 	Model                  string            `config:"model"`
+	TimeOut                int               `config:"time_out"`
 	TaskIndex              int               `config:"task_index"`
 	WebSite                string            `config:"web_site"`
 	NewRelease             string            `config:"new_release"`
