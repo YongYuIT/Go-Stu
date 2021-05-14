@@ -49,7 +49,7 @@ com:
           domain: "www.amazon.com"
           path:  "/"
         skin:
-          name: "csm-hit"
+          name: "skin"
           value: "noskin"
           domain: "www.amazon.com"
           path:  "/"
