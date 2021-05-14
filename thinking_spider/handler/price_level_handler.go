@@ -40,7 +40,8 @@ func GetPriceLevelHandler(priceLevelSpider *spider_interface.Spider, pageSpider 
 			//内容页
 			pageSpider.BuildStartUrl(func(spiderConfig *config.SpiderConfig) string {
 				startUrl := element.Request.URL.String()
-				pageSpider.Ctrl.SetCookies(startUrl, priceLevelSpider.Ctrl.Cookies(element.Request.URL.String()))
+				//pageSpider.Ctrl.SetCookies(startUrl, priceLevelSpider.Ctrl.Cookies(element.Request.URL.String()))
+				pageSpider.Ctrl.SetCookies(startUrl, spiderConfig.GetCookie())
 				return startUrl
 			})
 			level, err := url.QueryUnescape(currentthkPTag)

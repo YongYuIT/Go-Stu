@@ -22,6 +22,31 @@ com:
           value: "133-7766908-2678768"
           domain: ".amazon.com"
           path:  "/"
+        session_id_time:
+          name: "session-id-time"
+          value: "2082787201l"
+          domain: ".amazon.com"
+          path:  "/"
+        i18n_prefs:
+          name: "i18n-prefs"
+          value: "USD"
+          domain: ".amazon.com"
+          path:  "/"
+        session_token:
+          name: "session-token"
+          value: "NsqHDpg+qsbxDpQywkh+DHJjyAteAtcugaQQsZjHjE7a33HeMK7I1oKpMI+MN5bUYXsSkfbMkzS5D0yXJMsgfIcO0OeVlQDQxpYRiUF8zCzYhj6/qVwrJ2jdAoqNcWdJdFjbmrlXfShcGOXJMIMOIAJocdsg1azdbvVvh0Ry/uSfR0DRMiTr2u4/kQKyA9U6"
+          domain: ".amazon.com"
+          path:  "/"
+        lc_main:
+          name: "lc-main"
+          value: "en_US"
+          domain: ".amazon.com"
+          path:  "/"
+        csm_hit:
+          name: "lc-main"
+          value: "tb:s-G6GZPZWZAQ4CXWS47YA9|1620958707574&t:1620958708154&adb:adblk_no"
+          domain: "www.amazon.com"
+          path:  "/"
   page_handler_que: "div[class='a-text-center']"
   product_items_handler_que: "div[class='s-main-slot s-result-list s-search-results sg-row']"
   pages_key: "ref"

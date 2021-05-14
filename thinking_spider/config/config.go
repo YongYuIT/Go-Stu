@@ -87,6 +87,37 @@ func autoSetCookies(cookiesConfig []interface{} /*map[string]interface{}*/) [][]
 		autoSetCookie(umainCookie, umainCookieConfig)
 		cookie = append(cookie, umainCookie)
 		cookies = append(cookies, cookie)
+
+		sidTimeCookieConfig := cookieConfig["session_id_time"].(map[interface{}]interface{})
+		sidTimeCookie := &http.Cookie{}
+		autoSetCookie(sidTimeCookie, sidTimeCookieConfig)
+		cookie = append(cookie, sidTimeCookie)
+		cookies = append(cookies, cookie)
+
+		i18nPrefsCookieConfig := cookieConfig["i18n_prefs"].(map[interface{}]interface{})
+		i18nPrefsCookie := &http.Cookie{}
+		autoSetCookie(i18nPrefsCookie, i18nPrefsCookieConfig)
+		cookie = append(cookie, i18nPrefsCookie)
+		cookies = append(cookies, cookie)
+
+		sTokenCookieConfig := cookieConfig["session_token"].(map[interface{}]interface{})
+		sTokenCookie := &http.Cookie{}
+		autoSetCookie(sTokenCookie, sTokenCookieConfig)
+		cookie = append(cookie, sTokenCookie)
+		cookies = append(cookies, cookie)
+
+		lcMainCookieConfig := cookieConfig["lc_main"].(map[interface{}]interface{})
+		lcMainCookie := &http.Cookie{}
+		autoSetCookie(lcMainCookie, lcMainCookieConfig)
+		cookie = append(cookie, lcMainCookie)
+		cookies = append(cookies, cookie)
+
+		csmHitCookieConfig := cookieConfig["csm_hit"].(map[interface{}]interface{})
+		csmHitCookie := &http.Cookie{}
+		autoSetCookie(csmHitCookie, csmHitCookieConfig)
+		cookie = append(cookie, csmHitCookie)
+		cookies = append(cookies, cookie)
+
 	}
 
 	return cookies
