@@ -130,6 +130,8 @@ func GetListContent(file *os.File, infos []map[string]interface{}) {
 			if isStr {
 				if strings.Contains(key, "pic_url") {
 					itemStrFormat += "<td><img height=100 src=\"" + value.(string) + "\"/></td>"
+				} else if strings.Contains(key, "_url") {
+					itemStrFormat += "<td><a href=\"" + value.(string) + "\" target='_blank'>查看详情</a></td>"
 				} else {
 					itemStrFormat += fmt.Sprintf("<td>%s</td>", value)
 				}
