@@ -81,6 +81,6 @@ func Test_get_product_key_word(test *testing.T) {
 		fmt.Println("-----------------------------------page end")
 	})
 
-	//c.Visit("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=programming+books")
-	c.Visit("https://www.amazon.cn/s?k=programming+books&__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&ref=nb_sb_noss")
+	c.Visit("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=programming+books")
+	//c.Visit("https://www.amazon.cn/s?k=programming+books&__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&ref=nb_sb_noss")
 }

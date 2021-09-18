@@ -14,7 +14,7 @@ const website = "https://www.amazon.com"
 
 func Test_when_robot(test *testing.T) {
 	for i := 0; i < 500; i++ {
-		go go_to_next_page()
+		go go_to_next_page("programing+book")
 	}
 
 	for true {
@@ -24,10 +24,10 @@ func Test_when_robot(test *testing.T) {
 }
 
 func Test_go_to_next_page(test *testing.T) {
-	go_to_next_page()
+	go_to_next_page("programing+book")
 }
 
-func go_to_next_page() {
+func go_to_next_page(key_word string) {
 	c := colly.NewCollector(
 		colly.MaxDepth(5),
 	)
@@ -66,7 +66,7 @@ func go_to_next_page() {
 			fmt.Println("ant robot when req-->",
 				element.Request.URL.String(),
 				"\n time:", time.Now().Format(time.RFC850),
-				"\n keyword: ", "book")
+				"\n keyword: ", key_word)
 		}
 	})
 
@@ -74,11 +74,11 @@ func go_to_next_page() {
 		fmt.Println("find a error when req-->",
 			response.Request.URL.String(),
 			"\n time:", time.Now().Format(time.RFC850),
-			"\n keyword: ", "book",
+			"\n keyword: ", key_word,
 			"\n details for error", err)
 	})
 
-	c.Visit(website + "/s?k=book")
+	c.Visit(website + "/s?k=" + key_word)
 }
 
 func Test_getPageInfo(test *testing.T) {

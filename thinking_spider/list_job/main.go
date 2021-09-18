@@ -36,6 +36,7 @@ func main() {
 	for {
 		str, err := reader.ReadString('\n')
 		fmt.Print("doing job-->", str)
+		str = strings.ReplaceAll(strings.TrimSpace(str), " ", "+")
 		if !strings.EqualFold(str, "") {
 			utils.RunCommand("./thinking_spider", "-k", str[:len(str)-1], "-t", task)
 		}
