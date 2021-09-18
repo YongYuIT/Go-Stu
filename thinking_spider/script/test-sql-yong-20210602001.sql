@@ -7,7 +7,7 @@ with data_clean as (
                  from (
                           # 计算页面指数
                           select *, (page - 1) * 40 + page_index as page_num
-                          from key_word_prod_records
+                          from `key_word_prod_records-bak20210918001`
                           where (/*key_word like '%wine corks%' or*/ key_word like '%mini knife%')
                             and uuid != ''
                             and asin != ''

@@ -8,7 +8,7 @@ with data_clean as (
                       select *,
                              (page - 1) * 40 + page_index                 as page_num,
                              concat('https://www.amazon.com', detial_url) as main_detail
-                      from key_word_prod_records
+                      from `key_word_prod_records-bak20210601001`
                       where key_word like '%XXX%'
                         and uuid != ''
                         and asin != ''
