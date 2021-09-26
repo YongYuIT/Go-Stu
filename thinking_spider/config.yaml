@@ -7,7 +7,7 @@ com:
   web_site: "https://www.amazon.com"
   new_release: "https://www.amazon.com/gp/new-releases/kitchen/"
   max_deep: 10
-  delay_spider: 2
+  delay_spider: 5
   #key_words: "Fruit knife"
   key_words: "Kitchen & Dining"
   prices_levels: "Under $25;$25 to $50"
@@ -15,12 +15,12 @@ com:
     - cookie:
         session_id:
           name: "session-id"
-          value: "134-6672367-4790336"
+          value: "136-4247319-9599126"
           domain: ".amazon.com"
           path:  "/"
         ubid_main:
           name: "ubid-main"
-          value: "131-8634864-4156411"
+          value: "134-4402852-1719930"
           domain: ".amazon.com"
           path:  "/"
         session_id_time:
@@ -35,7 +35,7 @@ com:
           path:  "/"
         session_token:
           name: "session-token"
-          value: "aawuUtwsZhyohVZjHPOr0ZuezfFgFRjcjXSRWQGEj4pmgI5YV9oYZetHuYRjFibBzV0amFdyVWQ1RlBCUpDvCrShLwOHoT58xO59C2nwSJ6I9N4PNr5JXloJ2V8cH1qdlg9x5GhwzLFBWuIH1vs1j6L6PLQNauTWq2fMWOw9fqSY7tp6bKoiYX+JvPO76zN5BYv/UvsP1hwF4B/4qOnLsYMOfB7ppeyJCPI/mJQyBDk1VX5b+ziAuUyUrbatuUjq"
+          value: "Z0zanwhTYNATRXdX5CoV+x80oaI3s+eRYioX8SNl4quO+EA0UmYffWGLeLexI2HRtGaoTfx6ivkOJvkfE5XqstQY+x+6M704lEYKninpVChHqkd1doNMB0jtCVqA+ID3mXu9xJ9+7l9mjfGoVDghQtqaD/HxtHh8TXzDCalF0VWVKSz0e+ND8WbmHBsmqNs2"
           domain: ".amazon.com"
           path:  "/"
         lc_main:
@@ -45,7 +45,7 @@ com:
           path:  "/"
         csm_hit:
           name: "csm-hit"
-          value: "tb:s-F1Z1QB54R92CYHW77JD0|1620960185179&t:1620960185585&adb:adblk_no"
+          value: "tb:42QD5N7NHQS80NRVBXWK+s-42QD5N7NHQS80NRVBXWK|1632639937988&t:1632639937988&adb:adblk_no"
           domain: "www.amazon.com"
           path:  "/"
         skin:
@@ -71,7 +71,8 @@ com:
       item_uuid_attr: "data-uuid"
       item_desc_que: "img[class='s-image']"
       item_desc_attr: "alt"
-      item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
+      # item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
+      item_range_que: "a[class='a-link-normal s-underline-text s-underline-link-text'] span[class='a-size-base a-color-base s-underline-text']"
       item_price_que: "span[class='a-price'][data-a-color='base'] span[class='a-offscreen']"
       item_starts_que: "div[class='a-section a-spacing-none a-spacing-top-micro'] div[class='a-row a-size-small'] span"
       item_detail_url_que: "a[class='a-link-normal s-no-outline']"
@@ -95,5 +96,5 @@ patents:
   delay_spider: 2
   key_words: "https://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=0&f=S&l=50&d=PTXT&Query=%22Cabinet+Turntable%22+OR+%22Turntable+Storage+Container%22+OR+%22Lazy+Susan+Cabinet+Organizer%22+OR+%22lazy+susan+spice+rack+with+Dividers%22+OR+%22Lazy+Susan+Turntable+with+Dividers%22+OR+%22360+Rotating+storage+Container%22+OR+%22Divided+Lazy+Susan+Turntable%22+OR+%22Round+Rotating+Organization%22+"
 database:
-  conn: "root:123456@(localhost:3306)/thinking_spider?charset=utf8&parseTime=True&loc=Local"
+  conn: "root:123456@(localhost:3306)/thinking_spider?parseTime=True&loc=Local"
   type: "mysql"

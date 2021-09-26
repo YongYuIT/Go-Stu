@@ -60,7 +60,7 @@ type Item struct {
 	ItemDescQue      string `config:"item_desc_que"`
 	ItemPriceQue     string `config:"item_price_que"`
 	ItemDescAttr     string `config:"item_desc_attr"`
-	ItemRangeQue     string `config:"item_range_que"`
+	ItemRatingsQue   string `config:"item_range_que"`
 	ItemIndexAttr    string `config:"item_index_attr"`
 	ItemStartsQue    string `config:"item_starts_que"`
 	ItemDetailUrlQue string `config:"item_detail_url_que"`
