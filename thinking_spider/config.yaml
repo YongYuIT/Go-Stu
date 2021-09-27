@@ -6,21 +6,21 @@ com:
   task_index: 0
   web_site: "https://www.amazon.com"
   new_release: "https://www.amazon.com/gp/new-releases/kitchen/"
-  max_deep: 10
+  max_deep: 1
   delay_spider: 5
   #key_words: "Fruit knife"
   key_words: "Kitchen & Dining"
-  prices_levels: "Under $25;$25 to $50"
+  prices_levels: ""
   cookies:
     - cookie:
         session_id:
           name: "session-id"
-          value: "136-4247319-9599126"
+          value: "145-9265937-5099825"
           domain: ".amazon.com"
           path:  "/"
         ubid_main:
           name: "ubid-main"
-          value: "134-4402852-1719930"
+          value: "133-3165440-4460165"
           domain: ".amazon.com"
           path:  "/"
         session_id_time:
@@ -35,7 +35,7 @@ com:
           path:  "/"
         session_token:
           name: "session-token"
-          value: "Z0zanwhTYNATRXdX5CoV+x80oaI3s+eRYioX8SNl4quO+EA0UmYffWGLeLexI2HRtGaoTfx6ivkOJvkfE5XqstQY+x+6M704lEYKninpVChHqkd1doNMB0jtCVqA+ID3mXu9xJ9+7l9mjfGoVDghQtqaD/HxtHh8TXzDCalF0VWVKSz0e+ND8WbmHBsmqNs2"
+          value: "yBCgNmBNzgtQNlyoCaR74yfP4iT0QMNqp6kBy7WO7RhXqnw2s74I9FJhhpbesdYmQobMbBW4bSulopQjR7mqKxzPMaC/s5hEzApYS5n1VBCcWLWBkhV5dURrlUQliBtip7vEtbBOXdECdA/aYesCJ0O+4QP00seFC9Rdsx57pxM/RLaezZdyOJSpnBSwuXIB"
           domain: ".amazon.com"
           path:  "/"
         lc_main:
@@ -45,7 +45,7 @@ com:
           path:  "/"
         csm_hit:
           name: "csm-hit"
-          value: "tb:42QD5N7NHQS80NRVBXWK+s-42QD5N7NHQS80NRVBXWK|1632639937988&t:1632639937988&adb:adblk_no"
+          value: "tb:s-N5NX3S4N7AVAV9596CGQ|1632709715818&t:1632709716211&adb:adblk_no"
           domain: "www.amazon.com"
           path:  "/"
         skin:
@@ -72,7 +72,8 @@ com:
       item_desc_que: "img[class='s-image']"
       item_desc_attr: "alt"
       # item_range_que: "a[class='a-link-normal'] span[class='a-size-base']"
-      item_range_que: "a[class='a-link-normal s-underline-text s-underline-link-text'] span[class='a-size-base a-color-base s-underline-text']"
+      # item_range_que: "a[class='a-link-normal s-underline-text s-underline-link-text'] span[class='a-size-base a-color-base s-underline-text']"
+      item_range_que: "a[class*='a-link-normal'] span[class*='a-size-base']"
       item_price_que: "span[class='a-price'][data-a-color='base'] span[class='a-offscreen']"
       item_starts_que: "div[class='a-section a-spacing-none a-spacing-top-micro'] div[class='a-row a-size-small'] span"
       item_detail_url_que: "a[class='a-link-normal s-no-outline']"
