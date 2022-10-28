@@ -13,10 +13,14 @@ import (
 )
 
 func main() {
+	/**
+	./geth --dev --dev.period 0 --http --http.api eth,web3,personal,net --http.corsdomain="package://6fd22d6fe5549ad4c4d8fd3ca0b7816b.mod" --datadir ./tmpdata --ws --ws.port 3334
+	*/
 	fmt.Println("start test...")
 	//	abigen -abi YongCoin.abi -type YongCoin -pkg main -out YongCoin.go
 	//	跟本地geth节点建立rpc通信------------------------------------------------------------------
-	gethAddress := "http://127.0.0.1:8545"
+	//gethAddress := "http://127.0.0.1:8545" //http not support event
+	gethAddress := "ws://127.0.0.1:3334" //websocket support event, 注意：如果需要getn节点支持ws协议，启动时需要加上 --ws --ws.port 3334
 	cl, err := ethclient.Dial(gethAddress)
 	defer cl.Close()
 	if err != nil {
@@ -24,7 +28,7 @@ func main() {
 	}
 	fmt.Println("success conn to geth node at:	" + gethAddress)
 	//	根据交易哈希，查询合约部署交易----------------------------------------------------------------
-	contractSetUpTranx, isPending, err := cl.TransactionByHash(context.Background(), common.HexToHash("0xf61f4b997bb62137e243621ede6008f6f36fc3770e0b7d6ed71166b1e64cd8dd"))
+	contractSetUpTranx, isPending, err := cl.TransactionByHash(context.Background(), common.HexToHash("0x7ec39001b485d996bee6bb67f58d95f004fe9b0bd124cf938c156ac9b5f95543"))
 	if err == nil && !isPending {
 		fmt.Println("get contractSetUpTranx use gas: " + strconv.FormatUint(contractSetUpTranx.Gas(), 10))
 	}
@@ -56,30 +60,11 @@ func main() {
 	}
 	//	deployer give some money to user-------------------------------------------------------------
 	/*
-		./geth --dev --dev.period 0 --http --http.api eth,web3,personal,net --http.corsdomain="package://6fd22d6fe5549ad4c4d8fd3ca0b7816b.mod" --datadir ./tmpdata
-		eth.sendTransaction({from:"0x44FF39a22D1c54960ae9A1e16e88EA8df4D656De",to:"25a00d211b6e0459d3b593b59285d16e7c06111b",value: web3.toWei(50,"ether")})
-		eth.getBalance("25a00d211b6e0459d3b593b59285d16e7c06111b")
+		eth.sendTransaction({from:"0x44FF39a22D1c54960ae9A1e16e88EA8df4D656De",to:"0x86aE6D6d8C3E84A1ABCC9B6e146d7Ff980a62d01",value: web3.toWei(50,"ether")})
+		eth.getBalance("0x86aE6D6d8C3E84A1ABCC9B6e146d7Ff980a62d01")
 	*/
-	//amount := big.NewInt(10)
-	//var gasLimit uint64 = 300000
-	//var gasPrice *big.Int = big.NewInt(200)
-	//nonce, err := cl.PendingNonceAt(context.Background(), deployerKey.Address)
-	//auth, err := bind.NewTransactorWithChainID(bytes.NewReader(deployerKeyJson), "", chainId)
-	//auth.Nonce = big.NewInt(int64(nonce))
-	//auth.Value = amount
-	//auth.GasLimit = gasLimit
-	//auth.GasPrice = gasPrice
-	//auth.From = deployerKey.Address
-	//tx := types.NewTransaction(nonce, userAccount.Address, amount, gasLimit, gasPrice, []byte{})
-	//signedTx, err := auth.Signer(auth.From, tx)
-	//sendEthTranx := cl.SendTransaction(context.Background(), signedTx)
-	//if sendEthTranx != nil {
-	//	panic(err)
-	//}
-	//bind.WaitMined(context.Background(), cl, signedTx)
-	//fmt.Println("send eth hash: ", signedTx.Hash())
 	//	call mint----------------------------------------------------------------------------------
-	yongcoin, err := NewYongCoin(common.HexToAddress("0xa0E8a077b907b34E6c874DaBEa169009de010B58"), cl)
+	yongcoin, err := NewYongCoin(common.HexToAddress("0x542e1998371C9939F08a8aC2992EA3674E5293Af"), cl)
 	if err != nil {
 		panic(err)
 	}
@@ -95,6 +80,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	//	WatchSent------------
+	chanSent := make(chan *YongCoinSent)
+	watchOpt := new(bind.WatchOpts)
+	watchOpt.Context = context.Background()
+	yongcoin.WatchSent(watchOpt, chanSent)
+	go listenSentEvent(chanSent)
+	//	WatchSent------------
 	sendTranx, err := yongcoin.Send(userOpts, deployerKey.Address, new(big.Int).SetUint64(uint64(500)))
 	if err != nil {
 		panic(err)
@@ -105,4 +97,13 @@ func main() {
 	userBalance, err := yongcoin.Balance(nil, userDecKey.Address)
 	fmt.Println("deployerBalance:", deployerBalance)
 	fmt.Println("userBalance:", userBalance)
+}
+
+func listenSentEvent(sent <-chan *YongCoinSent) {
+	fmt.Println(" #### ready to listen event")
+	sentEvent := <-sent
+	fmt.Println(" #### got sent: ", sentEvent)
+	fmt.Println(" #### got sent: from:  ", sentEvent.From.Hex())
+	fmt.Println(" #### got sent: to:  ", sentEvent.To.Hex())
+	fmt.Println(" #### got sent: amount:  ", sentEvent.Amount)
 }
