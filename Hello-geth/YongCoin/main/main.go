@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
@@ -10,6 +11,7 @@ import (
 	"math/big"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -28,7 +30,7 @@ func main() {
 	}
 	fmt.Println("success conn to geth node at:	" + gethAddress)
 	//	根据交易哈希，查询合约部署交易----------------------------------------------------------------
-	contractSetUpTranx, isPending, err := cl.TransactionByHash(context.Background(), common.HexToHash("0x7ec39001b485d996bee6bb67f58d95f004fe9b0bd124cf938c156ac9b5f95543"))
+	contractSetUpTranx, isPending, err := cl.TransactionByHash(context.Background(), common.HexToHash("0xd5c1852f4da3b46bf110a0bf746054f47622891c922c04f91c066913c9f35166"))
 	if err == nil && !isPending {
 		fmt.Println("get contractSetUpTranx use gas: " + strconv.FormatUint(contractSetUpTranx.Gas(), 10))
 	}
@@ -44,7 +46,7 @@ func main() {
 	addr := userAccount.Address.Hex()
 	fmt.Println("get pub address: ", addr)
 	//	get deployer pri-pub userKeyStr-----------------------------------------------------------
-	deployerKeyJson, err := os.ReadFile("./keys/UTC--2022-10-28T07-05-43.432642863Z--44ff39a22d1c54960ae9a1e16e88ea8df4d656de")
+	deployerKeyJson, err := os.ReadFile("./keys/UTC--2022-11-09T03-23-27.218433604Z--29768bce1cdb6cd22b4a47209d375d3951e3cf8d")
 	if err != nil {
 		panic(err)
 	}
@@ -60,11 +62,11 @@ func main() {
 	}
 	//	deployer give some money to user-------------------------------------------------------------
 	/*
-		eth.sendTransaction({from:"0x44FF39a22D1c54960ae9A1e16e88EA8df4D656De",to:"0x86aE6D6d8C3E84A1ABCC9B6e146d7Ff980a62d01",value: web3.toWei(50,"ether")})
-		eth.getBalance("0x86aE6D6d8C3E84A1ABCC9B6e146d7Ff980a62d01")
+		eth.sendTransaction({from:"0x29768bCe1CDB6cD22B4a47209D375d3951e3cF8D",to:"0x9bbe4c52EeDe518775F0f776b6944904E6037c38",value: web3.toWei(50,"ether")})
+		eth.getBalance("0x9bbe4c52EeDe518775F0f776b6944904E6037c38")
 	*/
 	//	call mint----------------------------------------------------------------------------------
-	yongcoin, err := NewYongCoin(common.HexToAddress("0x542e1998371C9939F08a8aC2992EA3674E5293Af"), cl)
+	yongcoin, err := NewYongCoin(common.HexToAddress("0x863459c4c6975d0d289Df40f9eBf14e193da0B9C"), cl)
 	if err != nil {
 		panic(err)
 	}
@@ -97,6 +99,33 @@ func main() {
 	userBalance, err := yongcoin.Balance(nil, userDecKey.Address)
 	fmt.Println("deployerBalance:", deployerBalance)
 	fmt.Println("userBalance:", userBalance)
+	//	解析send交易回执
+	readReceipt(cl, sendTranx.Hash())
+}
+
+func readReceipt(client *ethclient.Client, hash common.Hash) {
+
+	abi, err := abi.JSON(strings.NewReader(YongCoinMetaData.ABI))
+	if err != nil {
+		panic(err)
+	}
+	receipt, err := client.TransactionReceipt(context.Background(), hash)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("get receipt: ", receipt.TxHash.Hex())
+	for i, log := range receipt.Logs {
+		fmt.Println("get log start --> ", i)
+		for s, event := range abi.Events {
+			fmt.Println("event str-->", s, "; event name-->", event.Name)
+			logValue, _ := event.Inputs.Unpack(log.Data)
+			fmt.Println("get log value:", logValue)
+		}
+		for i2, topic := range log.Topics {
+			fmt.Println("get log topic --> ", i2, " topic-->", topic.Hex())
+		}
+		fmt.Println("get log end --> ", i)
+	}
 }
 
 func listenSentEvent(sent <-chan *YongCoinSent) {
