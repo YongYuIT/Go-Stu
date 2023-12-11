@@ -1,0 +1,10 @@
+syntax = "proto3";
+option go_package = "/src";
+
+message GetFullNameRequest{
+  string name=1;
+}
+
+message GetFullNameResponse{
+  string fullName=1;
+}
