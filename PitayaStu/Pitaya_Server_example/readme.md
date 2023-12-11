@@ -17,3 +17,9 @@ request chat.room.join
 notify chat.room.message {"name":"2","content":"11111"}
 request chat.room.testmsg {"msg":"ttttest"}
 ~~~
+
+# 新增使用rpc协议的接口
+
+~~~
+protoc.exe .\protos\TestMsg.proto --go_out .
+~~~

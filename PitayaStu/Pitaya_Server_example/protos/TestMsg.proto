@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "/protos";
+
+// RPCMsg message to be sent using rpc
+message RPCTestMsgReq {
+  string Msg = 1;
+}
+
+// RPCRes is the rpc response
+message RPCTestMsgResp {
+  string Result = 1;
+}

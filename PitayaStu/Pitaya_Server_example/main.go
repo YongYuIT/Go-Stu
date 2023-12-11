@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Pitaya_Server_example/protos"
 	"context"
 	"fmt"
 	"log"
@@ -76,6 +77,10 @@ func (r *Room) AfterInit() {
 
 func (r *Room) TestMsg(ctx context.Context, msg *TestMsgReq) (*TestMsgResp, error) {
 	return &TestMsgResp{Result: "test success--" + msg.Msg}, nil
+}
+
+func (r *Room) RPCTestMsg(ctx context.Context, msg *protos.RPCTestMsgReq) (*protos.RPCTestMsgResp, error) {
+	return &protos.RPCTestMsgResp{Result: "rpc test success--" + msg.Msg}, nil
 }
 
 // Join room
