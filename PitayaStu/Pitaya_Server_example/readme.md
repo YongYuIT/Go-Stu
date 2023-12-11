@@ -15,4 +15,5 @@ pitaya-cli
 connect localhost:3250
 request chat.room.join
 notify chat.room.message {"name":"2","content":"11111"}
+request chat.room.testmsg {"msg":"ttttest"}
 ~~~

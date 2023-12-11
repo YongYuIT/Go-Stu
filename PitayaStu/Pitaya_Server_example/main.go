@@ -49,6 +49,14 @@ type (
 		Code   int    `json:"code"`
 		Result string `json:"result"`
 	}
+
+	TestMsgReq struct {
+		Msg string `json:"msg"`
+	}
+
+	TestMsgResp struct {
+		Result string `json:"result"`
+	}
 )
 
 // NewRoom returns a Handler Base implementation
@@ -64,6 +72,10 @@ func (r *Room) AfterInit() {
 		count, err := r.app.GroupCountMembers(context.Background(), "room")
 		logger.Log.Debugf("UserCount: Time=> %s, Count=> %d, Error=> %v", time.Now().String(), count, err)
 	})
+}
+
+func (r *Room) TestMsg(ctx context.Context, msg *TestMsgReq) (*TestMsgResp, error) {
+	return &TestMsgResp{Result: "test success--" + msg.Msg}, nil
 }
 
 // Join room
