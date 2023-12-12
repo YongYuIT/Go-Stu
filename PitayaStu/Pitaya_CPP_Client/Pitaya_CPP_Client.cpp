@@ -43,7 +43,8 @@ void quiet_log(int level, const char* msg, ...)
 }
 
 void request_success_handler(const pc_request_t* req, const pc_buf_t* resp) {
-	cout << "request success!" << endl;
+	std::string buff((char*)resp->base, resp->len);
+	cout << "request success-->" << buff << endl;
 }
 
 void request_error_handler(const pc_request_t* req, const pc_error_t* error) {
@@ -103,7 +104,7 @@ int main()
 	string req_tag = "hello_test_client_request_no_params";
 	pc_string_request_with_timeout(client, "chat.room.join", NULL, (void*)req_tag.c_str(), 10, request_success_handler, request_error_handler);
 
-	
+
 	cout << "start send msg" << endl;
 	string req_tag1 = "hello_test_client_request_with_params";
 	void* v_req_tag1 = const_cast<void*>(static_cast<const void*>(req_tag1.c_str()));
