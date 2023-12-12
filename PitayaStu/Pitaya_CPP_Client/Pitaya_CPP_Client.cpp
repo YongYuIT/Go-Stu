@@ -107,9 +107,13 @@ int main()
 
 	cout << "start send msg" << endl;
 	string req_tag1 = "hello_test_client_request_with_params";
-	void* v_req_tag1 = const_cast<void*>(static_cast<const void*>(req_tag1.c_str()));
 	string request_params = "{\"msg\":\"cppttttest\"}";
-	pc_binary_request_with_timeout(client, "chat.room.testmsg", (uint8_t*)request_params.data(), request_params.size(), v_req_tag1, 10, request_success_handler, request_error_handler);
+	pc_binary_request_with_timeout(client, "chat.room.testmsg", (uint8_t*)request_params.data(), request_params.size(), (void*)req_tag1.c_str(), 10, request_success_handler, request_error_handler);
+
+	cout << "start send rpc msg" << endl;
+	string req_tag2 = "hello_test_client_request_with_rpc_params";
+	string request_params1 = "{\"msg\":\"cpprpcttttest\"}";
+	pc_binary_request_with_timeout(client, "chat.room.rpctestmsg", (uint8_t*)request_params1.data(), request_params1.size(), (void*)req_tag2.c_str(), 10, request_success_handler, request_error_handler);
 
 	cin >> continueStr;
 }

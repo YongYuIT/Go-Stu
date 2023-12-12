@@ -16,6 +16,7 @@ connect localhost:3250
 request chat.room.join
 notify chat.room.message {"name":"2","content":"11111"}
 request chat.room.testmsg {"msg":"ttttest"}
+request chat.room.rpctestmsg {"msg":"rttttest"}
 ~~~
 
 # 新增使用rpc协议的接口
