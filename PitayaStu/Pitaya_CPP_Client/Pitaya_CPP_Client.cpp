@@ -3,23 +3,59 @@
 
 #include <iostream>
 #include <pitaya.h>
+#include <cstdarg>
 using namespace std;
 
+
+string emptyStr = "";
+
 void ev_handler(pc_client_t* client, int ev_type, void* ex_data, const char* arg1, const char* arg2) {
+
+	cout << "ev_handler-->ex_data::";
+	if (ex_data) {
+		char* ext_str = (char*)ex_data;
+		cout << ext_str;
+	}
+	if (arg1) {
+		cout << "-->arg1::" << arg1;
+	}
+	if (arg2) {
+		cout << "-->arg2::" << arg2;
+	}
+	cout << endl;
+
+
 
 }
 
 void push_handler(pc_client_t* client, const char* route, const pc_buf_t* payload) {
-
+	cout << "push_handler-->route::" << route << endl;
 }
 
 void quiet_log(int level, const char* msg, ...)
 {
-	cout << "level::" << level << "-->msg::" << msg << endl;
+	cout << "Log Level: " << level << " Message: ";
+	va_list args;
+	va_start(args, msg);
+	vfprintf(stdout, msg, args); // 使用 vfprintf 进行格式化输出
+	va_end(args);
+	cout << endl;
 }
+
+void request_success_handler(const pc_request_t* req, const pc_buf_t* resp) {
+	cout << "request success!" << endl;
+}
+
+void request_error_handler(const pc_request_t* req, const pc_error_t* error) {
+	char* ext_str = (char*)pc_request_ex_data(req);
+	cout << "request failed!-->" << ext_str << endl;
+}
+
 
 int main()
 {
+	string continueStr;
+
 	cout << "start client test" << endl;
 
 	cout << "start lib init" << endl;
@@ -31,8 +67,9 @@ int main()
 
 	cout << "start client init" << endl;
 	pc_client_config_t config = PC_CLIENT_CONFIG_DEFAULT;
-	config.conn_timeout = 30;
-	auto result = pc_client_init(NULL, &config);
+	config.conn_timeout = 10;
+	string init_tag = "hello_test_client_init";
+	auto result = pc_client_init((void*)init_tag.c_str(), &config);
 
 	cout << "start client create" << endl;
 	pc_client_t* client = result.client;
@@ -40,12 +77,14 @@ int main()
 		cout << "client create failed!!" << endl;
 		return -1;
 	}
-	cout << "client create sucess" << endl;
+	cout << "client create success" << endl;
 
 	cout << "start client conn" << endl;
-	int ev_handler_id = pc_client_add_ev_handler(client, ev_handler, NULL, NULL);
+	string add_ev_tag = "hello_test_add_ev";
+	int ev_handler_id = pc_client_add_ev_handler(client, ev_handler, (void*)add_ev_tag.c_str(), NULL);
 	pc_client_set_push_handler(client, push_handler);
-	int conn_state = pc_client_connect(client, "localhost", 3250, NULL);
+	string host = "localhost";
+	int conn_state = pc_client_connect(client, host.c_str(), 3250, NULL);
 	switch (conn_state)
 	{
 	case PC_RC_OK:
@@ -57,7 +96,21 @@ int main()
 	default:
 		cout << "conn failed" << endl;
 	}
+	//注意，此处立即打印 "conn success"，并不可信。因为pc_client_connect需要等到10秒才会有结果
+	cin >> continueStr;
 
+	cout << "start send with no params" << endl;
+	string req_tag = "hello_test_client_request_no_params";
+	pc_string_request_with_timeout(client, "chat.room.join", NULL, (void*)req_tag.c_str(), 10, request_success_handler, request_error_handler);
+
+	
+	cout << "start send msg" << endl;
+	string req_tag1 = "hello_test_client_request_with_params";
+	void* v_req_tag1 = const_cast<void*>(static_cast<const void*>(req_tag1.c_str()));
+	string request_params = "{\"msg\":\"cppttttest\"}";
+	pc_binary_request_with_timeout(client, "chat.room.testmsg", (uint8_t*)request_params.data(), request_params.size(), v_req_tag1, 10, request_success_handler, request_error_handler);
+
+	cin >> continueStr;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

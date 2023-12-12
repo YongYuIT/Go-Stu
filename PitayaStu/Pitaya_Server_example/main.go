@@ -124,7 +124,7 @@ var app pitaya.Pitaya
 func main() {
 	conf := configApp()
 	builder := pitaya.NewDefaultBuilder(true, "chat", pitaya.Standalone, map[string]string{}, *conf)
-	builder.AddAcceptor(acceptor.NewWSAcceptor(":3250"))
+	builder.AddAcceptor(acceptor.NewTCPAcceptor(":3250"))
 	builder.Groups = groups.NewMemoryGroupService(*config.NewDefaultMemoryGroupConfig())
 	app = builder.Build()
 
