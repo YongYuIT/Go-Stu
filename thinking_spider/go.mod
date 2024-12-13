@@ -16,7 +16,6 @@ require (
 	github.com/spf13/viper v1.7.1
 	github.com/tebeka/selenium v0.9.9
 	github.com/temoto/robotstxt v1.1.1 // indirect
-	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2 // indirect
-	golang.org/x/net v0.0.0-20210326220855-61e056675ecf // indirect
+	golang.org/x/net v0.7.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 )
